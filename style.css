@@ -27,7 +27,9 @@
 
 /* offcanvas가 안보이는 화면 */
 @media (max-width: 575px) {
-
+  .container-fluid {
+    justify-content: space-between;
+  }
 
   .btn {
     margin-left: auto;
