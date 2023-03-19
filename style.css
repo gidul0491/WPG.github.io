@@ -90,3 +90,7 @@ main table span {
 thead th {
   text-align: center;
 }
+
+nav .container-fluid {
+  width: 95%;
+}
