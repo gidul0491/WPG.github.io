@@ -27,9 +27,7 @@
 
 /* offcanvas가 안보이는 화면 */
 @media (max-width: 575px) {
-  .navbar-toggler {
-    box-shadow: none !important;
-  }
+
 
   .btn {
     margin-left: auto;
@@ -46,9 +44,7 @@
     padding: 0px;
   }
 
-  .navbar-toggler {
-    box-shadow: none !important;
-  }
+
 
   .navbar .btn,
   .navbar a {
@@ -85,10 +81,6 @@
     padding: 0px;
   }
 
-  .navbar-toggler {
-    box-shadow: none !important;
-  }
-
   .navbar .btn,
   .navbar a {
     width: 20vw;
@@ -110,6 +102,11 @@
   table th {
     font-size: 1px !important;
   }
+}
+
+.navbar-toggler {
+  box-shadow: none !important;
+  border: none !important;
 }
 
 .navbar-brand {
