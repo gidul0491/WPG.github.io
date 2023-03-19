@@ -1,0 +1,71 @@
+/* offcanvas가 보이는 화면 */
+@media (min-width: 768px) {
+  .offcanvas {
+    visibility: visible;
+    width: 300px;
+    transform: none !important;
+    position: fixed;
+    z-index: 0;
+  }
+  #topfixednav {
+    z-index: 1;
+  }
+  #offcan .offcanvas-header {
+    display: none;
+  }
+  #offcan {
+    padding-top: 60px;
+  }
+  #offcan {
+    width: 200px;
+  }
+}
+
+/* offcanvas가 안보이는 화면 */
+@media (max-width: 767px) {
+  .navbar-toggler {
+    box-shadow: none !important;
+  }
+  .btn {
+    margin-left: auto;
+  }
+  main {
+    margin-left: 5% !important;
+  }
+}
+
+.navbar-brand {
+  margin: 0px 80px 0px 20px;
+}
+ul {
+  margin: 0px 10px 10px 10px;
+}
+.offcanvas-body h4 {
+  margin: 32px 0px 8px 0px;
+}
+.offcanvas-body li {
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+.offcanvas-body a {
+  text-decoration: none;
+  color: black;
+}
+main {
+  margin: 50px 5% 5% 250px;
+}
+caption {
+  color: midnightblue;
+  font-weight: 700;
+}
+
+/* 오프캔버스로 클릭하여 이동 시 네비게이션 바에 의해 가려지기 때문에 패딩을 크게 주고 마진을 음수값으로 적용. 해당 위치로 이동 시 패딩부분이 네비게이션 바에 가려져 네비게이션 바로 아래에 컨텐츠가 오도록 이동할수 있으며 마진이 음수이기때문에 실제로는 컨텐츠간 간격이 커보이지 않음 */
+main h3,
+main caption {
+  padding-top: 80px;
+  margin-top: -30px;
+}
+
+main table i {color:#6ee;}
+main table span { color: #e66;}
+thead th {text-align: center;}
