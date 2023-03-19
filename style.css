@@ -107,19 +107,32 @@
 }
 
 /* 세로가 너무 짧은 경우 */
-@media (max-height: 575px) {
+@media (max-height: 480px) {
   #topfixednav {
     height: 30px;
     border-bottom: 1px solid #ddd;
   }
 
   #offcan {
-    width: 24vw;
+    width: 20vw;
     font-size: 3vm;
+  }
+
+  .offcanvas-body {
+    padding: 8px
+  }
+
+  main {
+    margin-left: 24vw !important;
   }
 
   .shadow {
     box-shadow: none !important;
+  }
+
+  table td,
+  table th {
+    font-size: 2vh !important;
   }
 }
 
