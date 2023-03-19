@@ -1,5 +1,5 @@
 /* offcanvas가 보이는 화면 */
-@media (min-width: 768px) {
+@media (min-width: 576px) {
   .offcanvas {
     visibility: visible;
     width: 300px;
@@ -26,7 +26,7 @@
 }
 
 /* offcanvas가 안보이는 화면 */
-@media (max-width: 767px) {
+@media (max-width: 575px) {
   .navbar-toggler {
     box-shadow: none !important;
   }
