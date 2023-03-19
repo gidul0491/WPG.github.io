@@ -17,15 +17,20 @@
     <div class="container-fluid">
       <!-- navbar collapse 만들기 : class, data-bs-toggle, data-bs-target 입력 -->
       <a href="#" class="navbar-brand">WP Guide</a>
-      <button class="navbar-toggler btn btn-outline-secondary p-0" type="button" data-bs-toggle="collapse"
-        data-bs-target="#topNav" aria-controls="topNav">
-        <!-- 버튼 모양으로 아이콘 넣어주기 -->
-        <!-- <span class="navbar-toggler-icon"></span> -->
-        <span class="btn btn-outline-secondary m-0">Menu</span>
-      </button>
-      <button type="button" class="btn btn-primary d-sm-none ms-2" data-bs-toggle="offcanvas" data-bs-target="#offcan">
-        Guide List
-      </button>
+
+      <div class="d-flex justify-content-end">
+        <button class="navbar-toggler btn btn-outline-secondary p-0" type="button" data-bs-toggle="collapse"
+          data-bs-target="#topNav" aria-controls="topNav">
+          <!-- 버튼 모양으로 아이콘 넣어주기 -->
+          <!-- <span class="navbar-toggler-icon"></span> -->
+          <span class="btn btn-outline-secondary m-0">Menu</span>
+        </button>
+        <button type="button" class="btn btn-primary d-sm-none ms-2" data-bs-toggle="offcanvas"
+          data-bs-target="#offcan">
+          Guide List
+        </button>
+      </div>
+
       <!-- collapse버튼에 집어넣을 div : class. id 입력 -->
       <div class="collapse navbar-collapse" id="topNav">
         <ul class="navbar-nav">
@@ -59,7 +64,7 @@
     </div>
   </aside>
   <!-- 메인컨텐츠 -->
-  <main class="contents">
+  <main>
     <!-- 시멘틱 태그 div -->
     <div id="sementictag">
       <h3>시멘틱 태그</h3>
