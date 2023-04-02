@@ -1,0 +1,1509 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>WP Guide - Bootstrap</title>
+    <link href="bootstrap-5.2.3-dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <script src="bootstrap-5.2.3-dist/js/bootstrap.min.js"></script>
+    <link href="style.css" rel="stylesheet"/>
+</head>
+
+<body>
+<!-- 네비게이션바 -->
+<nav class="navbar navbar-expand-sm navbar-light bg-light shadow fixed-top" id="topfixednav">
+    <div class="container-fluid">
+        <!-- navbar collapse 만들기 : class, data-bs-toggle, data-bs-target 입력 -->
+        <a class="navbar-brand" href="#">WP Guide</a>
+
+        <div class="d-flex justify-content-end">
+            <button aria-controls="topNav" class="navbar-toggler btn btn-outline-secondar border" data-bs-target="#topNav"
+                    data-bs-toggle="collapse" type="button">
+                <!-- 버튼 모양으로 아이콘 넣어주기 -->
+                <!-- <span class="navbar-toggler-icon"></span> -->
+                Menu
+            </button>
+            <button class="btn btn-primary d-sm-none ms-2" data-bs-target="#offcan" data-bs-toggle="offcanvas"
+                    type="button">
+                Guide List
+            </button>
+        </div>
+
+        <!-- collapse버튼에 집어넣을 div : class. id 입력 -->
+        <div class="collapse navbar-collapse" id="topNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="./index.html">HTML</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./css.html">CSS</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./bootstrap.html">Bootstrap</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./sql.html">SQL</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- 오프캔버스 -->
+<aside>
+    <div class="offcanvas offcanvas-start shadow" id="offcan" tabindex="-1">
+        <div class="offcanvas-header">
+            <h1 class="offcanvas- title">Guide List</h1>
+            <button aria-label="Close" class="btn-close mb-1" data-bs-dismiss="offcanvas" type="button"></button>
+        </div>
+        <div class="offcanvas-body">
+            <ul class="list-unstyled">
+                <li>
+                    <a href="#containerclass">컨테이너</a>
+                </li>
+                <li>
+                    <a href="#gridclass">그리드</a>
+                </li>
+                <li>
+                    <a href="#color">색상</a>
+                </li>
+                <li>
+                    <a href="#textclass">텍스트</a>
+                </li>
+                <li>
+                    <a href="#boottable">테이블</a>
+                </li>
+                <li>
+                    <a href="#bootimg">이미지</a>
+                </li>
+                <li>
+                    <a href="#bootbtn">버튼</a>
+                </li>
+                <li>
+                    <a href="#bootdisplay">디스플레이</a>
+                </li>
+                <li>
+                    <a href="#bootform">폼</a>
+                </li>
+                <li>
+                    <a href="#bootcard">카드</a>
+                </li>
+                <li>
+                    <a href="#bootlist">리스트</a>
+                </li>
+                <li>
+                    <a href="#bootnav">내비게이션</a>
+                </li>
+                <li>
+                    <a href="#bootcarousel">캐러셀</a>
+                </li>
+                <li>
+                    <a href="#bootmodal">모달</a>
+                </li>
+                <li>
+                    <a href="#bootoffcanvas">오프캔버스</a>
+                </li>
+                <li>
+                    <a href="#bootflex">플렉스</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</aside>
+<main>
+    <!-- 컨테이너 -->
+    <div id="containerclass">
+        <h3>컨테이너</h3>
+        <table class="table border">
+            <thead class="table-dark">
+            <tr>
+                <th>종류</th>
+                <th>설명</th>
+            </tr>
+            </thead>
+            <tr>
+                <th>.container</th>
+                <td>
+                    기본 container, 각 중단점 사이마다 일정한 너비를 가짐
+                </td>
+            </tr>
+            <tr>
+                <th>.container-sm</th>
+                <td>
+                    화면 크기가 576px 이상이면 여백 존재
+                </td>
+            </tr>
+            <tr>
+                <th>.container-md</th>
+                <td>
+                    화면 크기가 768px 이상이면 여백 존재
+                </td>
+            </tr>
+            <tr>
+                <th>.container-lg</th>
+                <td>
+                    화면 크기가 992px 이상이면 여백 존재
+                </td>
+            </tr>
+            <tr>
+                <th>.container-xl</th>
+                <td>
+                    화면 크기가 1200px 이상이면 여백 존재
+                </td>
+            </tr>
+            <tr>
+                <th>.container-xl</th>
+                <td>
+                    화면 크기가 1400px 이상이면 여백 존재
+                </td>
+            </tr>
+            <tr>
+                <th>.container-fluid</th>
+                <td>
+                    항상 여백이 없이 화면의 너비만큼의 크기를 가짐
+                </td>
+            </tr>
+
+        </table>
+    </div>
+    <!-- 그리드 -->
+    <div id="gridclass">
+        <h3>그리드</h3>
+        <table class="table border">
+            <thead class="table-dark">
+            <tr>
+                <th>종류</th>
+                <th>설명</th>
+            </tr>
+            </thead>
+            <tr>
+                <th>.row</th>
+                <td>
+                    grid의 한 행을 의미, 한 행은 12개의 열로 구분됨
+                </td>
+            </tr>
+            <tr>
+                <th>.col</th>
+                <td>
+                    .row 의 자식요소로 사용되며 너비가 row의 모든 행을 채우도록 자동으로 지정됨
+                </td>
+            </tr>
+            <tr>
+                <th>.col-<i>sm~xl</i>-<i>1~12</i></th>
+                <td>
+                    .col 요소 하나가 화면 너비에 따라 한줄에 하나씩만 배치됨. sm은 작은 화면에서, xl은 큰 화면에서부터 배치가 바뀌게 됨
+                </td>
+            </tr>
+        </table>
+    </div>
+    <!-- 색상 -->
+    <div id="color">
+        <h3>색상</h3>
+        <table class="table table-borderless border">
+            <tr class="text-white">
+                <td class="bg-primary w-25">.bg-primary</td>
+                <td class="bg-secondary w-25">.bg-secondary</td>
+                <td class="bg-success w-25">.bg-success</td>
+                <td class="bg-danger w-25">.bg-danger</td>
+            </tr>
+            <tr class="text-black">
+                <td class="bg-warning">.bg-warning</td>
+                <td class="bg-info">.bg-info</td>
+                <td class="bg-light">.bg-light</td>
+                <td class="bg-dark text-white">.bg-dark</td>
+            </tr>
+            <tr class="text-black">
+                <td class="bg-body">.bg-body</td>
+                <td class="bg-white">.bg-white</td>
+                <td class="bg-transparent">.bg-transparent(투명)</td>
+                <td class=" bg-primary bg-gradient">.bg-primary.bg-gradient</td>
+            </tr>
+            <tr>
+                <td class="bg-success text-dark bg-opacity-50">bg-opacity-(25단위)</td>
+                <th class="text-primary">.text-primary</th>
+                <th class="text-secondary">.text-secondary</th>
+                <th class="text-success">.text-success</th>
+
+            </tr>
+            <tr>
+                <th class="text-danger">.text-danger</th>
+                <th class="text-warning">.text-warning</th>
+                <th class="text-info">.text-info</th>
+                <th class="text-light bg-dark">.text-light</th>
+
+            </tr>
+            <tr>
+                <th class="text-dark">.text-dark</th>
+                <th class="text-body">.text-body</th>
+                <th class="text-muted">.text-muted</th>
+                <th class="text-white bg-dark">.text-white</th>
+
+            </tr>
+            <tr>
+                <th class="text-black-50">.text-black-50</th>
+                <th class="text-white-50 bg-dark">.text-white-50</th>
+                <th class="text-primary text-opacity-50">text-opacity-(25단위)</th>
+                <th>
+                    <button class="btn btn-primary d-block m-auto" type="button">.btn-primary</button>
+                </th>
+            </tr>
+        </table>
+    </div>
+    <!-- 텍스트 -->
+    <div id="textclass">
+        <h3>텍스트</h3>
+        <table class="table border">
+            <thead class="table-dark">
+            <tr>
+                <th>종류</th>
+                <th>설명</th>
+            </tr>
+            </thead>
+            <tr>
+                <th>.h<i>1~6</i></th>
+                <td>
+                    h1~h6의 폰트사이즈를 가지도록 하는 클래스
+                </td>
+            </tr>
+            <tr>
+                <th>.display-<i>1~6</i></th>
+                <td>
+                    h1~h6보다 큰 폰트사이즈를 가지도록 하는 클래스, 숫자가 작을 수록 큼
+                </td>
+            </tr>
+            <tr>
+                <th>&ltsmall></th>
+                <td>
+                    부모 요소보다 <small>조금 더 작은</small> 글씨를 갖게 하는 태그
+                </td>
+            </tr>
+            <tr>
+                <th>&ltlead></th>
+                <td>
+                    부모 요소보다
+                    <lead>조금 더 큰</lead>
+                    글씨를 갖게 하는 태그
+                </td>
+            </tr>
+            <tr>
+                <th>&ltmark></th>
+                <td>
+                    <mark>형광펜을 사용한 듯한</mark>
+                    효과를 주는 태그
+                </td>
+            </tr>
+            <tr>
+                <th>.blockquote</th>
+                <td>
+                    &ltblockquote> 태그의 속성으로 쓰임, &ltp>글씨 크기를 h5 정도로 키워줌
+                </td>
+            </tr>
+            <tr>
+                <th>.blockquote-footer</th>
+                <td>
+                    <details>
+                        <summary> &ltblockquote> 태그 내의 &ltfooter> 태그의 속성으로 쓰임, footer 부분을 연한 색으로 바꿔주고 글 앞에 "-"을 넣어줌
+                        </summary>
+                        <span><br>예시)<br>
+                                &ltblockquote class="blockquote"><br>
+                                &nbsp&nbsp&ltp>인용된 부분에 대한 내용을 입력&lt/p><br>
+                                &nbsp&nbsp&ltfooter class="blockquote-footer">출처&lt/footer><br>
+                                &lt/blockquote>
+                                <br>
+                            </span>
+                        <blockquote class="blockquote">
+                            <p>인용된 부분에 대한 내용을 입력</p>
+                            <footer class="blockquote-footer">출처</footer>
+                        </blockquote>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>&ltkbd></th>
+                <td>
+                    키입력을 표시 <kbd>Ctrl + V</kbd>
+                </td>
+            </tr>
+            <tr>
+                <th>.text-start</th>
+                <td class="text-start">
+                    글자를 좌측 정렬
+                </td>
+            </tr>
+            <tr>
+                <th>.text-center</th>
+                <td class="text-center">
+                    글자를 중앙 정렬
+                </td>
+            </tr>
+            <tr>
+                <th>.text-end</th>
+                <td class="text-end">
+                    <details>
+                        <summary>글자를 우측 정렬</summary>
+                        text-align:end 등은 inline요소만 정렬되지만 이 기능은 block요소도 정렬됨, 자식 요소를 정렬
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>.text-break</th>
+                <td>
+                    텍스트 양이 많아도 레이아웃을 벗어나지 않게 해줌(기본 값)
+                </td>
+            </tr>
+            <tr>
+                <th>.text-nowrap</th>
+                <td class="text-break">
+                    <p class="border text-nowrap" style="width:100px;">텍스트 양이 너무 많은 경우 <br> 텍스트가 레이아웃을<br>
+                        벗어남</p>
+                </td>
+            </tr>
+            <tr>
+                <th>.text-decoration-none</th>
+                <td>
+                    텍스트 데코레이션을 없애줌, a 태그의 밑줄을 제거하기 위한 경우 등
+                </td>
+            </tr>
+        </table>
+    </div>
+    <!-- 테이블 -->
+    <div id="boottable">
+        <h3>테이블</h3>
+        <table class="table border">
+            <thead class="table-dark">
+            <tr>
+                <th>종류</th>
+                <th>설명</th>
+            </tr>
+            </thead>
+            <tr>
+                <th>.table</th>
+                <td>
+                    부트스트랩 스타일의 테이블로 지정
+                </td>
+            </tr>
+            <tr>
+                <th>.table-hover</th>
+                <td>
+                    마우스 커서를 올리면 행의 배경색이 진해지는 테이블로 설정
+                </td>
+            </tr>
+            <tr>
+                <th>.table-striped</th>
+                <td>
+                    행의 배경색이 흰색, 회색으로 번갈아가며 적용됨
+                </td>
+            </tr>
+            <tr>
+                <th>.table-bordered</th>
+                <td>
+                    테이블에 바깥 테두리 적용
+                </td>
+            </tr>
+            <tr>
+                <th>.table-borderless</th>
+                <td>
+                    테이블에 바깥 테두리 뿐만 아니라 행을 나누는 경계선도 제거
+                </td>
+            </tr>
+            <tr>
+                <th>.table-dark</th>
+                <td>
+                    어두운 배경의 테이블로 설정
+                </td>
+            </tr>
+            <tr>
+                <th>.table-responsive</th>
+                <td>
+                    테이블의 내용이 너무 많아 가로로 긴 경우, 화면의 너비가 좁으면 해당 테이블만 가로로 스크롤할 수 있게 해줌, 해당 테이블을 감싸는 &ltdiv> 태그에 적용해야함
+                </td>
+            </tr>
+            <tr>
+                <th>.table-sm</th>
+                <td>
+                    약간 작은 테이블
+                </td>
+            </tr>
+        </table>
+    </div>
+    <!-- 이미지 -->
+    <div id="bootimg">
+        <h3>이미지</h3>
+        <table class="table border">
+            <thead class="table-dark">
+            <tr>
+                <th>종류</th>
+                <th>설명</th>
+            </tr>
+            </thead>
+            <tr>
+                <th>.rounded</th>
+                <td>
+                    이미지 모서리를 둥글게, <span>&ltimg src="경로" alt="" class="rounded"></span>
+                </td>
+            </tr>
+            <tr>
+                <th>.rounded-circle</th>
+                <td>
+                    이미지를 완전히 둥글게
+                </td>
+            </tr>
+            <tr>
+                <th>.img-thumbnail</th>
+                <td>
+                    둥근 1px 테두리 표시
+                </td>
+            </tr>
+            <tr>
+                <th>.img-fluid</th>
+                <td>
+                    이미지 사이즈가 부모 요소에 딱 맞게 조절됨
+                </td>
+            </tr>
+            <tr>
+                <th>&lti></th>
+                <td>
+                    아이콘, &ltlink rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css"> 또는  &ltlink rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">를 head태그에 붙여넣고 해당 사이트에서 원하는 아이콘의 i 태그 소스코드를 복사 후 붙여넣으면 됨
+                </td>
+            </tr>
+        </table>
+    </div>
+    <!-- 버튼 -->
+    <div id="bootbtn">
+        <h3>버튼</h3>
+        <table class="table border">
+            <thead class="table-dark">
+            <tr>
+                <th class="w-25">종류</th>
+                <th>설명</th>
+            </tr>
+            </thead>
+            <tr>
+                <th>.btn</th>
+                <td>
+                    <button class="btn" type="button">부트스트랩 스타일의 버튼</button>
+                </td>
+            </tr>
+            <tr>
+                <th>.btn-link</th>
+                <td>
+                    <a class="btn btn-link" href="#bootbtn">&lta> 태그 링크에 사용</a>
+                </td>
+            </tr>
+            <tr>
+                <th>.btn-primary</th>
+                <td>
+                    <button class="btn btn-primary" type="button">버튼에 색상 적용 가능</button>
+                </td>
+            </tr>
+            <tr>
+                <th>.btn-outline-primary</th>
+                <td>
+                    <button class="btn btn-outline-primary" type="button">버튼 테두리에만 색상 적용</button>
+                </td>
+            </tr>
+            <tr>
+                <th>.btn-<i>sm || lg</i></th>
+                <td>
+                    <button class="btn btn-sm btn-primary" type="button">버튼의 크기를</button>
+                    <button class="btn btn-lg btn-primary" type="button">변경해줌</button>
+                </td>
+            </tr>
+            <tr>
+                <th>.active</th>
+                <td>
+                    <button class="btn btn-primary active" type="button">버튼 또는 링크를 활성 상태로 설정</button>
+                </td>
+            </tr>
+            <tr>
+                <th>.btn-close</th>
+                <td>
+                    X 모양의 닫기 버튼
+                    <button class="btn-close ms-5" type="button"></button>
+                </td>
+            </tr>
+
+            <tr>
+                <th>.btn-group</th>
+                <td>
+                    버튼을 감싸는 div 태그에 적용시 버튼이 붙어있는 형태가 적용됨
+                </td>
+            </tr>
+            <tr>
+                <th>.btn-group-vertical</th>
+                <td>
+                    버튼을 감싸는 div 태그에 적용시 버튼이 세로로 븥어있는 형태가 적용됨
+                </td>
+            </tr>
+
+            <tr>
+                <th>.dropdown-toggle</th>
+                <td>
+                    드랍다운 버튼, 해당 클래스와 data-bs-toggle="dropdown" 속성을 버튼에 적용하고, 그 뒤에 &ltul> 태그에 .dropdown-menu, &lta>태그를
+                    포함한 &ltli>태그에 .dropdown-item 클래스를 적용시켜 드랍다운 메뉴를 만들 수 있음
+                </td>
+            </tr>
+            <tr>
+                <th>.dropdown-divider</th>
+                <td>
+                    드랍다운 메뉴 리스트의 li 태그에 hr태그를 구분선으로 만들어줌
+                </td>
+            </tr>
+            <tr>
+                <th>.dropdown-header</th>
+                <td>
+                    드랍다운 메뉴 리스트의 li 태그 내의 h#태그 등을 회색 글씨의 선택 불가능한 헤더가 만들어짐
+                </td>
+            </tr>
+            <tr>
+                <th>.dropdown-item-text</th>
+                <td>
+                    드랍다운 메뉴 리스트의 li 태그 내의 span태그 등을 선택 불가능한 일반 글자로 만들어줌
+                </td>
+            </tr>
+            <tr>
+                <th>.active || disabled</th>
+                <td>
+                    드랍다운 메뉴 리스트의 li 태그 내의 a태그를 활성화/비활성화 상태로 만들어줌
+                </td>
+            </tr>
+            <tr>
+                <th>.dropdown-menu-방향</th>
+                <td>
+                    방향에 start 또는 end를 넣고 드랍다운 버튼과 ul을 감싸는 div태그에 적용시키면 드랍다운 메뉴의 위치를 왼쪽/오른쪽으로 설정가능
+                </td>
+            </tr>
+            <tr>
+                <th>.dropup</th>
+                <td>
+                    드랍다운 버튼과 ul을 감싸는 div태그에 적용시키면 드랍다운 메뉴가 나타날 때 위치를 아래가 아닌 위로 설정가능
+                </td>
+            </tr>
+            <tr>
+                <th>.pagination</th>
+                <td>
+                    a.page-link를 감싸는 li.page-item을 감싸는 ul태그에 .pagination을 적용시 페이지를 나타내주는 버튼 그룹이 됨, .disbled, .active
+                    적용가능, .pagination-sm || lg 추가시 사이즈 설정 가능
+                </td>
+            </tr>
+
+        </table>
+    </div>
+    <!-- 디스플레이 -->
+    <div id="bootdisplay">
+        <h3>디스플레이</h3>
+        <table class="table border">
+            <thead class="table-dark">
+            <tr>
+                <th class="w-25">종류</th>
+                <th>설명</th>
+            </tr>
+            </thead>
+            <tr>
+                <th>.d-inline</th>
+                <td>
+                    block 타입을 inline 타입으로 변경
+                </td>
+            </tr>
+            <tr>
+                <th>.d-block</th>
+                <td>
+                    inline 타입을 block 타입으로 변경
+                </td>
+            </tr>
+            <tr>
+                <th>.m방향-크기</th>
+                <td>
+                    마진, 방향은 t(top), b(bottom), s(start, 왼쪽), e(end, 오른쪽), x(x축), y(y축)가 있으며 생략하면 모든 방향에 적용. 크기는 0,
+                    1(0.25rem), 2(0.5rem), 3(1rem), 4(2rem), 5(3rem)
+                </td>
+            </tr>
+            <tr>
+                <th>.p방향-크기</th>
+                <td>
+                    패딩, 방향과 크기는 .m- 과 동일한 방식으로 적용
+                </td>
+            </tr>
+            <tr>
+                <th>.border</th>
+                <td>
+                    1px의 회색 테두리
+                </td>
+            </tr>
+            <tr>
+                <th>.border-<i>방향</i></i></th>
+                <td>
+                    방향은 top, bottom, start, end 가 있으며 생략시 전방향
+                </td>
+            </tr>
+            <tr>
+                <th>.border-<i>두께</i></th>
+                <td>
+                    두께는 0, 1, 2, 3, 4, 5 가 있으며 단위는 px, 0은 테두리 제거 효과가 있음, 생략시 1
+                </td>
+            </tr>
+            <tr>
+                <th>.border-<i>색상</i></th>
+                <td>
+                    테두리 색상 지정가능
+                </td>
+            </tr>
+            <tr>
+                <th>.rounded-<i>방향</i></th>
+                <td>
+                    지정한 방향의 테두리 모서리 2개를 둥글게 설정, 방향은 top, bottom, start, end가 있으며 생략시 전방향
+                </td>
+            </tr>
+            <tr>
+                <th>.rounded-<i>circle || pill</i></th>
+                <td>
+                    circle은 테두리를 깎아 요소를 원모양으로 만들고 pill은 요소가 직사각형일시 알약 모양으로 만듦
+                </td>
+            <tr>
+                <th>.rounded-<i>숫자</i></th>
+                <td>
+                    0, 1, 2, 3, 4, 5의 숫자를 사용할 수 있으며 숫자가 커질수록 테두리가 더욱 둥글어짐, 0은 테두리 제거
+                </td>
+            </tr>
+            <tr>
+                <th>.clearfix</th>
+                <td>
+                    자식 요소에 float 속성을 줄 때 부모 요소에 .clearfix를 사용하면 자식 요소들끼리 겹치거나 하는 문제를 없애줌
+                </td>
+            </tr>
+            <tr>
+                <th>.float-start</th>
+                <td>
+                    요소에 float-left 속성을 부여
+                </td>
+            </tr>
+            <tr>
+                <th>.float-end</th>
+                <td>
+                    요소에 float-right 속성을 부여
+                </td>
+            </tr>
+            <tr>
+                <th>.invisible</th>
+                <td>
+                    요소가 실제로는 존재하지만 시각적으로 보이지 않게 해줌
+                </td>
+            </tr>
+            <tr>
+                <th>.visible</th>
+                <td>
+                    요소가 보이게 해줌
+                </td>
+            </tr>
+            <tr>
+                <th>.w-<i>숫자</i></th>
+                <td>
+                    부모요소 대비 상대적 너비(width), 25, 50, 75, 100으로 설정 가능
+                </td>
+            </tr>
+            <tr>
+                <th>.w-auto</th>
+                <td>
+                    width: auto와 같은 속성, block level 요소의 경우 부모요소의 너비만큼, inline-block 요소의 경우 자식요소의 너비만큼으로 조절됨
+                </td>
+            </tr>
+            <tr>
+                <th>.mw-100</th>
+                <td>
+                    max-width:100%와 같은 속성, 자식 요소의 크기가 커서 부모 요소의 너비보다 더 커지는 경우를 방지할 수 있음
+                </td>
+            </tr>
+            <tr>
+                <th>.h-<i>숫자</i></th>
+                <td>
+                    부모요소 대비 상대적 높이(height), 25, 50, 75, 100으로 설정 가능
+                </td>
+            </tr>
+            <tr>
+                <th>.h-auto</th>
+                <td>
+                    height: auto와 같은 속성, block 요소의 경우 부모요소의 높이만큼, inline-block 요소의 경우 자식요소의 높이만큼으로 조절됨
+                </td>
+            </tr>
+            <tr>
+                <th>.mg-100</th>
+                <td>
+                    max-height:100%와 같은 속성, 자식 요소의 크기가 커서 부모 요소의 높이보다 더 커지는 경우를 방지할 수 있음
+                </td>
+            </tr>
+            <tr>
+                <th>.shadow-<i>크기</i></th>
+                <td>
+                    그림자 효과 부여, 크기는 none, sm, 생략, lg 가 있으며 none은 그림자 효과 제거, 생략은 중간 크기의 그림자 효과
+                </td>
+            </tr>
+            <tr>
+                <th>.ratio ratio-<i>가로비율x세로비율</i></th>
+                <td>
+                    &ltiframe>, &ltembed>, &ltvideo>, 그리고 &ltobject>와 같은 외부 콘텐츠의 부모 요소에 클래스를 지정하여 컨텐츠의 가로세로 비율을 설정 가능,
+                    1x1, 4x3, 16x9, 21x9 중에서 선택 가능
+                </td>
+            </tr>
+        </table>
+    </div>
+    <!-- 폼 -->
+    <div id="bootform">
+        <h3>폼</h3>
+        <table class="table border">
+            <thead class="table-dark">
+            <tr>
+                <th class="w-25">종류</th>
+                <th>설명</th>
+            </tr>
+            </thead>
+            <tr>
+                <th>.form-label</th>
+                <td>
+                    &ltlabel> 태그에 사용됨, &ltinput> 태그와 함께 &div> 태그에 포함되어 있어야함
+                </td>
+            </tr>
+            <tr>
+                <th>.form-control</th>
+                <td>
+                    <details>
+                        <summary>
+                            특정 &ltinput> 태그에 기본적으로 사용되어야 하는 클래스
+                        </summary>
+                        <span>
+                            사용되는 태그 또는 타입: <br>
+                            &ltinput type="text || password"><br>
+                            &lttextarea><br>
+                            &ltinput type="file"><br>
+                            &ltinput type="color">
+                        </span>
+                    </details>
+
+                </td>
+            </tr>
+            <tr>
+                <th>.form-control-plaintext</th>
+                <td>
+                    테두리가 없는 텍스트 입력 영역
+                </td>
+            </tr>
+            <tr>
+                <th>.form-text</th>
+                <td>
+                    &ltdiv>태그 내에 설명글을 쓰고 클래스를 적용시키면 작은 회색 글씨의 설명글 형태가 됨
+                </td>
+            </tr>
+            <tr>
+                <th>.form-check</th>
+                <td>
+                    checkbox, radio 타입의 &ltinput> 태그를 감싸는 라벨의 부모요소인 div에 사용됨
+                </td>
+            </tr>
+            <tr>
+                <th>.form-check</th>
+                <td>
+                    checkbox, radio 타입의 &ltinput> 태그에 사용됨
+                </td>
+            </tr>
+            <tr>
+                <th>.form-check-inline</th>
+                <td>
+                    &ltinput> 태그와 &ltlabel> 등 폼 요소를 감싸는 &ltdiv> 태그에 사용되며 폼요소를 inline 타입으로 설정
+                </td>
+            </tr>
+            <tr>
+                <th>.form-check-label</th>
+                <td>
+                    checkbox, radio 타입의 &ltinput> 태그에 사용되는 라벨, 해당 요소를 감싸는 &ltlabel>태그에 사용됨
+                </td>
+            </tr>
+            <tr>
+                <th>.form-check-switch</th>
+                <td>
+                    checkbox와 &ltlabel> 태그가 포함된 &ltdiv>태그에 사용되면 토글 스위치 형태로 만들어줌
+                </td>
+            </tr>
+            <tr>
+                <th>.form-check-input</th>
+                <td>
+                    checkbox, radio 타입의 &ltinput> 태그에 사용됨
+                </td>
+            </tr>
+            <tr>
+                <th>.form-control-color</th>
+                <td>
+                    &ltinput type="color"> 태그에 사용됨
+                </td>
+            </tr>
+            <tr>
+                <th>.form-select-<i>sm || lg || 공백</i></th>
+                <td>
+                    &ltoption> 태그들을 감싸는 &ltselect> 태그에 사용됨
+                </td>
+            </tr>
+            <tr>
+                <th>.form-range</th>
+                <td>
+                    range 타입에 적용됨
+                </td>
+            </tr>
+            <tr>
+                <th>.form-floating</th>
+                <td>
+                    &ltinput type="text">, &lttextarea>, &ltselect> 태그와 그 뒤에오는 라벨을 포함하는 &ltdiv> 태그에 적용, placeholder와 비슷한
+                    기능을 가지는 라벨
+                </td>
+            </tr>
+            <tr>
+                <th>.input-group-<i>sm || lg || 공백</i></th>
+                <td>
+                    폼 요소들을 감싸는 &ltdiv> 태그에 적용, 폼 요소들을 붙어있는 형태로 만들어줌
+                </td>
+            </tr>
+            <tr>
+                <th>.input-group-text</th>
+                <td>
+                    &ltinput type="text">의 앞이나 뒤에 오는 span 태그에 적용
+                </td>
+            </tr>
+        </table>
+    </div>
+    <!-- 캬드 -->
+    <div id="bootcard">
+        <h3>카드</h3>
+        <table class="table border">
+            <thead class="table-dark">
+            <tr>
+                <th class="w-25">종류</th>
+                <th>설명</th>
+            </tr>
+            </thead>
+            <tr>
+                <th>.card</th>
+                <td>
+                    문자나 이미지 영역을 표시하기 위해 사용, 부모 div 태그에 추가
+                </td>
+            </tr>
+            <tr>
+                <th>.card-header</th>
+                <td>
+                    .card 내의 div 태그를 카드 헤더로 만들어줌
+                </td>
+            </tr>
+            <tr>
+                <th>.card-body</th>
+                <td>
+                    .card 내의 div 태그를 카드 바디로 만들어줌
+                </td>
+            </tr>
+            <tr>
+                <th>.card-footer</th>
+                <td>
+                    .card 내의 div 태그를 카드 푸터로 만들어줌
+                </td>
+            </tr>
+            <tr>
+                <th>.card-title</th>
+                <td>
+                    카드 제목
+                </td>
+            </tr>
+            <tr>
+                <th>.card-text</th>
+                <td>
+                    카드 내의 일반 문자 사용시 적용
+                </td>
+            </tr>
+            <tr>
+                <th>.card-link</th>
+                <td>
+                    .card 내 a 태그에 적용
+                </td>
+            </tr>
+            <tr>
+                <th>.card-image-위치</th>
+                <td>
+                    .card 내의 img 태그에 사용, 위치는 top, bottom, overlay가 있음. top은 카드의 자식 요소중 가장 앞에, bottom은 가장 뒤에 와야함. 둘의 차이는
+                    사진의 위쪽 혹은 아래쪽 모서리가 둥글게 되는 것이기 때문. overlay는 카드의 배경으로 적용됨
+                </td>
+            </tr>
+            <tr>
+                <th>#accordion</th>
+                <td>
+                    <details>
+                        <summary>
+                            .card-body가 숨겨진 여러개의 카드로 구성된 메뉴, 여러 개의 div.card 를 감싸고 있는 div에 id를 지정 - 꼭 id가 accordion일 필요는
+                            없음
+                        </summary>
+                        <span> &ltdiv <span class="text-primary"> id="accordion1"</span>> 태그 내에 &ltdiv class="card">로 각 항목들을 만듦</span>
+                        <div class="border ㅔ-3" id="accordion1" style="font-size:0.8rem;">
+                            <div class="card">
+                                <div class="card-header p-0">
+                                    <a class="btn text-start" data-bs-toggle="collapse" href="#mycollapse1"
+                                       style="font-size:0.8rem">
+                                        <span>
+                                            <ul style="list-style: none; padding: 0; margin: 0;">
+                                                <li>&ltdiv class="card-header"></li>
+                                                <li class="mt-0 ms-2">&lta <span
+                                                        class="text-info">href="#mycollapse1"</span>  data-bs-toggle="collapse" class="btn"></li>
+                                                <li class="ms-4"> 아코디언제목1</li>
+                                                <li class="ms-2">&lt/a></li>
+                                                <li>&lt/div></li>
+                                            </ul>
+                                        </span>
+                                    </a>
+                                </div>
+                                <div class="collapse m-0" data-bs-parent="#accordion1" id="mycollapse1">
+                                    <div class="card-body">
+                                        <span>
+                                            <ul style="list-style:none; padding: 0; margin: 0;">
+                                                <li>&ltdiv <span class="text-info">id="mycollapse1"</span>  class="collapse" <span
+                                                        class="text-primary">data-bs-parent="#accordion1"</span>></li>
+                                                <li class="mt-0 ms-2">&ltdiv class="card-body"></li>
+                                                <li class="ms-4">&ltp>내용&ltp></li>
+                                                <li class="ms-2">&lt/div> </li>
+                                                <li>&lt/div></li>
+                                            </ul>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card m-0">
+                                <div class="card-header p-0">
+                                    <a class="btn" data-bs-toggle="collapse" href="#mycollapse2"
+                                       style="font-size:0.8rem">
+                                        <span>
+                                           아코디언제목2
+                                        </span>
+                                    </a>
+                                </div>
+                                <div class="collapse m-0" data-bs-parent="#accordion1" id="mycollapse2">
+                                    <div class="card-body">
+                                        <span>
+                                            내용2
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header p-0">
+                                    <a class="btn" data-bs-toggle="collapse" href="#mycollapse3"
+                                       style="font-size:0.8rem">
+                                        <span>
+                                           아코디언제목3
+                                        </span>
+                                    </a>
+                                </div>
+                                <div class="collapse m-0" data-bs-parent="#accordion1" id="mycollapse3">
+                                    <div class="card-body">
+                                        <span>
+                                            내용3
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </details>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <!-- 리스트 -->
+    <div id="bootlist">
+        <h3>리스트</h3>
+        <table class="table border">
+            <thead class="table-dark">
+            <tr>
+                <th class="w-25">종류</th>
+                <th>설명</th>
+            </tr>
+            </thead>
+            <tr>
+                <th>.list-group</th>
+                <td>
+                    li.list-group-item을 감싸는 ul 태그에 .list-group 적용시 테두리가 있는 목록이 서로 붙어있는 형태가 됨, a.list-group-item을 감싸는 div
+                    태그에도 적용가능
+                </td>
+            </tr>
+            <tr>
+                <th>.list-group-item-색상</th>
+                <td>
+                    .list-group-item과 함께 쓰이면 색상이 연한 배경의 리스트가 됨
+                </td>
+            </tr>
+            <tr>
+                <th>.breadcrumb</th>
+                <td>
+                    a태그를 감싸는 li.breadcrumb-item을 감싸는 ul 태그에 .breadcrumb 적용시 현재 페이지의 카테고리가 어느 깊이까지 왔는지를 알려주는 breadcrumbs
+                    생성
+                </td>
+            </tr>
+            <tr>
+                <th>.list-unstyled</th>
+                <td>
+                    ul, ol에 사용되면 리스트 스타일을 제거
+                </td>
+            </tr>
+        </table>
+    </div>
+    <!-- 내비게이션 -->
+    <div id="bootnav">
+        <h3>내비게이션</h3>
+        <table class="table border">
+            <thead class="table-dark">
+            <tr>
+                <th class="w-25">종류</th>
+                <th>설명</th>
+            </tr>
+            </thead>
+            <tr>
+                <th>.nav</th>
+                <td>
+                    a.nav-link를 감싸는 li.nav-item을 감싸는 ul 태그에 .nav 적용시 내비게이션 메뉴 형성, 플렉스 컨테이너이므로 li 태그들을 정렬할 수 있음
+                </td>
+            </tr>
+            <tr>
+                <th>.nav-tabs</th>
+                <td>
+                    ul.nav에 추가시 탭 형태의 내비게이션이 됨
+                </td>
+            </tr>
+            <tr>
+                <th>.nav-pills</th>
+                <td>
+                    ul.nav에 추가시 필 형태의 내비게이션이 됨
+                </td>
+            </tr>
+            <tr>
+                <th>.dropdown</th>
+                <td>
+                    내비게이션에 드랍다운 메뉴를 만들어줌. li.nav-item에 .dropdown을 추가하고 그 안의 a.nav-link에 .dropdown-toggle 클래스와
+                    data-bs-toggle="dropdown"을 추가. 그 뒤에 형제요소로서 ul.dropdown-menu를 추가하고 그 안에 li 태그, 그 안에 a.dropdown-item
+                    태그 추가.
+                </td>
+            </tr>
+            <tr>
+                <th>data-bs-toggle="tab"</th>
+                <td>
+                    <details>
+                        <summary>
+                            여러 개의 버튼 중 하나를 클릭시 숨겨진 내용이 표시되는 내비게이션. div 내의 ul.nav 내의 li.nav-item 내의 a.nav-link 태그에
+                            href="#탭내용id"와 data-bs-toggle="tab" 속성을 추가, ul.nav와 형제요소로서 div.tab-content를 추가하고 그 안에
+                            div.tab-pain, id="탭내용id" 추가 후 그 안에 내용을 추가
+                        </summary>
+                        <div>
+                            <ul class="nav nav-tabs">
+                                <li class="nav-item">
+                                    <a class="nav-link active" data-bs-toggle="tab" href="#home">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-bs-toggle="tab" href="#menu1">Menu 1</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-bs-toggle="tab" href="#menu2">Menu 2</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active container" id="home">
+                                    <h4>Home</h4>
+                                    <p>메뉴의 Home 클릭시 열리는 영역</p>
+                                </div>
+                                <div class="tab-pane container fade" id="menu1">
+                                    <h4>Home</h4>
+                                    <p>Menu 1 클릭시 열리는 영역</p>
+                                </div>
+                                <div class="tab-pane container fade " id="menu2">
+                                    <h4>Home</h4>
+                                    <p>Menu 2 클릭시 열리는 영역</p>
+                                </div>
+                            </div>
+                        </div>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>.navbar</th>
+                <td>
+                    내비게이션 바, nav or div 태그에 .navbar, navbar-expand-크기를 추가하고 자식요소로 ul.navbar-nav, 그 안에 li.nav-item, 그 안에
+                    a.nav-link를 추가. .navbar-expand-크기 클래스 제거시 li가 세로로 정렬됨
+                </td>
+            </tr>
+            <tr>
+                <th>.navbar-dark</th>
+                <td>
+                    내비게이션 바의 글씨가 밝은색으로 바뀜, 최상위 nav 태그에 사용
+                </td>
+            </tr>
+            <tr>
+                <th>.navbar-brand</th>
+                <td>
+                    웹 페이지의 메인 아인콘, nav.navbar 내의 ul.navbar-nav 앞에 a.navbar-brand 추가시 원하는 링크로 이동하는 브랜드가 생성됨, img 태그를 자식
+                    태그로 추가하여 이미지도 사용 가능
+                </td>
+            </tr>
+            <tr>
+                <th>.navbar-text</th>
+                <td>
+                    아무 기능이 없는 텍스트, nav.navbar 내의 ul.navbar-nav의 형제 요소로 span.navbar-text를 추가
+                </td>
+            </tr>
+            <tr>
+                <th>.navbar-toggler</th>
+                <td>
+                    <details>
+                        <summary>
+                            화면이 작으면 내비게이션 메뉴들이 사라지고 하나의 버튼을 눌러야 메뉴들이 보이게되는 내비게이션 바.
+                        </summary>
+                        .nav-navbar 내에 a.navbar-brand 등과 형제요소로서 button.navbar-toggler에 data-bs-toggle="collapse",
+                        data-bs-target="#ul.navbar-nav를 감싸는 div의 id" 를 추가하고 button태그 안에 span.navbar-toggler-icon을 넣고,
+                        button.navbar-toggler와 형제요소로서 div.coppapse.navbar-collapse#ul.navbar-nav를 감싸는 div의 id" 를 추가하고 그
+                        안에 ul.nav-item을 넣어 내비게이션 메뉴 삽입. nav.navbar.navbar-expand-크기 태그에서 크기에 따라 어느 정도의 크기에서 메뉴를 감출 것인지
+                        설정 가능
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>.fixed-위치</th>
+                <td>
+                    내비게이션 바를 화면상에 고정시켜줌. 위치는 top 또는 bottom 사용 가능, 내비게이션 바의 최상위 부모의 클래스로 사용
+                </td>
+            </tr>
+            <tr>
+                <th>.sticky-bar</th>
+                <td>
+                    내비게이션 바가 처음엔 웹페이지의 중간에 있더라도 스크롤을 내리면 화면 위쪽 밖으로 넘어가 안보이는 것이 아닌 회면 최상단에 붙어서 화면과 같이 움직이게 됨, 내비게이션 바의
+                    최상위 부모의 클래스로 사용
+                </td>
+            </tr>
+            <tr>
+                <th>data-bs-spy="scroll"</th>
+                <td>
+                    <details>
+                        <summary>
+                            페이지 내의 현재 스크롤 위치에 따라 내비게이션 바의 특정 버튼이 활성화되는 기능
+                        </summary>
+                        html문서의 body 태그의 스타일로 position:relative 속성을, 사용자 속성으로 data-bs-spy="scroll",
+                        data-bs-target="네비게이션 바의 클래스", data-bs-offset="50(수정가능)" 속성을 추가, navbar를 화면 상단 고정. li 태그 내의 링크가
+                        페이지의 특정 영역과 id로 연결되어 있다면, 페이지의 특정 영역이 화면에 들어올 때 해당 영역과 연결된 내비게이션 바의 링크가 활성화 된 것으로 표시됨
+                    </details>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <!-- 캐러셀 -->
+    <div id="bootcarousel">
+        <h3>캐러셀</h3>
+        <table class="table border">
+            <thead class="table-dark">
+            <tr>
+                <th class="w-25">종류</th>
+                <th>설명</th>
+            </tr>
+            </thead>
+            <tr>
+                <th>.carousel</th>
+                <td>
+                    여러 장의 이미지가 자동으로 넘어가는 캐러셀 슬라이드, 최상위 부모로 div#캐러셀id.carousel.slide 를 설정하고 그 안에 div.carousel-indicators,
+                    div.carousel-inner, button.carousel-control-prev, button.carousel-control-next가 포함됨
+                </td>
+            </tr>
+            <tr>
+                <th>.carousel-indicators</th>
+                <td>
+                    indicator, 캐러셀 내의 이미지가 몇 번째 이미지인지를 나타내줌. div.carousel-indicators 안에 button type="button" 태그를 추가하고
+                    사용자 속성으로 data-bs-target="#캐러셀id" data-bs-slide-to="n(0부터 시작하는 정수)"를 추가. 첫 번째 버튼은 .active를 추가
+                </td>
+            </tr>
+            <tr>
+                <th>.carousel-inner</th>
+                <td>
+                    slideshow, 캐러셀 내에 이미지 등을 포함하는 div.darousel-item을 슬라이드쇼로 만들어줌
+                </td>
+            </tr>
+            <tr>
+                <th>.darousel-item</th>
+                <td>
+                    캐러셀의 내용물. img와 같은 캐러셀 아이템을 블럭 타입으로 넣어주고 첫 번째 슬라이드는 .active를 추가해야함. data-bs-interval="시간" 속성을 추가하면
+                    캐러셀 아이템이 전환되기까지의 시간을 설정가능하고 시간 단위는 ms
+                </td>
+            </tr>
+            <tr>
+                <th>.carousel-control-방향</th>
+                <td>
+                    캐러셀 아이템 넘길 수 있는 버튼, 방향은 prev 와 next가 있음. div.carousel의 자식요소로 button type="button"을 추가하고
+                    .carousel-control-방향 클래스, data-bs-target="#캐러셀id" data-bs-slide="방향" 속성을 추가. 그 안에
+                    span.carousel-control-prev/next/공백-icon을 추가
+                </td>
+            </tr>
+            <tr>
+                <th>.carousel-caption</th>
+                <td>
+                    캐러셀 아이템 위에 캡션을 추가. div.carousel-item의 자식요소로 div.carousel-caption을 추가하고 내용을 쓰면 됨
+                </td>
+            </tr>
+            <tr>
+                <th>.carousel-fade</th>
+                <td>
+                    fade in/out 방식으로 이미지 전환, 캐러셀 최상위 부모 요소에 추가.
+                </td>
+            </tr>
+        </table>
+    </div>
+    <!-- 모달 -->
+    <div id="bootmodal">
+        <h3>모달</h3>
+        <table class="table border">
+            <thead class="table-dark">
+            <tr>
+                <th class="w-25">종류</th>
+                <th>설명</th>
+            </tr>
+            </thead>
+            <tr>
+                <th>data-bs-toggle="modal"</th>
+                <td>
+                    모달창을 열기위한 버튼, button 태그에 data-bs-toggle="modal", data-bs-target="#모달id" 속성을 추가
+                </td>
+            </tr>
+            <tr>
+                <th>.modal</th>
+                <td>
+                    모달 요소들의 최상위 부모 div에 적용, #모달id도 추가되어야 함. 모달창이 열릴 때 배경을 어둡게 만들어주는 요소
+                </td>
+            </tr>
+            <tr>
+                <th>.modal-dialog</th>
+                <td>
+                    모달창으로 표시되는 영역, div.modal의 자식요소로 div.modal-dialog를 넣어주어야 함
+                </td>
+            </tr>
+            <tr>
+                <th>.modal-content</th>
+                <td>
+                    모달창, div.modal-dialog의 자식요소로 넣어주어야 함
+                </td>
+            </tr>
+            <tr>
+                <th>.modal-header</th>
+                <td>
+                    모달창 헤더 영역, div.modal-content의 자식요소로 넣어주어야 함
+                </td>
+            </tr>
+            <tr>
+                <th>.modal-body</th>
+                <td>
+                    모달창의 바디 영역, div.modal-content의 자식요소로 넣어주어야 함
+                </td>
+            </tr>
+            <tr>
+                <th>.modal-footer</th>
+                <td>
+                    모달창 푸터 영역, div.modal-content의 자식요소로 넣어주어야 함
+                </td>
+            </tr>
+            <tr>
+                <th>.modal-title</th>
+                <td>
+                    모달창의 타이틀, h# 태그 등에 사용됨
+                </td>
+            </tr>
+            <tr>
+                <th>data-bs-dismiss="modal"</th>
+                <td>
+                    모달창을 끄는 버튼, button 태그에 사용됨
+                </td>
+            </tr>
+            <tr>
+                <th>.modal-크기</th>
+                <td>
+                    모달창 크기 설정, div.modal-dialog 요소에 .modal-크기 를 추가하여 모달창 사이즈 설정 가능. 크기는 sm, lg, xl, fullscreen이 있음
+                </td>
+            </tr>
+            <tr>
+                <th>.modal-dialog-centered</th>
+                <td>
+                    모달창을 가운데로 띄우게 함, div.modal-dialog 요소에 추가
+                </td>
+            </tr>
+            <tr>
+                <th>.modal-dialog-scrollable</th>
+                <td>
+                    모달창 내에서 스크롤이 가능하게 함, div.modal-dialog 요소에 추가
+                </td>
+            </tr>
+        </table>
+    </div>
+    <!-- 오프캔버스 -->
+    <div id="bootoffcanvas">
+        <h3>오프캔버스</h3>
+        <table class="table border">
+            <thead class="table-dark">
+            <tr>
+                <th class="w-25">종류</th>
+                <th>설명</th>
+            </tr>
+            </thead>
+            <tr>
+                <th>data-bs-toggle="offcanvas"</th>
+                <td>
+                    오프캔버스를 열기위한 버튼, button 태그에 data-bs-toggle="offcanvas", data-bs-target="#오프캔버스id" 추가
+                </td>
+            </tr>
+            <tr>
+                <th>.offcanvas</th>
+                <td>
+                    오프캔버스 div 설정, id를 반드시 설정해주어야 함
+                </td>
+            </tr>
+            <tr>
+                <th>.offcanvas-위치</th>
+                <td>
+                    오프캔버스가 열리는 위치 설정, 위치는 start, end, top, bottom이 있음
+                </td>
+            </tr>
+            <tr>
+                <th>.offcanvas-header</th>
+                <td>
+                    오프캔버스의 헤더영역 지정, div태그에 적용
+                </td>
+            </tr>
+            <tr>
+                <th>.offcanvas-title</th>
+                <td>
+                    텍스트를 오프캔버스의 제목으로 지정
+                </td>
+            </tr>
+            <tr>
+                <th>data-bs-dismiss="offcanvas"</th>
+                <td>
+                    오프캔버스를 닫는 버튼, button 태그에 속성으로 추가
+                </td>
+            </tr>
+            <tr>
+                <th>.offcanvas-body</th>
+                <td>
+                    오프캔버스의 바디 영역을 지정
+                </td>
+            </tr>
+            <tr>
+                <th>.offcanvas-body</th>
+                <td>
+                    오프캔버스의 바디 영역을 지정
+                </td>
+            </tr>
+            <tr>
+                <th>data-bs-scroll="true"</th>
+                <td>
+                    오프캔버스를 스크롤 가능하게 지정
+                </td>
+            </tr>
+        </table>
+    </div>
+    <!-- 플렉스 -->
+    <div id="bootflex">
+        <h3>플렉스</h3>
+        <table class="table border">
+            <thead class="table-dark">
+            <tr>
+                <th class="w-25">종류</th>
+                <th>설명</th>
+            </tr>
+            </thead>
+            <tr>
+                <th>.d-flex</th>
+                <td>
+                    부트스트랩의 클래스를 이용한 플렉스, div에 적용하여 플렉스 컨테이너로 지정
+                </td>
+            </tr>
+            <tr>
+                <th>.d-inline-container</th>
+                <td>
+                    플렉스 컨테이너를 인라인 방식으로 만들어줌, 블럭 방식과 달리 한줄 전체를 사용하지 않음
+                </td>
+            </tr>
+            <tr>
+                <th>.flex-row</th>
+                <td>
+                    플렉스 컨테이너 내의 플렉스 항목들을 가로로 배치
+                </td>
+            </tr>
+            <tr>
+                <th>.flex-row-reverse</th>
+                <td>
+                    플렉스 컨테이너 내의 플렉스 항목들을 가로로 배치하고 역순으로 배열
+                </td>
+            </tr>
+            <tr>
+                <th>.flex-column</th>
+                <td>
+                    플렉스 항목을 세로로 배치
+                </td>
+            </tr>
+            <tr>
+                <th>.flex-column-reverse</th>
+                <td>
+                    플렉스 항목을 세로로 배치하고 역순으로 배열
+                </td>
+            </tr>
+            <tr>
+                <th>.justify-content-정렬방식</th>
+                <td>
+                    플렉스 컨테이너에 적용하는 플렉스 항목들의 가로방향 정렬 방식, start, center, end, between, around가 있음
+                </td>
+            </tr>
+
+            <tr>
+                <th>.align-content-정렬방식</th>
+                <td>
+                    플렉스 컨테이너에 적용하는 플렉스 항목들의 세로방향 정렬 방식, start, center, end, around, stretch가 있음
+                </td>
+            </tr>
+            <tr>
+                <th>.align-self-정렬방식</th>
+                <td>
+                    플렉스 항목에 적용하는 세로방향 정렬 방식, start, center, end, baseline, stretch가 있음
+                </td>
+            </tr>
+            <tr>
+                <th>.flex-fill</th>
+                <td>
+                    플렉스 항목을 빈공간을 채우도록 늘림, 플렉스 항목에 적용
+                </td>
+            </tr>
+            <tr>
+                <th>.flex-grow-1</th>
+                <td>
+                    플렉스 항목을 빈공간을 채우도록 늘림, 플렉스 항목에 적용
+                </td>
+            </tr>
+            <tr>
+                <th>.order-#</th>
+                <td>
+                    플렉스 항목의 배치 순서를 #으로 지정
+                </td>
+            </tr>
+            <tr>
+                <th>.flex-nowrap</th>
+                <td>
+                    플렉스 항목이 플렉스 컨테이너를 벗어날 수 있게 설정
+                </td>
+            </tr>
+            <tr>
+                <th>.flex-wrap</th>
+                <td>
+                    플렉스 항목이 플렉스 컨테이너를 벗어날 수 없으며 항목이 많을 시 줄이 바뀜
+                </td>
+            </tr>
+            <tr>
+                <th>.flex-wrap-reverse</th>
+                <td>
+                    플렉스 항목이 플렉스 컨테이너를 벗어날 수 없으며 항목이 많을 시 줄이 위로 바뀜
+                </td>
+            </tr>
+
+        </table>
+    </div>
+</main>
+</body>
+
+</html>

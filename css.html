@@ -1,0 +1,1991 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8"/>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>WP Guide - CSS</title>
+    <link href="bootstrap-5.2.3-dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <script src="bootstrap-5.2.3-dist/js/bootstrap.min.js"></script>
+    <link href="style.css" rel="stylesheet"/>
+</head>
+
+<body class="">
+<!-- 네비게이션바 -->
+<nav class="navbar navbar-expand-sm navbar-light bg-light shadow fixed-top" id="topfixednav">
+    <div class="container-fluid">
+        <!-- navbar collapse 만들기 : class, data-bs-toggle, data-bs-target 입력 -->
+        <a class="navbar-brand" href="#">WP Guide</a>
+
+        <div class="d-flex justify-content-end">
+            <button aria-controls="topNav" class="navbar-toggler btn btn-outline-secondar border"
+                    data-bs-target="#topNav"
+                    data-bs-toggle="collapse" type="button">
+                <!-- 버튼 모양으로 아이콘 넣어주기 -->
+                <!-- <span class="navbar-toggler-icon"></span> -->
+                Menu
+            </button>
+            <button class="btn btn-primary d-sm-none ms-2" data-bs-target="#offcan" data-bs-toggle="offcanvas"
+                    type="button">
+                Guide List
+            </button>
+        </div>
+
+        <!-- collapse버튼에 집어넣을 div : class. id 입력 -->
+        <div class="collapse navbar-collapse" id="topNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="./index.html">HTML</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./css.html">CSS</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./bootstrap.html">Bootstrap</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./sql.html">SQL</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- 오프캔버스 -->
+<aside>
+    <div class="offcanvas offcanvas-start shadow" id="offcan" tabindex="-1">
+        <div class="offcanvas-header">
+            <h1 class="offcanvas- title">Guide List</h1>
+            <button aria-label="Close" class="btn-close mb-1" data-bs-dismiss="offcanvas" type="button"></button>
+        </div>
+        <div class="offcanvas-body">
+            <ul class="list-unstyled">
+                <li>
+                    <a href="#selector">선택자</a>
+                </li>
+                <li>
+                    <a href="#font">글꼴</a>
+                </li>
+                <li>
+                    <a href="#liststyle">목록 스타일</a>
+                </li>
+                <li>
+                    <a href="#tablestyle">표 스타일</a>
+                </li>
+                <li>
+                    <a href="#boxmodel">박스 모델</a>
+                </li>
+                <li>
+                    <a href="#background">배경</a>
+                </li>
+                <li>
+                    <a href="#transform">트랜스폼</a>
+                </li>
+                <li>
+                    <a href="#transition">트랜지션</a>
+                </li>
+                <li>
+                    <a href="#animation">애니메이션</a>
+                </li>
+                <li>
+                    <a href="#responsive">반응형 웹</a>
+                </li>
+                <li>
+                    <a href="#cssapply">외부 CSS 파일 연결</a>
+                </li>
+                <li>
+                    <a href="#flex">플렉스</a>
+                </li>
+                <li>
+                    <a href="#grid">그리드</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</aside>
+<main>
+    <!-- 선택자-->
+    <div id="selector">
+        <h3>선택자</h3>
+        <table class="table border">
+            <caption class="caption-top" id="selectormain">선택자</caption>
+            <thead class="table-dark">
+            <tr>
+                <th class="w-25">종류</th>
+                <th>설명</th>
+            </tr>
+            </thead>
+            <tr>
+                <th>* { }</th>
+                <td>
+                    전체 선택자, 문서의 모든 요소에 스타일 적용
+                </td>
+            </tr>
+            <tr>
+                <th>tagname { }</th>
+                <td>
+                    유형 선택자, 해당 태그에 스타일 적용
+                </td>
+            </tr>
+            <tr>
+                <th>.classname { }</th>
+                <td>
+                    <details>
+                        <summary>클래스 선택자, 해당 클래스에 스타일 적용</summary>
+                        <span>h1.text-black { } : .text-black 클래스를 가지는 h1태그를 선택</span>
+                    </details>
+
+                </td>
+            </tr>
+            <tr>
+                <th>#id { }</th>
+                <td>
+                    id 선택자, 해당 id에 스타일 적용
+                </td>
+            </tr>
+            <tr>
+                <th>[ ] { }</th>
+                <td>
+                    <details>
+                        <summary>
+                            속성 선택자, 주어진 속성을 가지는 모든 요소를 선택
+                        </summary>
+                        <span>
+                        h1[attribute] { } : attribute 속성을 가진 h1 요소를 선택 <br>
+                        </span>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>[attribute="value"] { }</th>
+                <td>
+                    <details>
+                        <summary>
+                            속성의 값이 "value"인 요소를 선택
+                        </summary>
+                        <span>h1[title="abc"] : title="abc" 속성을 가진 h1 요소를 선택, title="abc def"는 선택되지 않음.</span>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>[attribute~="value"] { }</th>
+                <td>
+                    <details>
+                        <summary>
+                            속성의 값이 "value"를 포함하는 요소를 선택 - 단어 기준
+                        </summary>
+                        <span>h1[title~="abc"] : title="abc def"는 선택되지만 title="abcdef"는 선택되지 않음.</span>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>[attribute|="value"] { }</th>
+                <td>
+                    <details>
+                        <summary>
+                            속성의 값이 "value"이거나 "value-"로 시작하는 요소를 선택
+                        </summary>
+                        <span>h1[title|="abc"] : title="abc" || "abc-def는 선택되지만 title="abc def"는 선택되지 않음.</span>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>[attribute^="value"] { }</th>
+                <td>
+                    <details>
+                        <summary>
+                            속성의 값이 "value"로 시작하는 요소를 선택 - 문자열 기준
+                        </summary>
+                        <span>h1[title^="abc"] : title="abc" || "abc-def || "abcdef" 모두 선택됨</span>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>[attribute$="value"] { }</th>
+                <td>
+                    <details>
+                        <summary>
+                            속성의 값이 "value"로 끝나는 요소를 선택 - 문자열 기준
+                        </summary>
+                        <span>h1[title$="def"] : title="def" || "abc-def || "abcdef" 모두 선택됨</span>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>[attribute*="value"] { }</th>
+                <td>
+                    <details>
+                        <summary>
+                            속성의 값이 "value"를 포함하는 모든 요소를 선택 - 문자열 기준
+                        </summary>
+                        <span>h1[title$="bc"] : title="abc" || "abc-def || "abcdef" 모두 선택됨</span>
+                    </details>
+                </td>
+            </tr>
+        </table>
+        <table class="table border">
+            <caption class="caption-top" id="combinator">결합자</caption>
+            <thead class="table-dark">
+            <tr>
+                <th>종류</th>
+                <th>설명</th>
+            </tr>
+            </thead>
+            <tr>
+                <th>선택자1, 선택자2 { }</th>
+                <td>
+                    선택자 목록, 쉼표를 이용하여 여러 개의 선택자에 같은 스타일을 적용
+                </td>
+            </tr>
+            <tr>
+                <th>선택자1 선택자2 { }</th>
+                <td>
+                    자손 결합자, 선택자 사이에 공백을 포함하여 선택자1의 자손인 선택자2에 스타일 적용
+                </td>
+            </tr>
+            <tr>
+                <th>선택자1 > 선택자2 { }</th>
+                <td>
+                    자식 결합자, 선택자1의 자식 요소인 선택자2에 스타일 적용
+                </td>
+            </tr>
+            <tr>
+                <th>선택자1 ~ 선택자2 { }</th>
+                <td>
+                    일반 형제 결합자, 선택자1을 뒤따르면서 같은 부모를 공유하는 형제요소인 선택자2에 스타일 적용
+                </td>
+            </tr>
+            <tr>
+                <th>선택자1 + 선택자2 { }</th>
+                <td>
+                    인접 형제 결합자, 선택자1의 바로 뒤에 위치하는 형제요소인 선택자2에 스타일 적용
+                </td>
+            </tr>
+            <tr>
+                <th>선택자1 || 선택자2 { }</th>
+                <td>
+                    열 결합자, 같은 열에 있는 요소를 선택
+                </td>
+            </tr>
+        </table>
+        <table class="table border">
+            <caption class="caption-top" id="pseudo selector">가상 선택자</caption>
+            <thead class="table-dark">
+            <tr>
+                <th class="w-25">종류</th>
+                <th>설명</th>
+            </tr>
+            </thead>
+            <tr>
+                <th>::first-line { }</th>
+                <td>
+                    요소의 첫 번째 줄을 선택
+                </td>
+            </tr>
+            <tr>
+                <th>::first-letter { }</th>
+                <td>
+                    요소의 첫 번째 문자를 선택
+                </td>
+            </tr>
+            <tr>
+                <th>::before { }</th>
+                <td>
+                    요소의 앞을 선택
+                </td>
+            </tr>
+            <tr>
+                <th>::after { }</th>
+                <td>
+                    요소의 뒤를 선택
+                </td>
+            </tr>
+            <tr>
+                <th>::selection { }</th>
+                <td>
+                    마우스 드래그 등으로 선택한 텍스트를 선택
+                </td>
+            </tr>
+            <tr>
+                <th>:link { }</th>
+                <td>
+                    방문하지 않은 링크에 스타일 적용
+                </td>
+            </tr>
+            <tr>
+                <th>:visited { }</th>
+                <td>
+                    방문한 링크에 스타일 적용
+                </td>
+            </tr>
+            <tr>
+                <th>:active { }</th>
+                <td>
+                    활성화된 웹 요소에 스타일 적용
+                </td>
+            </tr>
+            <tr>
+                <th>:hover { }</th>
+                <td>
+                    마우스를 올린 상태의 요소를 선택
+                </td>
+            </tr>
+            <tr>
+                <th>:target { }</th>
+                <td>
+                    앵커를 클릭해서 목적지로 이동했을 때, 목적지에 해당하는 요소에 스타일 적용
+                </td>
+            </tr>
+            <tr>
+                <th>:enabled { }</th>
+                <td>
+                    해당 요소가 사용할 수 있는 상태일 때 스타일 적용
+                </td>
+            </tr>
+            <tr>
+                <th>:disabled { }</th>
+                <td>
+                    해당 요소가 사용할 수 없는 상태일 때 스타일 적용
+                </td>
+            </tr>
+            <tr>
+                <th>:checked { }</th>
+                <td>
+                    라디오 박스나 체크박스에서 선택된 항목에 스타일 적용
+                </td>
+            </tr>
+            <tr>
+                <th>:not() { }</th>
+                <td>
+                    괄호 안에 있는 요소를 제외한 요소들에 스타일 적용
+                </td>
+            </tr>
+            <tr>
+                <th>:empty { }</th>
+                <td>
+                    내용이 비어있는 요소를 선택, 공백은 내용이 있는 것으로 봄
+                </td>
+            </tr>
+            <tr>
+                <th>:has( )</th>
+                <td>괄호 안의 요소를 자식 요소로 가지는 부모 요소를 선택</td>
+            </tr>
+            <tr>
+                <th>A:only-child { }</th>
+                <td>
+                    A 요소의 형제 요소가 없는 경우 해당 요소를 선택, A가 공백이면 종류에 관계없이 하나뿐인 요소를 선택
+                </td>
+            </tr>
+            <tr>
+                <th>A:only-type-of { }</th>
+                <td>
+                    부모 안에 A타입 자식 요소가 하나 뿐일 때 A를 선택
+                </td>
+            </tr>
+
+            <tr>
+                <th>A:first-child { }</th>
+                <td>
+                    A와 형제인 요소 중 첫 번째 요소가 A일 경우에 선택, A가 공백이면 아무 첫 번째 요소 선택
+                </td>
+            </tr>
+            <tr>
+                <th>A:last-child { }</th>
+                <td>
+                    A와 형제인 요소 중에서 마지막 요소가 A일 경우 선택, A가 공백이면 아무 마지막 요소 선택
+                </td>
+            </tr>
+
+            <tr>
+                <th>A:nth-child(n) { }</th>
+                <td>
+                    <details>
+                        <summary>
+                            A의 형제 요소 중에서 특정 순서에 있는 요소가 A일 경우에 선택, A가 공백이면 아무 n번째 요소 선택
+                        </summary>
+                        <span>음이 아닌 정수를 뜻하는 n 사용 가능, 2n+1 혹은 even, odd 사용 가능</span>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>A:nth-last-child(n) { }</th>
+                <td>
+                    A와 형제인 요소 중에서 뒤에서부터 n번째에 있는 형제 요소가 A일 경우선택, A가 공백이면 뒤에서 부터 아무 n번째 요소 선택
+                </td>
+            </tr>
+            <tr>
+                <th>A:first-of-type { }</th>
+                <td>
+                    A와 형제인 A 요소 중에서 첫 번째 요소를 선택
+                </td>
+            </tr>
+            <tr>
+                <th>A:last-of-type { }</th>
+                <td>
+                    A와 형제인 A 요소 중에서 마지막 요소를 선택
+                </td>
+            </tr>
+            <tr>
+                <th>A:nth-of-type(n) { }</th>
+                <td>
+                    A와 형제인 A 요소 중에서 n번째 요소 선택
+                </td>
+            </tr>
+            <tr>
+                <th>A:nth-last-of-type(n) { }</th>
+                <td>
+                    A와 형제인 A 요소 중에서 뒤에서 n번째 요소 선택
+                </td>
+            </tr>
+        </table>
+    </div>
+    <!-- 글꼴-->
+    <div id="font">
+        <h3>글꼴</h3>
+        <table class="table border">
+            <!--            <caption class="caption-top" id="selectormain">선택자</caption>-->
+            <thead class="table-dark">
+            <tr>
+                <th class="w-25">종류</th>
+                <th>설명</th>
+            </tr>
+            </thead>
+            <tr>
+                <th>font-family</th>
+                <td>
+                    글꼴 지정, 두 단어 이상으로 된 글꼴은 ""으로 표기, 첫 번째 글꼴이 지원되지 않는 경우를 대비하여 두개 이상의 글꼴 설정, 모든 자식 요소에 해당 글꼴 적용
+                </td>
+            </tr>
+            <tr>
+                <th>font-size</th>
+                <td>
+                    <details>
+                        <summary>
+                            글꼴 크기 지정
+                        </summary>
+                        <span>
+                            xx-small < x-small < small < medium < large < x-large < xx-large <br>
+                            em : 부모 요소에서 지정한 대문자 M 의 너비를 기준으로 한 상대적 크기 (1em = 16px = 12pt) <br>
+                            rem : 문서의 시작 부분에서 지정한 크기를 기준으로 한 상대적 크기 <br>
+                            ex : 해당 글꼴의 소문자 x의 높이를 기준으로 한 상대적 크기 <br>
+                            px : 모니터의 1픽셀을 기준으로 한 크기 <br>
+                            pt : 포인트, 일반 문서에서 많이 사용
+                        </span>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>font-style</th>
+                <td>
+                    <details>
+                        <summary>
+                            이탤릭체로 쓸지 말지를 결정
+                        </summary>
+                        font-style : <span>normal</span> || <span style="font-style : italic">italic</span> || <span
+                            style="font-style: oblique">oblique</span>
+                        <br>
+                        italic 체는 처음부터 디자인 된 글꼴인 반면 oblique는 현재 글꼴을 단순히 기울어지게 처리한 것
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>font-weight</th>
+                <td>
+                    <details>
+                        <summary>
+                            글자 굵기를 지정, font-weight : <span>normal</span> || <span>bold</span> || <span>bolder</span> ||
+                            <span>lighter</span> || <i>100 ~ 900</i>
+                        </summary>
+                        <span>
+                            400 : normal <br>
+                        700 : bold
+                        </span>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>@font-face</th>
+                <td>
+                    <details>
+                        <summary>
+                            폰트의 업로드와 임의의 폰트명으로 설정 후 지정
+                        </summary>
+                        <span>
+                            @font-face { <br>
+                            &nbsp&nbspfont-family: '폰트 명' <br>
+                            &nbsp&nbspsrc: local('폰트파일이름') //사용자의 컴퓨터에 해당 폰트가 있는지 확인 <br>
+                            &nbsp&nbspurl('폰트파일 경로/.woff') format('woff') //업로드할 폰트 파일의 경로와 파일의 포맷 <br>
+                            &nbsp&nbspurl('폰트파일 경로/.ttf') format('truetype') //ttf는 truetype으로 입력 <br>
+                            &nbsp&nbspurl('폰트파일 경로.svg') format('svg') <br>
+                            } <br>
+                            .wfont { <br>
+                            &nbsp&nbspfont-family: '폰트 명'; //웹 폰트 지정 <br>
+                            }
+                        </span>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>@import url ()</th>
+                <td>
+                    fonts.google.com 에서 원하는 폰트를 찾고 @import url ( ) 부분을 복사한 뒤 style 태그에 붙여넣으면 폰트를 불러올 수 있음
+                </td>
+            </tr>
+            <tr>
+                <th>color</th>
+                <td>
+                    글자색 지정, <span>hsla(색상각도, 채도, 명도, 불투명도), rgba(0, 255, 255, 불투명도)</span>
+                </td>
+            </tr>
+            <tr>
+                <th>text-align</th>
+                <td>
+                    <details>
+                        <summary>
+                            글자 정렬 설정
+                        </summary>
+                        <span>
+                        start : 현재 텍스트 줄의 시작 위치에 맞추어 문단 정렬 <br>
+                        end : 현재 텍스트 줄의 끝 위치에 맞추어 문단 정렬<br>
+                        left : 왼쪽에 맞추어 문단 정렬<br>
+                        right : 오른쪽에 맞추어 문단 정렬<br>
+                        center : 가운데에 맞추어 문단 정렬<br>
+                        justify : 양 쪽에 맞추어 문단 정렬<br>
+                        match-parent : 부모 요소를 따라 문단 정렬
+                    </span>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>line-height</th>
+                <td>
+                    줄 간격 설정, 배경의 높이와 동일하게 설정하면 텍스트를 세로 중앙으로 정렬 가능
+                </td>
+            </tr>
+            <tr>
+                <th>text-decoration</th>
+                <td>
+                    <details>
+                        <summary>
+                            텍스트에 밑줄이나 취소선 표시
+                        </summary>
+                        <span>none : 줄을 표시하지 않음 <br></span>
+                        <span style="text-decoration : underline">underline : 밑줄 표시 <br></span>
+                        <span style="text-decoration : overline">overline : 윗줄 표시  <br></span>
+                        <span style="text-decoration : line-through">line through : 취소선 표시 </span>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>text-shadow</th>
+                <td>
+                    텍스트에 그림자 효과 추가, <span>text-shadow: none || 가로거리 세로거리 번짐정도 색상;</span>
+                </td>
+            </tr>
+            <tr>
+                <th>text-transfrom</th>
+                <td>
+                    <details>
+                        <summary>
+                            텍스트의 대소문자를 변환
+                        </summary>
+                        <span>capitalize : 첫 글자를 대문자로 변환 <br></span>
+                        <span>uppercase : 모든 글자를 대문자로 변환 <br></span>
+                        <span>lowercase : 모든 글자를 소문자로 변환 <br></span>
+                        <span>full-width : 가능한 한 모든 문자를 전각 문자로 변환 <br></span>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>letter-spacing</th>
+                <td>
+                    글자와 글자 사이의 간격을 조절
+                </td>
+            </tr>
+            <tr>
+                <th>word-spacing</th>
+                <td>
+                    단어와 단어 사이의 간격을 조절
+                </td>
+            </tr>
+        </table>
+    </div>
+    <!-- 목록 스타일-->
+    <div id="liststyle">
+        <h3>목록 스타일</h3>
+        <table class="table border">
+            <!--            <caption class="caption-top" id=""> 속성</caption>-->
+            <thead class="table-dark">
+            <tr>
+                <th class="w-25">종류</th>
+                <th>설명</th>
+            </tr>
+            </thead>
+            <tr>
+                <th>list-style-type</th>
+                <td>
+                    <details>
+                        <summary>
+                            목록에서 불릿이나 번호의 종류 설정
+                        </summary>
+                        <table class="table">
+                            <tr>
+                                <th class="attribute">disk</th>
+                                <td>
+                                    <ul>
+                                        <li style="list-style-type: disc;">채운 원 모양</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="attribute">circlek</th>
+                                <td>
+                                    <ul>
+                                        <li style="list-style-type: circle;">빈 원모양</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="attribute">square</th>
+                                <td>
+                                    <ul>
+                                        <li style="list-style-type: square;">채운 사각형</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="attribute">decimal</th>
+                                <td>
+                                    <ul>
+                                        <li style="list-style-type: decimal;">1부터 시작하는1 0진수</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="attribute">decimal-leading-zero</th>
+                                <td>
+                                    <ul>
+                                        <li style="list-style-type: decimal-leading-zero;">앞에 0이 붙는 10진수</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="attribute">lower-roman</th>
+                                <td>
+                                    <ul>
+                                        <li style="list-style-type: lower-roman;">로마 숫자 소문자</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="attribute">upper-roman</th>
+                                <td>
+                                    <ul>
+                                        <li style="list-style-type: upper-roman;">로마 숫자 대문자</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="attribute">lower-alpha || lower-latin</th>
+                                <td>
+                                    <ul>
+                                        <li style="list-style-type: lower-alpha;">알파벳 소문자</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="attribute">upper-alpha || upper-latin</th>
+                                <td>
+                                    <ul>
+                                        <li style="list-style-type: upper-latin;">알파벳 대문자</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="attribute">none</th>
+                                <td>
+                                    <ul>
+                                        <li style="list-style-type: none;">불릿이나 숫자를 없앰</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </table>
+
+                    </details>
+
+
+                </td>
+            </tr>
+            <tr>
+                <th>list-style-image</th>
+                <td>
+                    <details>
+                        <summary>
+                            불릿을 원하는 이미지로 바꿀 수 있음
+                        </summary>
+                        <span>list-style-image : url(이미지파일경로);</span>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>list-style-position</th>
+                <td>
+                    <details>
+                        <summary>
+                            들여쓰기 설정
+                        </summary>
+                        <span>
+                            list-style-postion : insinde - 불릿이나 번호를 기본 위치보다 안으로 들여 씀 <br>
+                            list-style-postion : none - 기본 값
+                        </span>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>list-style</th>
+                <td>
+                    <details>
+                        <summary>
+                            목록 속성을 한번에 표시할 수 있음
+                        </summary>
+                        <span>
+                            예시) <br>
+                            list-style : lower-alpha inside;
+                        </span>
+                    </details>
+                </td>
+            </tr>
+        </table>
+
+    </div>
+    <!-- 표 스타일-->
+    <div id="tablestyle">
+        <h3>표 스타일</h3>
+        <table class="table border">
+            <!--            <caption class="caption-top" id="selectormain">선택자</caption>-->
+            <thead class="table-dark">
+            <tr>
+                <th class="w-25">종류</th>
+                <th>설명</th>
+            </tr>
+            </thead>
+            <tr>
+                <th>caption-side</th>
+                <td>
+                    <details>
+                        <summary>
+                            캡션의 위치 설정
+                        </summary>
+                        <span>
+                            caption-side : top - 기본값, 캡션을 표 윗부분에 표시 <br>
+                        caption-side : bottom - 캡션을 표 아랫부분에 표시
+                        </span>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>border</th>
+                <td>
+                    <details>
+                        <summary>
+                            표 바깥 테두리와 셀 테두리를 각각 지정
+                        </summary>
+                        <span>
+                            표 바깥 테두리 : table 태그에 설정 <br>
+                            셀 테두리 : td, th 태그에 설정
+                        </span>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>border-spacing</th>
+                <td>
+                    셀과 셀 사이의 여백 조절, <span>border-spacing : 수평거리 수직거리</span>
+                </td>
+            </tr>
+            <tr>
+                <th>border-collapse</th>
+                <td>
+                    <details>
+                        <summary>
+                            셀과 셀 사이의 테두리, 셀과 표의 테두리를 합침
+                        </summary>
+                        <span>
+                            border-collapse : collapse - 테두리 합침 <br>
+                            border-collapse : seperate - 기본값, 테두리 분리
+                        </span>
+                    </details>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <!-- 박스모델-->
+    <div id="boxmodel">
+        <h3>박스 모델</h3>
+        <table class="table border">
+            <!--            <caption class="caption-top" id="selectormain">선택자</caption>-->
+            <thead class="table-dark">
+            <tr>
+                <th class="w-25">종류</th>
+                <th>설명</th>
+            </tr>
+            </thead>
+            <tr>
+                <th>width</th>
+                <td>
+                    컨텐츠 영역의 너비 지정, <span>단위 - px, em, %, 기본값: auto</span>
+                </td>
+            </tr>
+            <tr>
+                <th>height</th>
+                <td>
+                    컨텐츠 영역의 높이 지정, <span>단위 - px, em, %, 기본값: auto</span>
+                </td>
+            </tr>
+            <tr>
+                <th>box-sizing</th>
+                <td>
+                    <details>
+                        <summary>
+                            패딩과 테두리 영역까지 사이즈 지정에 포함할 것인지
+                        </summary>
+                        <span>
+                            box-sizing : border-box - 테두리까지 포함해서 크기를 지정
+                            box-sizing : content-box - 기본값, 컨텐츠 영역만 크기 지정
+                        </span>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>box-shadow</th>
+                <td>
+                    <details>
+                        <summary>
+                            박스 모델에 그림자 효과 부여
+                        </summary>
+                        <span>
+                            box-shadow : 수평거리 수직거리 흐림정도 번짐정도 색상 inset <br>
+                            흐림 정도 : 숫자가 클 수록 부드럽고 작을 수록 진함 <br>
+                            번짐 정도 : 양숫값을 사용하면 그림자가 박스보다 크게 퍼짐 <br>
+                            색상 : 공백으로 구분해서 여러 개의 색상도 지정 가능 <br>
+                            inset : 이 키워드를 적어주면 그림자가 외부가 아닌 내부로 표시됨
+                        </span>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>border-style</th>
+                <td>
+                    <details>
+                        <summary>
+                            테두리 스타일을 지정
+                        </summary>
+                        <span>
+                            none : 기본값, 테두리 없음 <br>
+                            hidden : 테두리 감추기, 표에서 테두리가 collapse인 경우 다른 테두리까지 감춤 <br>
+                            solid : 실선 테두리 <br>
+                            dotted : 점섬 테두리 <br>
+                            dashed : 짧은 직선 테두리 <br>
+                            double : 이중 선 테두리 <br>
+                            groove : 홈이 파인 듯한 테두리 <br>
+                            ridge : 튀어나온 듯한 테두리 <br>
+                            inset : 창 내부로 들어간 듯한 테두리 <br>
+                            outset : 창에서 튀어나온 듯한 테두리 <br>
+                        </span>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>border-width</th>
+                <td>
+                    <details>
+                        <summary>
+                            테두리 두께 지정
+                        </summary>
+                        <span>
+                            thin || medium || thick 혹은 px 단위로 지정 가능
+                        </span>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>border-color</th>
+                <td>
+                    테두리 색상 지정
+                </td>
+            </tr>
+            <tr>
+                <th>border</th>
+                <td>
+                    <details>
+                        <summary>
+                            테두리 스타일을 묶어서 지정
+                        </summary>
+                        <span>
+                            border : 두께 스타일 색상 (순서 상관 없음)
+                        </span>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>border-radius</th>
+                <td>
+                    테두리를 둥글게 설정, <span>border-radius: 크기 || 백분율 (타원형일 경우 /입력 후 세로 반지름 길이도 추가)</span>
+                </td>
+            </tr>
+            <tr>
+                <th>margin</th>
+                <td>
+                    <details>
+                        <summary>
+                            요소 주변의 여백을 설정
+                        </summary>
+                        <span>
+                            px, em, % 등 수치 또는 부모 요소 기준 백분율로 표시 <br>
+                            auto: 자동 설정, 좌우 마진을 auto로 지정할 경우 요소를 가운데로 정렬 <br>
+                            세로 마진의 경우 위, 아래 요소의 마진값은 서로 더해지는 것이 아니라 큰 값으로 중첩됨
+                        </span>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>padding</th>
+                <td>
+                    컨텐츠 영역과 테두리 사이의 여백
+                </td>
+            </tr>
+            <tr>
+                <th>diplay</th>
+                <td>
+                    <details>
+                        <summary>
+                            요소의 배치 방법을 결정
+                        </summary>
+                        <span>
+                            block : 블럭 레벨 요소로 만듦 <br>
+                            inline : 인라인 레벨 요소로 만듦 <br>
+                            inline-block : 인라인, 블럭 레벨 요소의 속성을 모두 가지며 마진과 패딩 지정 가능 <br>
+                            none : 해당 요소를 화면에 표시하지 않음
+                        </span>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>float</th>
+                <td>
+                    <details>
+                        <summary>
+                            요소를 왼쪽이나 오른쪽으로 배치
+                        </summary>
+                        <span>
+                            float : left - 해당 요소를 문서의 왼쪽에 배치 <br>
+                            float : right - 해당 요소를 문서의 오른쪽에 배치 <br>
+                            float : none - 기본값, 좌우 어느 족에도 배치하지 않음
+                        </span>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>clear</th>
+                <td>
+                    <details>
+                        <summary>
+                            float 속성을 해제
+                        </summary>
+                        <span>
+                            float 속성을 사용하면 해당 요소의 뒤에 오는 요소에도 float 속성이 적용되는데 이를 해제할 수 있는 기능 <br>
+                            clear : left - float:left를 해제 <br>
+                            clear : right - float:right를 해제 <br>
+                            clear : both - float을 모두 해제
+                        </span>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>left</th>
+                <td>
+                    기준 위치의 왼쪽에서부터 요소가 얼마나 오른쪽으로 떨어진 거리
+                </td>
+            </tr>
+            <tr>
+                <th>right</th>
+                <td>
+                    기준 위치의 오른쪽에서부터 요소가 얼마나 왼쪽으로 떨어진 거리
+                </td>
+            </tr>
+            <tr>
+                <th>top</th>
+                <td>
+                    기준 위치의 위쪽에서부터 요소가 얼마나 아래쪽으로 떨어진 거리
+                </td>
+            </tr>
+            <tr>
+                <th>bottom</th>
+                <td>
+                    기준 위치의 아래쪽에서부터 요소가 얼마나 위쪽으로 떨어진 거리
+                </td>
+            </tr>
+            <tr>
+                <th>position</th>
+                <td>
+                    <details>
+                        <summary>
+                            요소의 배치 방법 지정
+                        </summary>
+                        <span>
+                            static : 기본값, 문서의 흐름에 맞춰 배치 <br>
+                            relative : 위칫값을 지정할수 있음, static과 비슷 <br>
+                            absolute : relative값을 사용한 상위 요소를 기준으로 위치를 지정해 배치 <br>
+                            fixed : 브라우저 창을 기준으로 위치 지정
+                        </span>
+                    </details>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <!-- 배경-->
+    <div id="background">
+        <h3>배경</h3>
+        <table class="table border">
+            <!--            <caption class="caption-top" id="selectormain">선택자</caption>-->
+            <thead class="table-dark">
+            <tr>
+                <th class="w-25">종류</th>
+                <th>설명</th>
+            </tr>
+            </thead>
+            <tr>
+                <th>background-color</th>
+                <td>
+                    배경색 지정
+                </td>
+            </tr>
+            <tr>
+                <th>background-clip</th>
+                <td>
+                    <details>
+                        <summary>
+                            배경색의 지정 범위 설정
+                        </summary>
+                        <span>
+                            border-box : 기본값, 테두리까지 배경 지정 <br>
+                            padding-box : 테두리를 뺀 패딩 범위까지 배경 지정 <br>
+                            content-box : 컨텐츠 부분에만 배경 지정
+                        </span>
+
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>background-image</th>
+                <td>
+                    배경 이미지 지정, <span>background-image: url('이미지파일경로');</span>
+                </td>
+            </tr>
+            <tr>
+                <th>background-repeat</th>
+                <td>
+                    <details>
+                        <summary>
+                            배경 이미지의 반복 방식 설정
+                        </summary>
+                        <span>
+                            repeat : 기본값, 가득 찰 때까지 가로와 세로로 반복 <br>
+                            repeat-x : 가로로 가득 찰 때까지 가로로 반복 <br>
+                            repeat-y : 세로로 가득 찰 때까지 세로로 반복 <br>
+                            no-repeat : 한 번만 표시하고 반복하지 않음
+                        </span>
+
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>background-position</th>
+                <td>
+                    <details>
+                        <summary>
+                            배경 이미지의 위치 설정
+                        </summary>
+                        <span>
+                            background-position : 수평위치 수직위치; <br>
+                            수평위치: left || center || right || 백분율 || 길이 값 <br>
+                            수직위치: top || center || botton || 백분율 || 길이 값 <br>
+                        </span>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>background-origin</th>
+                <td>
+                    <details>
+                        <summary>
+                            배경 이미지의 적용 범위 설정
+                        </summary>
+                        <span>
+                            content-box: 컨텐츠 부분에만 배경이미지 표시 <br>
+                            padding-box: 패딩까지 배경이미지 표시 <br>
+                            border-box: 테두리까지 배경이미지 표시 <br>
+                        </span>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>background-attachment</th>
+                <td>
+                    <details>
+                        <summary>
+                            스크롤할 때 이미지가 움직일지 고정될지를 설정
+                        </summary>
+                        <span>
+                            scroll: 기본값, 화면을 스크롤하면 배경 이미지도 스크롤됨 <br>
+                            fixed: 화면을 스크롤하면 배경 이미지는 고정되고 내용만 스크롤됨
+                        </span>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>background</th>
+                <td>
+                    <details>
+                        <summary>
+                            background 속성 하나로 배경이미지관련 속성 제어 가능
+                        </summary>
+                        <span>
+                            예시) <br>
+                            background: url('이미지파일경로') no-repeat center bottom fixed;
+                        </span>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>background-size</th>
+                <td>
+                    <details>
+                        <summary>
+                            배경 이미지 크기 설정
+                        </summary>
+                        <span>
+                            auto: 기본값, 원래 배경이미지 크기만큼 표시 <br>
+                            contain: 요소 안에 배경 이미지가 다 들어오도록 이미지를 확대/축소 <br>
+                            cover: 배경 이미지로 요소를 모두 덮도록 이미지를 확대/축소 <br>
+                            크기: 이미지의 너비와 높이를 px 등의 단위로 지정, 값이 하나만 주어질 경우 너비로 인식하여 높이를 자동 계산 <br>
+                            백분율: 요소의 크기를 기준으로 배경 이미지의 크기 조절
+                        </span>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>linear-gradient</th>
+                <td>
+                    <details>
+                        <summary>
+                            직선적인 그라데이션을 가지는 색상
+                        </summary>
+                        <span>
+                            linear-gradient(to 방향또는각도, 시작색상, 중지점에서색상과위치(%), ,,, , 끝색상); <br>
+                            예시) <br>
+                            linear-gradient(to right bottom, blue, white); <br>
+                            linear-gradient(to 45deg, #06f, white 30%, black);
+                        </span>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>radial-gradient</th>
+                <td>
+                    <details>
+                        <summary>
+                            타원형 또는 원형의 그라데이션을 가지는 색상
+                        </summary>
+                        <span>
+                            radial-gradient(형태 크기 위치, 시작색상, 중지점에서색상과위치(%), ,,, , 끝색상); <br>
+                            크기:
+                            closest-side - 그라데이션 가장자리가 가장 가까운 모서리에 닿는 크기 <br>
+                            closest-center - 그라데이션 가장자리가 가장 가까운 코너에 닿는 크기 <br>
+                            farthest-side - 그라데이션 가장자리가 가장 먼 모서리에 닿는 크기 <br>
+                            farthest-corner - 그라데이션 가장가리가 가장 먼 모서리에 닿는 크기<br><br>
+                            예시) <br>
+                            radial-gradient(white, yellow, red); <br>
+                            radial-gradient(circle, #06f, white 30%); <br>
+                            radial-gradient(circle closest-side at 20% 20%, #06f, white 30%); <br>
+                        </span>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>repeating-linear(radial)-gradient</th>
+                <td>
+                    <details>
+                        <summary>
+                            그라데이션의 반복
+                        </summary>
+                        <span>
+                            예시) <br>
+                            repeating-linear-gradient(yellow, red 20px); <br>
+                            repeating-radial-gradient(circle, white, white 10%, #ccc 10%, #ccc 20%);
+                        </span>
+                    </details>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <!-- 트랜스폼-->
+    <div id="transform">
+        <h3>트랜스폼</h3>
+        <table class="table border">
+            <!--            <caption class="caption-top" id="selectormain">선택자</caption>-->
+            <thead class="table-dark">
+            <tr>
+                <th class="w-25">transform의 속성</th>
+                <th>설명</th>
+            </tr>
+            </thead>
+            <tr>
+                <th>translate(tx, ty)</th>
+                <td>
+                    지정한 크기만큼 x축, y축으로 이동
+                </td>
+            </tr>
+            <tr>
+                <th>translateX(tx)</th>
+                <td>
+                    지정한 크기만큼 x축으로 이동
+                </td>
+            </tr>
+            <tr>
+                <th>translateY(ty)</th>
+                <td>
+                    지정한 크기만큼 y축으로 이동
+                </td>
+            </tr>
+            <tr>
+                <th>scale(tx, ty)</th>
+                <td>
+                    지정한 크기만큼 x축, y축으로 확대/축소
+                </td>
+            </tr>
+            <tr>
+                <th>scaleX(tx)</th>
+                <td>
+                    지정한 크기만큼 x축으로 확대/축소
+                </td>
+            </tr>
+            <tr>
+                <th>scaleY(tx, ty)</th>
+                <td>
+                    지정한 크기만큼 y축으로 확대/축소
+                </td>
+            </tr>
+            <tr>
+                <th>rotate(각도deg)</th>
+                <td>
+                    지정한 각도만큼 회전
+                </td>
+            </tr>
+            <tr>
+                <th>skew(ax, ay)</th>
+                <td>
+                    지정한 각도만큼 x축과 y축으로 왜곡
+                </td>
+            </tr>
+            <tr>
+                <th>skewX(ax)</th>
+                <td>
+                    지정한 각도만큼 x축으로 왜곡
+                </td>
+            </tr>
+            <tr>
+                <th>skewY(ay)</th>
+                <td>
+                    지정한 각도만큼 y축으로 왜곡
+                </td>
+            </tr>
+            <tr>
+                <th>translate3D(tx, ty, tz)</th>
+                <td>
+                    지정한 크기만큼 x축, y축, z축으로 이동
+                </td>
+            </tr>
+            <tr>
+                <th>translateZ(tz)</th>
+                <td>
+                    지정한 크기만큼 z축으로 이동
+                </td>
+            </tr>
+            <tr>
+                <th>scale3D(tx, ty, tz)</th>
+                <td>
+                    지정한 크기만큼 x축, y축, z축으로 확대/축소
+                </td>
+            </tr>
+            <tr>
+                <th>scaleZ(tz)</th>
+                <td>
+                    지정한 크기만큼 z축으로 확대/축소
+                </td>
+            </tr>
+            <tr>
+                <th>rotate3D(rx, ry, rz, 각도deg)</th>
+                <td>
+                    지정한 각도만큼 회전, rx, ry, rz를 이용하여 회전 축을 벡터로 나타내야함
+                </td>
+            </tr>
+            <tr>
+                <th>rotateX(각도deg)</th>
+                <td>
+                    지정한 각도만큼 x축으로 회전
+                </td>
+            </tr>
+            <tr>
+                <th>rotateY(각도deg)</th>
+                <td>
+                    지정한 각도만큼 y축으로 회전
+                </td>
+            </tr>
+            <tr>
+                <th>rotateZ(각도deg)</th>
+                <td>
+                    지정한 각도만큼 z축으로 회전
+                </td>
+            </tr>
+            <tr>
+                <th>perspective(길이)</th>
+                <td>
+                    입체적으로 보일 수 있도록 깊이값 지정
+                </td>
+            </tr>
+        </table>
+    </div>
+    <!-- 트랜지션-->
+    <div id="transition">
+        <h3>트랜지션</h3>
+        <table class="table border">
+            <!--            <caption class="caption-top" id="selectormain">선택자</caption>-->
+            <thead class="table-dark">
+            <tr>
+                <th class="w-25">종류</th>
+                <th>설명</th>
+            </tr>
+            </thead>
+            <tr>
+                <th>transition-property</th>
+                <td>
+                    트랜지션의 대상을 지정, <span>all || none || 속성이름</span>
+                </td>
+            </tr>
+            <tr>
+                <th>transition-duration</th>
+                <td>
+                    트랜지션이 실행되는 시간, <span>단위 s || ms</span>
+                </td>
+            </tr>
+            <tr>
+                <th>transition-timing-function</th>
+                <td>
+                    <details>
+                        <summary>
+                            트랜지션의 속도 변화
+                        </summary>
+                        <span>ease || linear || ease-in || ease-out || ease-in-out || cubic-bezier(n, n, n, n)</span>
+                    </details>
+
+                </td>
+            </tr>
+            <tr>
+                <th>transition-delay</th>
+                <td>
+                    트랜지션의 지연 시간
+                </td>
+            </tr>
+            <tr>
+                <th>transition</th>
+                <td>
+                    <details>
+                        <summary>
+                            트랜지션 속성들을 한 번에 지정
+                        </summary>
+                        <span>
+                            transition: transition-property transition-duration transition-timing-function transition-delay <br>
+                            duration과 delay의 경우 순서를 지켜야하지만 나머지는 순서를 지키지 않아도 됨
+                        </span>
+                    </details>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <!-- 애니메이션-->
+    <div id="animation">
+        <h3>애니메이션</h3>
+        <table class="table border">
+            <!--            <caption class="caption-top" id="selectormain">선택자</caption>-->
+            <thead class="table-dark">
+            <tr>
+                <th class="w-25">종류</th>
+                <th>설명</th>
+            </tr>
+            </thead>
+            <tr>
+                <th>@keyframes</th>
+                <td>
+                    <details>
+                        <summary>
+                            애니메이션 이름, 바뀌는 지점, 바뀌는 속성을 지정
+                        </summary>
+                        <span>
+                            @keyframes 이름 { <br>
+                            &nbsp &nbsp 지점 { 스타일; } <br>
+                            } <br>
+                            지점의 경우 스타일이 바뀌는 지점을 의미, from과 to 혹은 0%, 50%, 100% 등으로 설정 가능
+                        </span>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>animation-delay</th>
+                <td>
+                    애니메이션이 시작되기까지의 딜레이 설정
+                </td>
+            </tr>
+            <tr>
+                <th>animation-direction</th>
+                <td>
+                    <details>
+                        <summary>
+                            애니메이션을 종료한 뒤 처음부터 시작할지, 역방향으로 진행할지 지정
+                        </summary>
+                        <span>
+                            normal : 기본값, 애니메이션을 from에서 to로 진행 <br>
+                            reverse : 애니메이션을 반대로 진행 <br>
+                            alternate : 홀수 번째는 normal, 짝수 번째는 reverse 방향으로 진행 <br>
+                            alternate-reverse : alternate와 반대로 진행
+                        </span>
+                    </details>
+
+                </td>
+            </tr>
+            <tr>
+                <th>animation-duration</th>
+                <td>
+                    애니메이션의 진행 시간
+                </td>
+            </tr>
+            <tr>
+                <th>animation-iteration-count</th>
+                <td>
+                    애니메이션의 반복 횟수, <span>횟수를숫자로지정 || infinite</span>
+                </td>
+            </tr>
+            <tr>
+                <th>animation-name</th>
+                <td>
+                    적용할 애니메이션의 이름
+                </td>
+            </tr>
+            <tr>
+                <th>animation-timing-function</th>
+                <td>
+                    <details>
+                        <summary>
+                            키프레임의 전환 형태
+                        </summary>
+                        <span>ease || linear || ease-in || ease-out || ease-in-out || cubic-bezier(n, n, n, n)</span>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>animation</th>
+                <td>
+                    애니메이션 속성을 한꺼번에 묶어서 지정
+                </td>
+            </tr>
+
+        </table>
+    </div>
+    <!-- 반응형 웹-->
+    <div id="responsive">
+        <h3>반응형 웹</h3>
+        <table class="table border">
+            <!--            <caption class="caption-top" id="selectormain">선택자</caption>-->
+            <thead class="table-dark">
+            <tr>
+                <th class="w-25">종류</th>
+                <th>설명</th>
+            </tr>
+            </thead>
+            <tr class="detailtr">
+                <th>&ltmeta></th>
+                <td>
+                    <details>
+                        <summary>
+                            뷰포트를 지정하는 태그, &lthead>태그 내에 작성
+                        </summary>
+                    </details>
+                </td>
+            </tr>
+            <tr class="noshowtr">
+                <td colspan="2">
+                    <span>
+                        기본형: &ltmeta name="viewport" content="속성1=값1, 속성2=값2, ..."> <br>
+                        <table class="table smalltable">
+                            <tr class="bg-success text-white">
+                                <th>종류</th>
+                                <th>설명</th>
+                                <th>사용가능한 값</th>
+                                <th>기본값</th>
+                            </tr>
+                            <tr>
+                                <td>width</td>
+                                <td>뷰포트 너비</td>
+                                <td>device-width || 크기</td>
+                                <td>브라우저 기본값</td>
+                            </tr>
+                            <tr>
+                                <td>height</td>
+                                <td>뷰포트 높이</td>
+                                <td>device-height || 크기</td>
+                                <td>브라우저 기본값</td>
+                            </tr>
+                            <tr>
+                                <td>user-scalable</td>
+                                <td>확대/축소가능 여부</td>
+                                <td>yes || no</td>
+                                <td>yes</td>
+                            </tr>
+                            <tr>
+                                <td>initial-scale</td>
+                                <td>초기 확대/축소값</td>
+                                <td>1 ~ 10</td>
+                                <td>1</td>
+                            </tr>
+                        </table>
+                    </span>
+                </td>
+            </tr>
+            <tr class="detailtr">
+                <th>@media</th>
+                <td>
+                    <details>
+                        <summary>특정 미디어에서 어떤 CSS를 적용할 것이지를 지정, &ltstyle>태그 안에서 사용</summary>
+                    </details>
+                </td>
+            </tr>
+
+            <tr class="noshowtr">
+                <td colspan="2">
+                    <span>기본형: @media only||not 미디어유형 and (조건) and (조건) ... { } <br><br>
+                    only : 미디어 쿼리를 지원하지 않는 웹 브라우저에서는 실행하지 않음 <br>
+                        not : 다음에 지정하는 미디어 유형을 제외한 미디어에만 적용함 <br><br>
+                    </span>
+<!--                    미디어 유형 종류 숨김테이블-->
+                    <table class="table border">
+                        <tr class="bg-success text-white">
+                            <th>미디어 유형 종류</th>
+                            <th>설명</th>
+                        </tr>
+                        <tr>
+                            <td>all</td>
+                            <td>모든 유형</td>
+                        </tr>
+                        <tr>
+                            <td>print</td>
+                            <td>인쇄 장치</td>
+                        </tr>
+                        <tr>
+                            <td>screen</td>
+                            <td>컴퓨터, 스마트폰</td>
+                        </tr>
+                        <tr>
+                            <td>tv</td>
+                            <td>TV</td>
+                        </tr>
+                        <tr>
+                            <td>aural</td>
+                            <td>음성 합성 장치</td>
+                        </tr>
+                        <tr>
+                            <td>braille</td>
+                            <td>점자 표시 장치</td>
+                        </tr>
+                        <tr>
+                            <td>handheld</td>
+                            <td>패드와 같은 손에 들고 다니는 장치</td>
+                        </tr>
+                        <tr>
+                            <td>projection</td>
+                            <td>프로젝터</td>
+                        </tr>
+                        <tr>
+                            <td>tty</td>
+                            <td>디스플레이 기능이 제한된 장치, 픽셀 단위가 사용 불가능함</td>
+                        </tr>
+                        <tr>
+                            <td>embossed</td>
+                            <td>점자 프린터</td>
+                        </tr>
+                    </table>
+<!--                    너비, 높이 속성 종류 숨김테이블-->
+                    <span>실제 웹 문서 내용이 화면에 나타나는 영역인 뷰표트의 너비와 높이를 조건으로 사용 가능</span>
+                    <table class="table border">
+                        <tr class="bg-success text-white">
+                            <th>너비, 높이 속성 종류</th>
+                            <th>설명</th>
+                        </tr>
+                        <tr>
+                            <td>width, height</td>
+                            <td>특정 너비, 높이에만 CSS 적용</td>
+                        </tr>
+                        <tr>
+                            <td>min-width, min-height</td>
+                            <td>웹 페이지의 최소 너비와 높이 지정, 해당 값 이상의 경우에 CSS 적용</td>
+                        </tr>
+                        <tr>
+                            <td>max-width, max-height</td>
+                            <td>웹 페이지의 최대 너비와 높이 지정, 해당 값 이하의 경우에 CSS 적용</td>
+                        </tr>
+                    </table>
+<!--                    단말기 화면너비, 높이 속성 종류 숨김테이블-->
+                    <span>단말기의 너비와 높이를 조건으로 사용 가능, 일반적으로 단말기 화면의 해상도와 단말기에서 사용하는 웹 브라우저의 해상도는 서로 다름</span>
+                    <table class="table border">
+                        <tr class="bg-success text-white">
+                            <th>단말기의 너비, 높이 속성 종류</th>
+                            <th>설명</th>
+                        </tr>
+                        <tr>
+                            <td>device-width, device-height</td>
+                            <td>특정 너비, 높이의 단말기에 CSS 적용</td>
+                        </tr>
+                        <tr>
+                            <td>min-device-width, min-device-height</td>
+                            <td>단말기의 최소 너비와 높이 지정, 해당 값 이상의 경우에 CSS 적용</td>
+                        </tr>
+                        <tr>
+                            <td>max-device-width, max-device-height</td>
+                            <td>단말기의 최대 너비와 높이 지정, 해당 값 이하의 경우에 CSS 적용</td>
+                        </tr>
+                    </table>
+<!--                    화면 회전 속성-->
+                    <span>단말기의 화면이 세로방향인지 가로방향인지를 조건으로 사용 가능</span>
+                    <table class="table border">
+                        <tr class="bg-success text-white">
+                            <th>단말기의 너비, 높이 속성 종류</th>
+                            <th>설명</th>
+                        </tr>
+                        <tr>
+                            <td>orientation: portrait</td>
+                            <td>단말기가 세로모드일 때 CSS 적용</td>
+                        </tr>
+                        <tr>
+                            <td>orientation: landscape</td>
+                            <td>단말기가 가로모드일 때 CSS 적용</td>
+                        </tr>
+                    </table>
+                </td>
+
+            </tr>
+        </table>
+    </div>
+    <!-- 외부 CSS 파일 연결-->
+    <div id="cssapply">
+        <h3>외부 CSS 파일 연결</h3>
+        <table class="table border">
+            <!--            <caption class="caption-top" id="selectormain">선택자</caption>-->
+            <thead class="table-dark">
+            <tr>
+                <th class="w-25">종류</th>
+                <th>설명</th>
+            </tr>
+            </thead>
+            <tr>
+                <th>&ltlink></th>
+                <td>
+                    <details>
+                        <summary>
+                            &lthead> 태그 내에 들어가며 외부 CSS 파일을 HTML문서로 가져옴
+                        </summary>
+                        <span>
+                            기본형 : &ltlink rel="stylesheet" media="미디어쿼리 조건(@media 뒤에 오는 내용과 동일한 형식)" href="css 파일 경로">
+                        </span>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>@import</th>
+                <td>
+                    <details>
+                        <summary>
+                            &ltstyle> 태그 안에서 사용되며 외부 CSS 파일을 HTML문서로 가져옴
+                        </summary>
+                        <span>
+                            기본형 : @import url("css 파일 경로") 미디어쿼리 조건(@media 뒤에 오는 내용과 동일한 형식)
+                        </span>
+                    </details>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <!-- 플렉스-->
+    <div id="flex">
+        <h3>플렉스</h3>
+        <table class="table border">
+            <!--            <caption class="caption-top" id="selectormain">선택자</caption>-->
+            <thead class="table-dark">
+            <tr>
+                <th class="w-25">종류</th>
+                <th>설명</th>
+            </tr>
+            </thead>
+            <tr>
+                <th>display: flex</th>
+                <td>
+                    <details>
+                        <summary>
+                            &ltdiv> 를 플렉스 컨테이너로 설정
+                        </summary>
+                        <span>
+                        flex: 플렉스 컨테이너 내의 플렉스 항목을 블럭 레벨 요소로 배치 <br>
+                        inline-flex: 플렉스 항목을 인라인 레벨 요소로 배치
+                    </span>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>flex-direction</th>
+                <td>
+                    <details>
+                        <summary>주축의 방향과 플렉스 항목의 배치 순서를 설정</summary>
+                        <span>
+                            row: 주축을 가로로 지정, 플렉스 항목을 왼쪽에서 오른쪽으로 배치 <br>
+                            row-reverse: 주축을 가로로 지정, 플렉스 항목을 오른쪽에서 왼쪽으로 배치 <br>
+                            column: 주축을 세로로 지정, 플렉스 항목을 위에서 아래로 배치 <br>
+                            column-reverse: 주축을 세로로 지정, 플렉스 항목을 아래에서 위로 배치
+                        </span>
+                    </details>
+                    </td>
+            </tr>
+            <tr>
+                <th>flex-wrap</th>
+                <td>
+                    <details>
+                        <summary>플렉스 항목이 플렉스 컨테이너 범위를 벗어날 때 화면에 어떻게 보이게 할지를 설정</summary>
+                        <span>
+                            nowrap: 기본값, 플렉스 항목을 한 줄에 표시 <br>
+                            wrap: 플렉스 항목을 여러 줄에 표시 <br>
+                            wrap-reverse: 플렉스 항목을 여러 줄에 표시, 각 줄은 아래에서부터 위쪽 방향으로 배치됨
+                        </span>
+                    </details>
+                </td>
+            </tr>
+
+            <tr>
+                <th>flex-flow</th>
+                <td>
+                    flex-direction 속성과 flex-wrap 속성을 한 번에 설정
+                </td>
+            </tr>
+            <tr>
+                <th>justify-content</th>
+                <td>
+                    <details>
+                        <summary>
+                            플렉스 컨테이너에 적용되며 주축(기본적으로 가로)방향의 정렬 방법을 설정
+                        </summary>
+                        <span>
+                            flex-start: 주축의 시작점에 맞춰 배치 <br>
+                            flex-end: 주축의 끝점에 맞춰 배치 <br>
+                            center: 주축의 중앙에 맞춰 배치 <br>
+                            space-between: 첫째항목과 마지막 항목을 주축의 양 끝단에 맞추고 나머지는 일정한 간격을 갖도록 배치 <br>
+                            space-around: 모든 항목을 주축에 같은 간격으로 배치, 양 끝부분에 공백이 생김
+                        </span>
+                    </details>
+
+                </td>
+            </tr>
+            <tr>
+                <th>align-items</th>
+                <td>
+                    <details>
+                        <summary>
+                            플렉스 컨테이너에 적용되며 교차축(기본적으로 세로)방향의 정렬 방법을 설정
+                        </summary>
+                        <span>
+                            flex-start: 교차축의 시작점에 맞춰 배치 <br>
+                            flex-end: 교차축의 끝점에 맞춰 배치 <br>
+                            center: 교차축의 중앙에 맞춰 배치 <br>
+                            baseline: 교차축의 문자 기준선에 맞춰 배치 <br>
+                            stretch: 플렉스 항목을 늘려 교차축에 가득 차게 배치
+                        </span>
+                    </details>
+
+                </td>
+            </tr>
+            <tr>
+                <th>align-self</th>
+                <td>
+                    <details>
+                        <summary>
+                            특정 플렉스 항목에 적용되며 교차축(기본적으로 세로)방향의 정렬 방법을 설정
+                        </summary>
+                        <span>
+                            flex-start: 교차축의 시작점에 맞춰 배치 <br>
+                            flex-end: 교차축의 끝점에 맞춰 배치 <br>
+                            center: 교차축의 중앙에 맞춰 배치 <br>
+                            baseline: 교차축의 문자 기준선에 맞춰 배치 <br>
+                            stretch: 플렉스 항목을 늘려 교차축에 가득 차게 배치
+                        </span>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>align-content</th>
+                <td>
+                    <details>
+                        <summary>
+                            플렉스 컨테이너에 적용되며 플렉스 항목이 여러 줄로 표시될 때 각 줄의 교차축(기본적으로 세로)방향으로의 정렬 방법을 설정
+                        </summary>
+                        <span>
+                            flex-start: 교차축의 시작점에 맞춰 배치 <br>
+                            flex-end: 교차축의 끝점에 맞춰 배치 <br>
+                            center: 교차축의 중앙에 맞춰 배치 <br>
+                            space-between: 첫째항목과 마지막 항목을 교차축의 양 끝단에 맞추고 나머지는 일정한 간격을 갖도록 배치 <br>
+                            space-around: 모든 항목을 교차축에 같은 간격으로 배치, 양 끝부분에 공백이 생김 <br>
+                            stretch: 플렉스 항목을 늘려 교차축에 가득 차게 배치
+                        </span>
+                    </details>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+    <!-- 그리드-->
+    <div id="grid">
+        <h3>그리드</h3>
+        <table class="table border">
+            <!--            <caption class="caption-top" id="selectormain">선택자</caption>-->
+            <thead class="table-dark">
+            <tr>
+                <th class="w-25">종류</th>
+                <th>설명</th>
+            </tr>
+            </thead>
+            <tr>
+                <th>display</th>
+                <td>
+                    <details>
+                        <summary>&ltdiv> 를 그리드 컨테이너로 설정</summary>
+                        <span>
+                            gird: 컨테이너 안의 항목을 블럭 레벨 요소로 배치 <br>
+                            inline-grid: 컨테이너 안의 항목을 인라인 레벨 요소로 배치
+                        </span>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>grid-template-columns</th>
+                <td>
+                    <details>
+                        <summary>그리드 컨테이너에 설정, 열의 개수와 너비를 지정</summary>
+                        <span>
+                            grid-template-columns : 200px 200px 200px; - 너비 200px의 열 3개로 지정 <br>
+                            fr : fraction, 그리드에서 사용되는 단위로 Afr Bfr Cfr = A:B:C의 길이비를 가짐, 열의 너비 지정 등에 사용가능 <br>
+                            repeat(횟수,값) : 200px 200px 200px -> repeat(3,200px) 으로 표현가능 <br>
+                            횟수) auto-fill : 그리드 항목의 가로 개수를 뷰포트 크기에 맞게 자동 설정, 여백이 남음 <br>
+                            횟수) auto-fit : 그리드 항목의 가로 개수를 뷰포트 크기에 딱맞게 설정되어 여백이 남지 않음 <br>
+                            minmax(최소길이, 최대길이) : 그리드 항목의 컨텐츠 양에 따라 항목의 길이가 자동적으로 조절됨, auto값 사용가능
+                        </span>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>grid-template-rows</th>
+                <td>
+                    <details>
+                        <summary>그리드 컨테이너에 설정, 행의 높이 지정</summary>
+                        <span>
+                            grid-template-rows : 100px; - 행의 높이를 100px로 지정
+                        </span>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>grid-column-gap</th>
+                <td>
+                    열과 열 사이의 간격을 지정
+                </td>
+            </tr>
+            <tr>
+                <th>grid-row-gap</th>
+                <td>
+                    행과 행 사이의 간격을 지정
+                </td>
+            </tr>
+            <tr>
+                <th>grid-gap</th>
+                <td>
+                    열과 행 사이의 간격을 한번에 지정, <span>grid-gap: 행간격 열간격;</span>
+                </td>
+            </tr>
+            <tr>
+                <th>grid-column-start</th>
+                <td>
+                    그리드의 열의 개수가 n개이면 열을 구분하는 세로선은 n+1개가 됨, 그리드 항목이 왼쪽에서부터 몇 번째 세로선의 바로 오른쪽에 위치할 것인지를 설정
+                </td>
+            </tr>
+            <tr>
+                <th>grid-column-end</th>
+                <td>
+                    그리드 항목이 몇 번째 세로선까지 자리를 차지할지를 설정, 기본값은 항목의 시작위치 +1
+                </td>
+            </tr>
+            <tr>
+                <th>grid-column: n/m</th>
+                <td>
+                    그리드 항목이 몇 번째 세로선부터 몇 번째 세로선까지 자리를 차지할지를 설정, /로 시작선과 끝선 구분
+                </td>
+            </tr>
+            <th>grid-row-start</th>
+            <td>
+                그리드의 행의 개수가 n개이면 행을 구분하는 가로선은 n+1개가 됨, 그리드 항목이 위쪽에서부터 몇 번째 가로선의 바로 아래쪽에 위치할 것인지를 설정
+            </td>
+            </tr>
+            <tr>
+                <th>grid-row-end</th>
+                <td>
+                    그리드 항목이 몇 번째 가로선까지 자리를 차지할지를 설정, 기본값은 항목의 시작위치 +1
+                </td>
+            </tr>
+            <tr>
+                <th>grid-row: n/m</th>
+                <td>
+                    그리드 항목이 몇 번째 가로선부터 몇 번째 가로선까지 자리를 차지할지를 설정, /로 시작선과 끝선 구분
+                </td>
+            </tr>
+            <tr>
+                <th>grid-area</th>
+                <td>
+                    그리드 항목에 적용되며 템플릿 이름을 지정할 수 있음
+                </td>
+            </tr>
+            <tr>
+                <th>grid-template-area</th>
+                <td>
+                    <details>
+                        <summary>그리드 컨테이너에 적용되며 "" 안에 템플릿 이름과 . 을 사용하여 그리드 항목을 직접 배치할 수 있음</summary>
+                        <span>
+                            grid-template-area: <br>
+                            &nbsp&nbsp"box1 box1 box1" <br>
+                            &nbsp&nbsp"box2 box3 box3" <br>
+                            &nbsp&nbsp"box2 . box4" <br>
+                            . 은 빈 공간을 의미함
+                        </span>
+                    </details>
+
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</main>
+
+
+</body>
+</html>

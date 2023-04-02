@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>WP Guide - SQL</title>
+    <link href="bootstrap-5.2.3-dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <script src="bootstrap-5.2.3-dist/js/bootstrap.min.js"></script>
+    <link href="style.css" rel="stylesheet"/>
+</head>
+
+<body>
+<!-- 네비게이션바 -->
+<nav class="navbar navbar-expand-sm navbar-light bg-light shadow fixed-top" id="topfixednav">
+    <div class="container-fluid">
+        <!-- navbar collapse 만들기 : class, data-bs-toggle, data-bs-target 입력 -->
+        <a class="navbar-brand" href="#">WP Guide</a>
+
+        <div class="d-flex justify-content-end">
+            <button aria-controls="topNav" class="navbar-toggler btn btn-outline-secondar border"
+                    data-bs-target="#topNav"
+                    data-bs-toggle="collapse" type="button">
+                <!-- 버튼 모양으로 아이콘 넣어주기 -->
+                <!-- <span class="navbar-toggler-icon"></span> -->
+                Menu
+            </button>
+            <button class="btn btn-primary d-sm-none ms-2" data-bs-target="#offcan" data-bs-toggle="offcanvas"
+                    type="button">
+                Guide List
+            </button>
+        </div>
+
+        <!-- collapse버튼에 집어넣을 div : class. id 입력 -->
+        <div class="collapse navbar-collapse" id="topNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="./index.html">HTML</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./css.html">CSS</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./bootstrap.html">Bootstrap</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./sql.html">SQL</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- 오프캔버스 -->
+<aside>
+    <div class="offcanvas offcanvas-start shadow" id="offcan" tabindex="-1">
+        <div class="offcanvas-header">
+            <h1 class="offcanvas- title">Guide List</h1>
+            <button aria-label="Close" class="btn-close mb-1" data-bs-dismiss="offcanvas" type="button"></button>
+        </div>
+        <div class="offcanvas-body">
+            <ul class="list-unstyled">
+                <li>
+                    <a href="#sqlselect">SELECT 문</a>
+                </li>
+                <li>
+                    <a href="#sqlwhere">WHERE, 연산자</a>
+                </li>
+                <li>
+                    <a href="#sqlstrfunc">문자 함수</a>
+                </li>
+                <li>
+                    <a href="#sqlnumberfunc">숫자 함수</a>
+                </li>
+                <li>
+                    <a href="#sqldate">날짜 함수</a>
+                </li>
+                <li>
+                    <a href="#sqltype">형 변환 함수</a>
+                </li>
+                <li>
+                    <a href="#sqlmultirow">다중행 함수</a>
+                </li>
+                <li>
+                    <a href="#sqljoin">조인</a>
+                </li>
+                <li>
+                    <a href="#sqlsubq">서브쿼리</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</aside>
+<main>
+    <!-- 셀렉트 문 -->
+    <div id="sqlselect">
+        <h3>셀렉트 문</h3>
+        <table class="table border">
+            <thead class="table-dark">
+            <tr>
+                <th>종류</th>
+                <th>설명</th>
+            </tr>
+            </thead>
+            <tr>
+                <th>SELECT</th>
+                <td>
+                    조회할 열 이름/데이터를 하나 이상 지정, *은 모든 열을 의미
+                </td>
+            </tr>
+            <tr>
+                <th>FROM</th>
+                <td>
+                    조회할 테이블 이름, <span>SELECT * FROM emp</span>
+                </td>
+            </tr>
+            <tr>
+                <th>DISTINCT</th>
+                <td>SELECT절에 명시한 열에서 중복 값을 제외해줌, <span>SELECT DISTINCT * FROM emp</span></td>
+            </tr>
+            <tr>
+                <th>ALL</th>
+                <td>
+                    SELECT절에 명시한 열에서 중복 값을 제외 없이 모두 표시해줌, <span>SELECT ALL * FROM emp</span>
+                </td>
+            </tr>
+            <tr>
+                <th>AS</th>
+                <td>
+                    <details>
+                        <summary>별칭 지정, 별칭의 지정 방법에는 4가지가 있음</summary>
+                        <span>
+                            1. -data- 별칭 <br>
+                        2. -data- "별칭" <br>
+                        3. -data- AS 별칭 <br>
+                        4. -data- AS "별칭" <br>
+                        이 중 3번 방법이 가장 좋음
+                        </span>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>ORDER BY</th>
+                <td>정렬 기준이 되는 열을 선택할 수 있음, <span>SELECT * FROM emp ORDER BY sal (DESC/ASC)</span></td>
+            </tr>
+
+        </table>
+    </div>
+    <!-- 웨얼 절 -->
+    <div id="sqlwhere">
+        <h3>WHERE, 연산자</h3>
+        <table class="table border">
+            <thead class="table-dark">
+            <tr>
+                <th>종류</th>
+                <th>설명</th>
+            </tr>
+            </thead>
+            <tr>
+                <th>WHERE</th>
+                <td>
+                    특정 조건을 기준으로 원하는 행을 출력, <span>SELECT * FROM emp WHERE deptno = 30;</span>
+                </td>
+            </tr>
+            <tr>
+                <th>AND</th>
+                <td>
+                    AND 논리 연산자 <span>SELECT * FROM emp WHERE deptno = 30 AND job = 'SALESMAN';</span>
+                </td>
+            </tr>
+            <tr>
+                <th>OR</th>
+                <td>
+                    OR 논리 연산자 <span>SELECT * FROM emp WHERE deptno = 30 OR job = 'SALESMAN';</span>
+                </td>
+            </tr>
+            <tr>
+                <th>+, -, *, /</th>
+                <td>
+                    산술 연산자, 나눗셈 결과는 실수로 출력됨
+                </td>
+            </tr>
+            <tr>
+                <th> >, >=, <, <=</th>
+                <td>
+                    비교 연산자
+                </td>
+            </tr>
+            <tr>
+                <th> =, !=, <>, ^=</th>
+                <td>
+                    등가 비교 연산자, A = B 는 A와 B가 같을 경우 TRUE, A (!=, <>, ^=) B는 A와 B가 다를 경우 TRUE
+                </td>
+            </tr>
+            <tr>
+                <th> NOT <span class="attribute">값</span></th>
+                <td>
+                    논리 부정 연산자, <span class="attribute">값</span>이 아닌 경우에만 TRUE, <span>SELECT * FROM emp WHERE NOT sal = 3000;</span>
+                </td>
+            </tr>
+            <tr>
+                <th> IN</th>
+                <td>
+                    동일한 열의 조건이 여러 가지일 경우 OR 연산자로 묶는 것보다 편리한 방법, <span>SELECT * FROM emp WHERE job IN ['manager', 'salesman', 'clerk'];</span>
+                </td>
+            </tr>
+            <tr>
+                <th> BETWEEN <span class="attribute">A</span> AND <span class="attribute">B</span></th>
+                <td>
+                    <span class="attribute">A</span> 이상 <span class="attribute">B</span> 이하인 경우에 TRUE, <span>SELECT * FROM emp WHERE sal
+                    BETWEEN 2000 AND 3000;</span>
+                </td>
+            </tr>
+            <tr>
+                <th>LIKE</th>
+                <td>
+                    일부 문자열이 포함된 데이터를 조회
+                </td>
+            </tr>
+            <tr>
+                <th>_ , %</th>
+                <td>
+                    와일드 카드, _는 하나의 문자열, %는 길이와 상관없는 문자열을 의미, <span>'S%', '_L%' 등</span>
+                </td>
+            </tr>
+            <tr>
+                <th>\</th>
+                <td>
+                    이스케이프 문자, 와일드카드와 같은 특수문자 앞에 붙여주면 와일드카드를 단순한 문자로 인식함
+                </td>
+            </tr>
+            <tr>
+                <th>IS NULL</th>
+                <td>
+                    데이터 값이 NULL인 경우 비교 연산이 불가능하기 때문에 값이 NULL인지 구분하기 위해서는 A = NULL 이 아니라 A IS NULL 이라고 써야함
+                </td>
+            </tr>
+            <tr>
+                <th>UNION (ALL)</th>
+                <td>
+                    집합 연산자, 두 SELECT문을 합쳐서 하나의 결과로 보여줌, 두 SELECT문의 열 개수와 열의 자료형이 같아야함, UNION ALL은 중복값도 모두 포함해서 출력
+                </td>
+            </tr>
+            <tr>
+                <th>MINUS</th>
+                <td>
+                    먼저 작성한 SELECT문의 결과에서 뒤에 작성한 SELECT 문의 결과들을 뺀 결과만 보여줌
+                </td>
+            </tr>
+            <tr>
+                <th>INTERSECT</th>
+                <td>
+                    먼저 작성한 SELECT 문과 뒤에 작성한 SELECT 문의 결과의 교집합만 보여줌
+                </td>
+            </tr>
+            <tr>
+                <th>연산자 우선순위</th>
+                <td>
+                    <code>*, /</code> > <code>+, -</code> > <code>=, !=, <>, ^=, >, >=, <, <=</code> > <code>IS (NOT)
+                    NULL, (NOT) LIKE, (NOT) IN</code> > <code>BETWEEN A AND B</code> > <code>NOT</code> >
+                    <code>AND</code> > <code>OR</code>
+                </td>
+            </tr>
+        </table>
+
+    </div>
+    <!-- 문자 함수 -->
+    <div id="sqlstrfunc">
+        <h3>문자 함수</h3>
+        <table class="table border">
+            <thead class="table-dark">
+            <tr>
+                <th>종류</th>
+                <th>설명</th>
+            </tr>
+            </thead>
+            <tr>
+                <th>UPPER(문자열)</th>
+                <td>
+                    문자 데이터를 모두 대문자로 변환, <span>SELECT UPPER(ename) FROM emp WHERE deptno = 30;</span>
+                </td>
+            </tr>
+            <tr>
+                <th>LOWER(문자열)</th>
+                <td>
+                    문자 데이터를 모두 소문자로 변환, <span>SELECT * FROM emp WHERE LOWER(ename) LIKE LOWER();</span>
+                </td>
+            </tr>
+            <tr>
+                <th>INITCAP(문자열)</th>
+                <td>
+                    문자 데이터를 첫 글자는 대문자로, 나머지는 소문자로 변환, <span>SELECT INITCAP(ename) FROM emp;</span>
+                </td>
+            </tr>
+            <tr>
+                <th>LENGTH(문자열)</th>
+                <td>
+                    문자열의 길이를 구하는 함수, <span>SELECT LENGTH(ename) FROM emp;</span>
+                </td>
+            </tr>
+            <tr>
+                <th>LENGTHB(문자열)</th>
+                <td>
+                    문자열의 바이트 크기를 구하는 함수, LENGTH() 함수는 한글의 길이를 1로 계산하지만 LENGTHB()는 2로 계산함, <span>SELECT ename FROM emp WHERE LENGTHB(ename) >= 2;</span>
+                </td>
+            </tr>
+            <tr>
+                <th>SUBSTR(문자열, 시작위치 <span class="gray">, 추출 길이</span>)</th>
+                <td>
+                    문자열 일부를 추출, 시작위치가 음수일 경우 마지막 문자에서부터 왼쪽으로의 위치, 추출 길이를 생략시 시작위치부터 오른쪽 끝까지 출력 <span>SELECT SUBSTR(job,1,2) SUBSTR(job,5) FROM emp;</span>
+                </td>
+            </tr>
+            <tr>
+                <th>INSTR(문자열, 찾을 문자열 <span class="gray">, 탐색을 시작할 문자열 위치, 몇 번째 문자열을 찾을지</span> )</th>
+                <td>
+                    문자열에서 찾고싶은 문자 또는 문자열이 몇 번째에 있는지를 알려주는 함수, <span>SELECT INSTR('HELLO, ORACLE!','L',2,2) AS INSTR FROM DUAL;</span>
+                </td>
+            </tr>
+            <tr>
+                <th>REPLACE(문자열, 찾을 문자열 <span class="gray">, 대체할 문자</span> )</th>
+                <td>
+                    문자열에서 찾고싶은 문자 또는 문자열을 대체하거나 제거하는 함수, <span>SELECT REPLACE('010-1234-5678','-',' ') AS REPLACE FROM DUAL;</span>
+                </td>
+            </tr>
+            <tr>
+                <th>LPAD, RPAD(문자열, 자릿수 <span class="gray">, 빈 공간에 채울 문자</span> )</th>
+                <td>
+                    문자열을 입력한 자릿수만큼의 길이로 만들고 빈 공간은 공백 또는 원하는 문자로 LPAD는 왼쪽, RPAD는 오른쪽에 채워넣음, <span>SELECT RPAD('971225-', 14, '*') FROM DUAL;</span>
+                </td>
+            </tr>
+            <tr>
+                <th>CONCAT(문자열1, 문자열2)</th>
+                <td>
+                    문자열1 뒤에 문자열2를 붙여줌 <span>SELECT CONCAT(empno, CONCAT(' : ', ename)) FROM emp;</span>
+                </td>
+            </tr>
+            <tr>
+                <th>TRIM(<span class="gray">삭제옵션 삭제할문자 FROM</span> 문자열)</th>
+                <td>
+                    문자열의 시작/끝부분을 잘라주는 함수, 삭제옵션은 LEADING, TRAILING, BOTH가 있음, 삭제할 문자는 적지 않으면 공백이 제거되고 적고싶으면 ''안에 입력,
+                    <span>SELECT TRIM(LEADING '_' FROM '__ORACLE__') FROM DUAL;</span>
+                </td>
+            </tr>
+            <tr>
+                <th>LTRIM, RTRIM(문자열 <span class="gray">, 삭제할 문자</span>)</th>
+                <td>
+                    문자열의 시작/끝부분을 잘라주는 함수, 삭제할 문자는 적지 않으면 공백이 제거되고 적고싶으면 ''안에 입력, ''안의 모든 문자를 대상 문자열의 시작/끝부분에서 지워준다고 보면 됨
+                    <span>SELECT LTRIM('_/_/ORACLE/_/_', '/_/) FROM DUAL; 결과 : ORACLE/_/_</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <!-- 숫자 함수 -->
+    <div id="sqlnumberfunc">
+        <h3>숫자 함수</h3>
+        <table class="table border">
+            <thead class="table-dark">
+            <tr>
+                <th>종류</th>
+                <th>설명</th>
+            </tr>
+            </thead>
+            <tr>
+                <th>ROUND(숫자<span class="gray">, 반올림하여 나타낼 소수점 위치</span>)</th>
+                <td>
+                    숫자를 반올림, 소수점 위치를 지정하지 않으면 정수로 표현됨, 위치는 실수의 첫째자리수까지 나타내는 것을 0으로 생각하고 소수부에서 반올림하고 싶으면 양수, 정수부에서 반올림하고
+                    싶으면 음수를 사용
+                </td>
+            </tr>
+            <tr>
+                <th>TRUNC(숫자<span class="gray">, 버림하여 나타낼 소수점 위치</span>)</th>
+                <td>
+                    숫자를 버 림, 소수점 위치를 지정하지 않으면 정수로 표현됨, 위치는 실수의 첫째자리수까지 나타내는 것을 0으로 생각하고 소수부에서 버림하고 싶으면 양수, 정수부에서 버림하고
+                    싶으면 음수를 사용
+                </td>
+            </tr>
+            <tr>
+                <th>CEIL(숫자)</th>
+                <td>
+                    입력한 숫자보다 크면서 가장 작은 정수를 출력
+                </td>
+            </tr>
+            <tr>
+                <th>FLOOR(숫자)</th>
+                <td>
+                    입력한 숫자보다 작으면서 가장 큰 정수를 출력
+                </td>
+            </tr>
+            <tr>
+                <th>MOD(나눠질숫자, 나눌숫자)</th>
+                <td>
+                    나머지를 구하는 함수
+                </td>
+            </tr>
+        </table>
+    </div>
+    <!-- 날짜 함수 -->
+    <div id="sqldate">
+        <h3>날짜 함수</h3>
+        <table class="table border">
+            <thead class="table-dark">
+            <tr>
+                <th>종류</th>
+                <th>설명</th>
+            </tr>
+            </thead>
+            <tr>
+                <th>SYSDATE</th>
+                <td>
+                    오라클 데이터베이스 서버가 놓인 OS의 날짜와 시간 표시, SYDATE+1이면 하루 뒤, -1이면 하루 전 날짜
+                </td>
+            </tr>
+            <tr>
+                <th>ADD_MONTHS(날짜, 정수)</th>
+                <td>
+                    입력한 날짜에서 정수만큼의 개월 수 뒤의 날짜를 출력
+                </td>
+            </tr>
+            <tr>
+                <th>MONTHS_BETWEEN(날짜1, 날짜2)</th>
+                <td>
+                    날짜2로부터 날짜1까지 흐른 개월 수를 계산후 출력, TRUNC를 이용하여 정수부만 출력하면 좋음
+                </td>
+            </tr>
+            <tr>
+                <th>NEXT_DAY(날짜, 요일)</th>
+                <td>
+                    날짜를 기준으로 바로 다음으로 오게되는 해당 요일의 날짜
+                </td>
+            </tr>
+            <tr>
+            <tr class="detailtr">
+                <th>ROUND, TRUNC(날짜, 날짜 포맷)</th>
+                <td>
+                    <details>
+                        <summary>날짜를 날짜 포맷에 맞추어 출력</summary>
+                    </details>
+                </td>
+            </tr>
+
+            <tr class="noshowtr">
+                <td colspan="2">
+                    <!--                    날짜 포멧 종류 숨김테이블-->
+                    <table class="table border">
+                        <tr class="bg-success text-white">
+                            <th>날짜 포맷 종류</th>
+                            <th>설명</th>
+                        </tr>
+                        <tr>
+                            <td>CC, SCC</td>
+                            <td>세기</td>
+                        </tr>
+                        <tr>
+                            <td>SYYYY, YYYY, YEAR, SYEAR, YYY, YY, Y</td>
+                            <td>해당 데이터의 7월 1일부터는 다음 연도인 것으로 반올림</td>
+                        </tr>
+                        <tr>
+                            <td>RRRR,RR</td>
+                            <td>연을 4자리, 2자리로 표시</td>
+                        </tr>
+                        <tr>
+                            <td>IYYY, IYY, IY, I</td>
+                            <td>2009, 009, 09, 9로 표시, ISO 8601 기준</td>
+                        </tr>
+                        <tr>
+                            <td>Q</td>
+                            <td>분기, 3개월이 1분기이므로 2번째 달의 16일부터는 다음 분기인 것으로 반올림</td>
+                        </tr>
+                        <tr>
+                            <td>MONTH, MON, MM, RM</td>
+                            <td>NOVEMBER, NOV, 11, IX로 달을 표시, 각 달의 16일부터는 다음 달인 것으로 반올림</td>
+                        </tr>
+                        <tr>
+                            <td>WW</td>
+                            <td>해당 연도의 몇 번째 주인지 표시</td>
+                        </tr>
+                        <tr>
+                            <td>IW</td>
+                            <td>해당 연도의 몇 번째 주인지 표시, ISO 8601 기준</td>
+                        </tr>
+                        <tr>
+                            <td>W</td>
+                            <td>해당 월의 몇 번째 주인지 표시</td>
+                        </tr>
+                        <tr>
+                            <td>DDD, DD, J</td>
+                            <td>해당 연도에서 몇 번째 일인지, 해당 달에서 몇 번째 일인지, Julian 년호 숫자, 정오를 기준으로 반올림</td>
+                        </tr>
+                        <tr>
+                            <td>DAY, DY, D</td>
+                            <td>FRIDAY, FRI, 주중 일로 표시</td>
+                        </tr>
+                        <tr>
+                            <td>HH, HH12, HH24</td>
+                            <td>06, 06, 18로 시간을 표시</td>
+                        </tr>
+                        <tr>
+                            <td>MI</td>
+                            <td>분을 표시</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <!-- 형변환 함수 -->
+    <div id="sqltype">
+        <h3>형 변환 함수</h3>
+        <table class="table border">
+            <thead class="table-dark">
+            <tr>
+                <th>종류</th>
+                <th>설명</th>
+            </tr>
+            </thead>
+            <tr>
+                <th>TO_CHAR()</th>
+                <td>
+                    <details>
+                        <summary>
+                            숫자 또는 날짜 데이터를 문자 데이터로 변환
+                        </summary>
+                        <span>
+                            날짜를 변환 시 TO_CHAR(SYSDATE, 'MM', 'NLS_DATE_LANGUAGE = KOREAN') 처럼 표기 가능 <br>
+                        날짜 형식: CC, YYYY, RRRR, YY, RR(50을 1950년으로 인식함), MM, MON, MONTH, DD, DDD, DY, DAY, W <br>
+                        시간 형식: HH24, HH, HH12, MI, SS, AM, PM, A.M., P.M. <br>
+                        예시) TO_CHAR(SYSDATE, 'HH24:MI:SS P.M.') <br><br>
+                            9: 숫자의 한 자리, 빈자리를 채우지 않음, 소수점은 0이어도 표시  <br>
+                            0: 빈 자리를 0으로 채움 <br>
+                            $: 달러 표시를 붙여서 출력 <br>
+                            L: 지역 화폐단위 기호를 붙여서 출력 <br>
+                            .: 소수점을 표시 <br>
+                            ,: 천 단위 구분 기호 표시 <br>
+                            예시) TO_CHAR(sal, '$999,999.0099
+                        </span>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>TO_NUMBER(문자열, 문자열의 숫자 형태)</th>
+                <td>
+                    문자 데이터를 숫자 데이터로 변환
+                </td>
+            </tr>
+            <tr>
+                <th>TO_DATE(문자열, 문자열의 날짜 형태)</th>
+                <td>
+                    문자 데이터를 날짜 데이터로 변환
+                </td>
+            </tr>
+            <tr>
+                <th>NVL(NULL인지 검사할 열, NULL일 경우 반환할 데이터)</th>
+                <td>
+                    데이터가 NULL이면 특정값을 반환
+                </td>
+            </tr>
+            <tr>
+                <th>NVL2(NULL인지 검사할 열, NULL이 아닐 경우 반환할 값, NULL일 경우 반환할 값)</th>
+                <td>
+                    데이터가 NULL인지 아닌지에 따라 특정값을 반환, 값에는 데이터 또는 식 사용 가능
+                </td>
+            </tr>
+            <tr>
+                <th>DECODE(대상 열, 조건1, 결과1, 조건2, 결과2, ... , 일치하는 조건이 없을 때 반환할 결과)</th>
+                <td>
+                    조건에 따라 반환할 결과를 지정
+                </td>
+            </tr>
+            <tr>
+                <th>CASE <span class="gray">열(생략가능)</span> WHEN <span class="attribute">값 또는 조건식</span> THEN <span
+                        class="attribute">반환값</span> ... END
+                </th>
+                <td>
+                    각 경우에 따른 반환값 지정
+                </td>
+            </tr>
+        </table>
+    </div>
+    <!-- 다중행 함수 -->
+    <div id="sqlmultirow">
+        <h3>다중행 함수</h3>
+        <table class="table border">
+            <thead class="table-dark">
+            <tr>
+                <th>종류</th>
+                <th>설명</th>
+            </tr>
+            </thead>
+            <tr>
+                <th>SUM(<span class="gray">DISTINCT||ALL||공백</span> 열) <span class="gray">OVER(분석을 위한 문법)(생략가능)</span>
+                </th>
+                <td>
+                    지정한 열의 총합 반환
+                </td>
+            </tr>
+            <tr>
+                <th>COUNT(<span class="gray">DISTINCT||ALL||공백</span> 열) <span class="gray">OVER(분석을 위한 문법)(생략가능)</span>
+                </th>
+                <td>
+                    지정한 열의 데이터 개수 반환
+                </td>
+            </tr>
+            <tr>
+                <th>MAX(<span class="gray">DISTINCT||ALL||공백</span> 열) <span class="gray">OVER(분석을 위한 문법)(생략가능)</span>
+                </th>
+                <td>
+                    지정한 열의 최댓값 반환, 날짜데이터도 사용가능
+                </td>
+            </tr>
+            <tr>
+                <th>MIN(<span class="gray">DISTINCT||ALL||공백</span> 열) <span class="gray">OVER(분석을 위한 문법)(생략가능)</span>
+                </th>
+                <td>
+                    지정한 열의 최솟값 반환, 날짜데이터도 사용가능
+                </td>
+            </tr>
+            <tr>
+                <th>AVG(<span class="gray">DISTINCT||ALL||공백</span> 열) <span class="gray">OVER(분석을 위한 문법)(생략가능)</span>
+                </th>
+                <td>
+                    지정한 열의 평균값 반환
+                </td>
+            </tr>
+            <tr>
+                <th>GROUP BY</th>
+                <td>
+                    다중행 함수 사용시 그룹이 없으면 모든 행에 대하여 합, 평균 등을 구하게 됨. 하지만 GROUP BY로 다중행함수로 계산되지 않는 열을 묶어주면 각 행마다 계산결과가 표시됨.
+                    <span>SELECT AVG(sal), deptno FROM emp GROUP BY deptno; 결과: 각 deptno마다 sal의 평균값이 구해짐</span>
+                </td>
+            </tr>
+            <tr>
+                <th>HAVING</th>
+                <td>
+                    <details>
+                        <summary>
+                            GROUP BY 절이 있을 때 사용가능, 다중행 함수의 결과값에 조건을 걸어 결과물을 출력, WHERE이 각 행의 데이터에 조건을 거는 것이라면 HAVING은 각
+                            행의 데이터를 이용하여 다중행 함수로 그룹별 결과들을 얻었을 때 그 결과들에 대해 조건을 거는것
+                        </summary>
+                        <span>
+                            <ul class="list-unstyled">
+                                <li>SELECT deptno, job, AVG(sal)</li>
+                                <li class="ms-3">FROM emp</li>
+                                <li>GROUP BY deptno, job</li>
+                                <li class="ms-3">HAVING AVG(sal) >= 2000</li>
+                                <li>ORDER BY deptno, job</li>
+                            </ul>
+                        </span>
+                    </details>
+
+                </td>
+            </tr>
+            <tr>
+                <th>ROLLUP(열1, 열2, ...)</th>
+                <td>
+                    GROUP BY 바로 다음에 사용가능, GROUP BY만 사용하면 열1과 열2의 조합별로 다중행함수가 실행되지만 ROLLUP 사용시 열1과 열2의 조합별 뿐만아니라 열2는
+                    구분하지않고 열1만으로 구분된 다중행함수 실행결과, 그리고 열1로도 구분되지않은 모든 데이터에 대한 다중행함수 실행결과가 출력됨
+                    <span>
+                       <details>
+                        <summary>예시)</summary>
+                            ROLLUP(A, B, C) <br>
+                        1. A그룹별 B그룹별 C그룹에 해당하는 결과 출력<br>
+                        2. A그룹별 B그룹에 해당하는 결과 출력<br>
+                        3. A그룹에 해당하는 결과 출력<br>
+                           4. 전체 데이터 결과 출력
+                    </details>
+                    </span>
+
+                </td>
+            </tr>
+            <tr>
+                <th>CUBE(열1, 열2, ...)</th>
+                <td>
+                    GROUP BY 바로 다음에 사용가능, GROUP BY만 사용하면 열1과 열2의 조합별로 다중행함수가 실행되지만 CUBE 사용시 열1과 열2의 조합별 뿐만아니라 열2는
+                    구분하지않고 열1만으로 구분된 다중행함수 실행결과, 열1는 구분하지않고 열2만으로 구분된 다중행함수 실행결과, 그리고 구분되지않은 모든 데이터에 대한 다중행함수 실행결과가 출력됨
+                    <span>
+                       <details>
+                        <summary>예시)</summary>
+                            ROLLUP(A, B, C) <br>
+                        1. A그룹별 B그룹별 C그룹에 해당하는 결과 출력<br>
+                        2. A그룹별 B그룹에 해당하는 결과 출력<br>
+                        3. B그룹별 c그룹에 해당하는 결과 출력<br>
+                           4. A그룹별 C그룹에 해당하는 결과 출력<br>
+                           5. A그룹에 해당하는 결과 출력 <br>
+                           6. A그룹에 해당하는 결과 출력 <br>
+                           7. A그룹에 해당하는 결과 출력 <br>
+                           8. A그룹에 해당하는 결과 출력 <br>
+                           9. 전체 데이터 결과 출력
+                    </details>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <th>GROUPING SETS(열1, 열2, ...)</th>
+                <td>
+                    GROUP BY 바로 다음에 사용 가능, 열1로 그룹화하여 다중항함수를 실행하고, 그다음으로 열2로 그룹화하여 다중행함수를 실행. 열1을 그룹화했을때의 결과와 열2를 그룹화했을때의
+                    결과를 그냥 붙여서 출력하는 것으로 볼 수 있음
+                </td>
+            </tr>
+            <tr>
+                <th>GROUPING(열1, 열2, ...)</th>
+                <td>
+                    SELECT 절에 사용가능, 그룹화한 열1, 열2, ...를 선택하면 해당 열이 그룹화가 된 것인지 아닌지를 표시해줌, 그룹화된 열은 0, 안된 열은 1로 표시
+                </td>
+            </tr>
+            <tr>
+                <th>GROUPING_ID(열1, 열2, ...)</th>
+                <td>
+                    SELECT 절에 사용가능, 각 열이 그룹화되었는지 아닌지에 따라 GROUPING 함수는 열별로 1또는 0으로 표시해주는데 이를 2진수 취급하여 10진수로 나타내 주는 것이
+                    GROUPING_ID 함수
+                </td>
+            </tr>
+            <tr>
+                <th>LISTAGG(열, <span class="gray">'구분자'</span>) <span
+                        class="gray">WITHIN GROUP(ORDER BY 정렬기준이 되는 열)</span></th>
+                <td>
+                    SELECT 절에 사용가능, 열을 세로로 출력하는 것이 아닌 GROUP BY로 묶여진 열로 구분되어 가로로 구분됨
+                    <span>
+                       <details>
+                        <summary>예시</summary>
+                        <ul class="list-unstyled">
+                            <li>SELECT deptno,</li>
+                            <li class="ms-5">LISTAGG(enames, ',')</li>
+                            <li class="ms-5">WITHIN GROUP(ORDER BY SAL DESC) AS enames</li>
+                            <li class="ms-3">FROM emp</li>
+                            <li>GROUP BY deptno;</li>
+                        </ul>
+                        <table class="table border">
+                            <tr>
+                                <th>deptno</th>
+                                <th>enames</th>
+                            </tr>
+                            <tr>
+                                <td>10</td>
+                                <td>king, clark, miller</td>
+                            </tr>
+                            <tr>
+                                <td>20</td>
+                                <td>ford, scott, jones, adams, smith</td>
+                            </tr>
+                            <tr>
+                                <td>30</td>
+                                <td>blake, allen, turner, martin, ward, james</td>
+                            </tr>
+                        </table>
+                    </details>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <th>PIVOT</th>
+                <td>
+                    <details>
+                        <summary>
+                            결과를 표 형태로 나타나게 해줌
+                        </summary>
+                        <span>
+                            <ul class="list-unstyled">
+                                <li>SELECT *</li>
+                                <li class="ms-3">FROM(SELECT x축 구분 열 , y축 구분 열, 계산할 값을 나타내는 열 FROM 테이블)</li>
+                                <li class="ms-3">PIVOT(다중행함수() FOR x축 구분 열 IN (x축 구분 열의 데이터1, 데이터2, ...))</li>
+                                <li>ORDER BY y축 구분 열;</li>
+                            </ul>
+                        </span>
+                    </details>
+
+                </td>
+            </tr>
+            <tr>
+                <th>UNPIVOT</th>
+                <td>
+                    <details>
+                        <summary>
+                            표의 x축 구분 열을 y축으로 옮김, 즉 표 형태를 해제함
+                        </summary>
+                        <span>
+                            <ul class="list-unstyled">
+                                <li><span class="attribute">완전한표 형태로 결과물을 내는 구문</span> </li>
+                                <li class="ms-3">UNPIVOT(<span class="attribute">계산할 값을 나타내는 열</span> FOR <span
+                                        class="attribute">해제할 x축 구분 열</span> IN (<span class="attribute">x축 구분 열의 데이터1, 데이터2, ...</span>))</li>
+                                <li>ORDER BY ...</li>
+                            </ul>
+                        </span>
+                    </details>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <!-- 조인 -->
+    <div id="sqljoin">
+        <h3>조인</h3>
+        <table class="table border">
+            <thead class="table-dark">
+            <tr>
+                <th>종류</th>
+                <th>설명</th>
+            </tr>
+            </thead>
+            <tr>
+                <th>WHERE 테이블명칭1.외래키1 = 테이블명칭2.주키2
+                </th>
+                <td>
+                    <details>
+                        <summary>
+                            등가조인, 다른 테이블을 조인하는 방법 중 한 가지
+                        </summary>
+                        <span>
+                            <ul class="list-unstyled">
+                                <li>SELECT E.empno, E.ename, D.deptno, ...</li>
+                                <li class="ms-5">FROM emp E, dept D</li>
+                                <li class="ms-3">WHERE E.deptno = D.deptno</li>
+                                <li>ORDER BY ...;</li>
+                            </ul>
+                        </span>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>WHERE 테이블명칭1.외래키1 BETWEEN 테이블명칭2.기준열1 AND 테이블명칭2.기준열2</span>
+                </th>
+                <td>
+                    <details>
+                        <summary>
+                            비등가조인, 다른 테이블을 조인하는 방법 중 한 가지
+                        </summary>
+                        <span>
+                            <ul class="list-unstyled">
+                                <li>SELECT *</li>
+                                <li class="ms-5">FROM emp E, salgrade S</li>
+                                <li class="ms-3">WHERE E.sal BETWEEN S.losal AND S.hisal;</li>
+                            </ul>
+                            salgrade 테이블이 grade, losal, hisal 열로 이루어져 있을 때 emp의 sal의 한 데이터가 losal과 hisal의 범위 내에 있을 때 그 행은 해당 grade 열의 데이터를 가져가게 됨
+                        </span>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>WHERE 같은테이블의명칭1.외래키1 = 같은테이블의명칭2.주키2</span>
+                </th>
+                <td>
+                    <details>
+                        <summary>
+                            자체조인, 같은 테이블에서 서로 다른 두 행을 붙여야 할 때 사용
+                        </summary>
+                        <span>
+                            <ul class="list-unstyled">
+                                <li>SELECT *</li>
+                                <li>FROM emp E1, emp E2</li>
+                                <li>WHERE E1.mgr = E2.empno;</li>
+                            </ul>
+                            WHERE 절에서 (해당 테이블에서 외래키로 사용될 열) = (해당 테이블의 주키) 형태를 취함
+                        </span>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>WHERE 테이블명칭1.외래키1<span class="gray">(+)</span>= 테이블명칭2.주키2<span class="gray">(+)</span>
+                </th>
+                <td>
+                    왼쪽 또는 오른쪽(다른 테이블을 null값으로 불러오는 기준이 되는 쪽) 외부조인, (+)가 붙어있는 쪽의 테이블은 다른 테이블의 외래키에 맞는 데이터가 없더라도 NULL값으로서
+                    모조리 가져옴
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    NATURAL JOIN
+                </th>
+                <td>
+                    <details>
+                        <summary>
+                            등가조인, 기준열이 되는 열 앞에 테이블명이 붙으면 안됨
+                        </summary>
+                        <span>
+                            <ul class="list-unstyled">
+                                <li>SELECT E.empno, <span class="attribute">deptno</span>, D.dname</li>
+                                <li>FROM emp E <span class="attribute">NATURAL JOIN</span>  dept D</li>
+                            </ul>
+                            기존의 WHERE 절이 필요없어짐
+                        </span>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    JOIN USING
+                </th>
+                <td>
+                    <details>
+                        <summary>
+                            등가조인, 기준열이 되는 열 앞에 테이블명이 붙으면 안됨
+                        </summary>
+                        <span>
+                            <ul class="list-unstyled">
+                                <li>SELECT E.empno, <span class="attribute">deptno</span>, D.dname</li>
+                                <li>FROM emp E <span class="attribute">JOIN</span> dept D <span class="attribute">USING (deptno)</span></li>
+                            </ul>
+                            기존의 WHERE 절이 필요없어짐
+                        </span>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    JOIN ON
+                </th>
+                <td>
+                    <details>
+                        <summary>
+                            가장 범용성 있는 조인, 기존의 WHERE 절에 있는 조인 조건식을 ON 옆에 작성
+                        </summary>
+                        <span>
+                            <ul class="list-unstyled">
+                                <li>SELECT E.empno, <span class="attribute">E.deptno</span>, D.dname</li>
+                                <li>FROM emp E <span class="attribute">JOIN</span> dept D <span class="attribute">ON (E.deptno = D.deptno)</span></li>
+                            </ul>
+                        </span>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    OUTER JOIN
+                </th>
+                <td>
+                    <details>
+                        <summary>
+                            외부조인, 기존의 WHERE 절에 있는 조인 조건식을 ON 옆에 작성
+                        </summary>
+                        <span>
+                            <ul class="list-unstyled">
+                                <li>SELECT E1.ename, <span class="attribute">E1.mgr</span>, E2.ename</li>
+                                <li>FROM emp E1  <span
+                                        class="attribute">LEFT||RIGHT||FULL OUTER JOIN</span> emp E2 <span
+                                        class="attribute">ON (E1.mgr = E2.empno)</span></li>
+                            </ul>
+                        </span>
+                    </details>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <!-- 서브쿼리 -->
+    <div id="sqlsubq">
+        <h3>서브쿼리</h3>
+        <table class="table border">
+            <thead class="table-dark">
+            <tr>
+                <th>종류</th>
+                <th>설명</th>
+            </tr>
+            </thead>
+            <tr>
+                <th>ANY, SOME
+                </th>
+                <td>
+                    <details>
+                        <summary>
+                            서브쿼리가 반환한 값 중 하나라도 메인쿼리와의 조건식 결과가 TRUE라면 메인쿼리 조선식을 TRUE로 반환
+                        </summary>
+                        <span>
+                            <ul class="list-unstyled">
+                                <li>SELECT *</li>
+                                <li>FROM emp</li>
+                                <li>WHERE sal = SOME||ANY (SELECT MAX(sal) FROM emp GROUP BY deptno);</li>
+                            </ul>
+                            deptno 그룹별로 sal의 최댓값을 가지는 행들의 모든 데이터가 출력됨
+                        </span>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>ALL
+                </th>
+                <td>
+                    <details>
+                        <summary>
+                            서브쿼리가 반환한 모든 값들과 메인쿼리와의 조건식 결과가 TRUE라면 메인쿼리 조선식을 TRUE로 반환
+                        </summary>
+                        <span>
+                            <ul class="list-unstyled">
+                                <li>SELECT *</li>
+                                <li>FROM emp</li>
+                                <li>WHERE sal < ALL (SELECT sal FROM emp WHERE deptno = 30);</li>
+                            </ul>
+                            deptno이 30인 모든 행의 sal값보다 작은 sal 값을 가지는 행의 모든 데이터가 출력됨
+                        </span>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>EXIST
+                </th>
+                <td>
+                    <details>
+                        <summary>
+                            서브쿼리가 반환한 모든 값들과 메인쿼리와의 조건식 결과가 TRUE라면 메인쿼리 조선식을 TRUE로 반환
+                        </summary>
+                        <span>
+                            <ul class="list-unstyled">
+                                <li>SELECT *</li>
+                                <li>FROM emp</li>
+                                <li>WHERE EXIST (SELECT dname FROM dept WHERE deptno = 10);</li>
+                            </ul>
+                            deptno이 10인 dname (FROM dept) 값이 하나라도 존재하면 모든 데이터를 출력
+                        </span>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>WITH
+                </th>
+                <td>
+                    <details>
+                        <summary>
+                            서브쿼리를 FROM절 내에 써서 필요한 데이터로 이뤄진 테이블로부터 쿼리문을 작성할 경우 속도를 더 빠르게 함
+                        </summary>
+                        <span>
+                            <ul class="list-unstyled">
+                                <li>WITH</li>
+                                <li>E10 AS (SELECT * FROM emp WHERE deptno = 10)</li>
+                                <li>D   AS (SELECT * FROM dept)</li>
+                                <li>SELECT E10.empno, D.dname, ...</li>
+                                <li>FROM E10, D</li>
+                                <li>WHERE E10.DEPTNO + D.DEPTNO;</li>
+                            </ul>
+
+                        </span>
+                    </details>
+                </td>
+            </tr>
+        </table>
+    </div>
+</main>
+</body>
+</html>

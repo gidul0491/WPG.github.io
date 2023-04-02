@@ -39,6 +39,11 @@
   main {
     margin-left: 5% !important;
   }
+
+  #offcan {
+    width: 180px;
+    font-size: 3vw;
+  }
 }
 
 @media (max-width: 441px) {
@@ -54,7 +59,7 @@
   }
 
   .navbar .btn {
-    height: 5vh;
+    height: 40px;
 
   }
 
@@ -122,6 +127,11 @@
     padding: 8px
   }
 
+  .navbar .btn {
+    font-size: 1px;
+
+  }
+
   main {
     margin-left: 180px !important;
   }
@@ -132,32 +142,35 @@
 
   table td,
   table th {
-    font-size: 2vh !important;
+    font-size: 2.5vh !important;
   }
+}
+
+summary::after {
+  content: " ▼";
+}
+
+details[open] > summary {
+  margin-bottom: 20px;
+}
+
+details[open] > summary::after {
+  content: " ▲";
+
+}
+
+summary::marker {
+  content: "" !important;
+}
+
+details summary:after {
+  margin-top: 20px;
 }
 
 .navbar-toggler {
   box-shadow: none !important;
 }
-
-button.navbar-toggler:active {
-  box-shadow: none !important;
-  background-color: #666 !important;
-}
-
-.navbar-brand {
-  margin: 0px 80px 0px 20px;
-}
-
-ul {
-  margin: 0px 10px 10px 10px;
-}
-
-.offcanvas-body h4 {
-  margin: 32px 0px 8px 0px;
-}
-
-.offcanvas-body li {
+li {
   font-size: 16px;
   margin-bottom: 4px;
 }
@@ -165,6 +178,19 @@ ul {
 .offcanvas-body a {
   text-decoration: none;
   color: black;
+}
+
+.offcanvas-body ul li ul {
+  margin-top: 8px;
+  margin-left: 0px;
+  list-style: none;
+  font-size: 1px;
+}
+
+.offcanvas-body ul li ul li {
+  margin-left: -18px;
+  list-style: none;
+  font-size: 12px;
 }
 
 main {
@@ -177,24 +203,63 @@ caption {
 }
 
 /* 오프캔버스로 클릭하여 이동 시 네비게이션 바에 의해 가려지기 때문에 패딩을 크게 주고 마진을 음수값으로 적용. 해당 위치로 이동 시 패딩부분이 네비게이션 바에 가려져 네비게이션 바로 아래에 컨텐츠가 오도록 이동할수 있으며 마진이 음수이기때문에 실제로는 컨텐츠간 간격이 커보이지 않음 */
-main h3,
+main h3 {
+  padding-top: 80px;
+  margin-top: -60px;
+}
+
 main caption {
   padding-top: 80px;
-  margin-top: -30px;
+  margin-top: -80px;
 }
 
 main table i {
-  color: #6ee;
+  color: #5dd;
 }
 
 main table span {
   color: #e66;
 }
 
+main table span.gray {
+  color: #bbb;
+}
+
+main table .smalltable {
+    font-size: small;
+}
+.noshowtr {
+    display:none;
+}
+.detailtr:has(details[open]) + .noshowtr {
+    display: table-row!important;
+    background-color: #f8f8f8;
+}
+
 thead th {
   text-align: center;
 }
 
+.attribute-body th{
+    color: cornflowerblue;
+}
+
+.attribute {
+  color: cornflowerblue;
+}
+
 nav .container-fluid {
   width: 95%;
+}
+
+.nav-link {
+  margin-right: 20px;
+}
+
+code {
+    background-color:black;
+    border-radius:5PX;
+    padding: 0.2rem 0.3rem;
+    line-height:1.4rem;
+    color:orange;
 }
