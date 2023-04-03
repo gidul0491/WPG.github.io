@@ -1011,7 +1011,7 @@
                 <td>
                     <details>
                         <summary>
-                            작은 테이블로부터 데이터를 추출하기 위한 방법, FROM 절에 서브쿼리를 작성하여 큰 테이블을 작은테이블로 만들어 불러오는 것보다 속도가 빠름
+                            큰 테이블을 나눠서 작은 테이블로 만들어 데이터를 추출하기 위한 방법, FROM 절에 서브쿼리를 작성하여 불러오는 것보다 속도가 빠름
                         </summary>
                         <span>
                             <ul class="list-unstyled">
@@ -1020,7 +1020,7 @@
                                 <li>D   AS (SELECT * FROM dept)</li>
                                 <li>SELECT E10.empno, D.dname, ...</li>
                                 <li>FROM E10, D</li>
-                                <li>WHERE E10.DEPTNO + D.DEPTNO;</li>
+                                <li>WHERE E10.DEPTNO = D.DEPTNO;</li>
                             </ul>
 
                         </span>
