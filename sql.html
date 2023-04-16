@@ -87,6 +87,27 @@
                 <li>
                     <a href="#sqlsubq">서브쿼리</a>
                 </li>
+                <li>
+                    <a href="#sqlDML">데이터 조작어</a>
+                </li>
+                <li>
+                    <a href="#sqlDDL">데이터 정의어</a>
+                </li>
+                <li>
+                    <a href="#sqldatadic">데이터 사전</a>
+                </li>
+                <li>
+                    <a href="#sqlindex">인덱스</a>
+                </li>
+                <li>
+                    <a href="#sqlview">뷰</a>
+                </li>
+                <li>
+                    <a href="#sqlseq">시퀀스</a>
+                </li>
+                <li>
+                    <a href="#sqlsynonym">동의어</a>
+                </li>
             </ul>
         </div>
     </div>
@@ -214,7 +235,7 @@
             <tr>
                 <th>LIKE</th>
                 <td>
-                    일부 문자열이 포함된 데이터를 조회
+                    일부 문자열이 포함된 데이터를 조회 <span>WHERE ename LIKE '_L%'</span>
                 </td>
             </tr>
             <tr>
@@ -425,7 +446,7 @@
             <tr>
                 <th>NEXT_DAY(날짜, 요일)</th>
                 <td>
-                    날짜를 기준으로 바로 다음으로 오게되는 해당 요일의 날짜
+                    날짜를 기준으로 바로 다음으로 오게되는 해당 요일의 날짜 <span>SELECT TO_CHAR(NEXT_DAY(ADD_MONTHS(hiredate,3),'월'),'YYYY-MM-DD') AS R_JOB</span>
                 </td>
             </tr>
             <tr>
@@ -1029,6 +1050,442 @@
             </tr>
         </table>
     </div>
+    <!-- 데이터 조작어 -->
+    <div id="sqlDML">
+        <h3>데이터 조작어, DML(Data Manipulation Language)</h3>
+        <table class="table border">
+            <thead class="table-dark">
+            <tr>
+                <th>종류</th>
+                <th>설명</th>
+            </tr>
+            </thead>
+
+            <tr>
+                <th>
+                    INSERT INTO
+                </th>
+                <td>
+                    <details>
+                        <summary>
+                            테이블에 데이터 추가
+                        </summary>
+                        <span>
+                            <ul class="list-unstyled">
+                                <li>INSERT INTO <span class="attribute">테이블 이름 (열1, 열2, ...)</span></li>
+                                <li>VALUES <span class="attribute">(데이터1, 데이터2, NULL, TO_DATE('03/04/2023', 'DD/MM/YYYY'), ...)</span>;</li>
+                                <li>서브쿼리 이용, 여러 행 추가</li>
+                                <li>INSERT INTO <span class="attribute">테이블 이름 (열1, 열2, ...)</span></li>
+                                <li class="ms-3">SELECT <span class="attribute">열1, 열2, ...</span>.</li>
+                                <li class="ms-3">FROM ...(JOIN 이든 뭐든)</li>
+                            </ul>
+                        </span>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>UPDATE SET
+                </th>
+                <td>
+                    <details>
+                        <summary>
+                            테이블 내의 데이터 변경
+                        </summary>
+                        <span>
+                            <ul class="list-unstyled">
+                                <li>UPDATE <span class="attribute">테이블 이름</span></li>
+                                <li>SET <span class="attribute">열1 = 데이터1, 열2 = 데이터2, ...</span>;</li>
+                                <li>WHERE <span class="attribute">데이터를 변경할 행의 조건, 생략시 모든 행의 데이터 변경</span></li>
+                                <li><p></p></li>
+                                <li>서브쿼리</li>
+                                <li>SET <span class="attribute">(열1, 열2, ...)</span>;</li>
+                                <li>SELECT <span class="attribute">(열1, 열2, ...)</span> FROM <span
+                                        class="attribute">테이블</span> WHERE..</li>
+                            </ul>
+                        </span>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>DELETE (FROM)
+                </th>
+                <td>
+                    행 제거, <span>DELETE (FROM, 생략가능) <span
+                        class="attribute">테이블 이름</span> WHERE ...(생략시 데이터 모두 삭제)</span>
+                </td>
+            </tr>
+            <tr>
+                <th>ROLLBACK;
+                </th>
+                <td>
+                    수정한 테이블 이전상태로 되돌리기, 이전상태란 마지막 COMMIT;까지임
+                </td>
+            </tr>
+            <tr>
+                <th>COMMIT;
+                </th>
+                <td>
+                    현재까지의 테이블 수정사항 확정
+                </td>
+            </tr>
+        </table>
+    </div>
+    <!-- 데이터 정의어 -->
+    <div id="sqlDDL">
+        <h3>데이터 정의어, DDL(Data Definition Language)</h3>
+        <table class="table border">
+            <thead class="table-dark">
+            <tr>
+                <th>종류</th>
+                <th>설명</th>
+            </tr>
+            </thead>
+            <tr>
+                <th>CREATE TABLE
+                </th>
+                <td>
+                    <details>
+                        <summary>
+                            테이블 생성
+                        </summary>
+                        <span>
+                            CREATE TABLE <span class="attribute">[소유계정.]테이블 이름</span> (<br>
+                            <span class="attribute">열1이름 열1자료형,<br>
+                            열2이름 열2자료형,<br>...<br></span>
+
+                            );<br> <br>
+                            CREATE TABLE <span class="attribute">[소유계정.]테이블 이름</span><br>
+                            AS SELECT * FROM <span class="attribute">불러올테이블이름</span>;<br>
+                            (WHERE ...)
+                        </span>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>DROP TABLE
+                </th>
+                <td>
+                    테이블 제거, <span>DROP TABLE <span class="attribute">테이블 이름</span></span>
+                </td>
+            </tr>
+            <tr>
+                <th>ALTER TABLE
+                </th>
+                <td>
+                    <details>
+                        <summary>
+                            테이블 수정
+                        </summary>
+                        <span>
+                            ADD : ALTER TABLE <span class="attribute">테이블이름</span> ADD <span class="attribute">열 자료형(크기)</span><br>
+                            RENAME TO : ALTER TABLE <span class="attribute">테이블이름</span> RENAME COLUMN <span class="attribute">열이름</span> TO <span class="attribute">새로운이름</span> <br>
+                            MODIFY : ,,, MODIFY <span class="attribute">열이름 새로운자료형(크기)</span> <br>
+                            DROP : ,,, DROP <span class="attribute">삭제할열이름</span>
+                        </span>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>RENAME TO
+                </th>
+                <td>
+                    테이블 이름 변경, <span>RENAME <span class="attribute">변경할테이블이름</span> TO <span class="attribute">변경후이름</span></span>
+                </td>
+            </tr>
+            <tr>
+                <th>TRUNCATE TABLE
+                </th>
+                <td>
+                    테이블 전체 데이터 삭제 <span>TRUNCATE TABLE <span class="attribute">테이블이름</span></span>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <!-- 데이터 사전 -->
+    <div id="sqldatadic">
+        <h3>데이터 사전</h3>
+        <table class="table border">
+            <thead class="table-dark">
+            <tr>
+                <th>종류</th>
+                <th>설명</th>
+            </tr>
+            </thead>
+            <tr>
+                <th>DICTIONARY || DICT
+                </th>
+                <td>
+                    현재 계정에서 사용 가능한 데이터 사전 목록
+                </td>
+            </tr>
+            <tr>
+                <th>USER_객체S
+                </th>
+                <td>
+                    현재 데이터베이스에 접속한 사용자가 소유한 객체 정보, ex) SELECT * FROM USER_IND_COLUMNS, USER_INDEXES;
+                </td>
+            </tr>
+            <tr>
+                <th>ALL_객체S
+                </th>
+                <td>
+                    모든 사용자가 소유한 객체 중 사용이 허락된 객체 정보, ex) SELECT * ALL_TABLES;
+                </td>
+            </tr>
+            <tr>
+                <th>DBA_객체S
+                </th>
+                <td>
+                    데이터베이스 관리 권한을 가진 사용자만 조회 가능, 데이터베이스에 존재하는 모든 테이블이 출력 ex) SELECT * FROM DBA_USERS;
+                </td>
+            </tr>
+        </table>
+    </div>
+    <!-- 인덱스 -->
+    <div id="sqlindex">
+        <h3>인덱스</h3>
+        <table class="table border">
+            <thead class="table-dark">
+            <tr>
+                <th>종류</th>
+                <th>설명</th>
+            </tr>
+            </thead>
+            <tr>
+                <th>CREATE INDEX
+                </th>
+                <td>
+
+                    <details>
+                        <summary>
+                            인덱스 생성
+                        </summary>
+                        <span>
+                            CREATE [UNIQUE, BITMAP] INDEX <span class="attribute">인덱스이름</span> <br>
+                            ON <span class="attribute">테이블이름</span>(<br>
+                            <span class="attribute">열이름1</span> ASC,<br>
+                            <span class="attribute">열이름2</span> DESC,<br>
+                            ...<br>
+                            );<br><br>
+                            열이름 자리에 함수 삽입 가능<br>
+                        </span>
+                    </details>
+
+                </td>
+            </tr>
+            <tr>
+                <th>[UNIQUE]</th>
+                <td>열에 중복 데이터가 없을 때 사용</td>
+            </tr>
+            <tr>
+                <th>[BITMAP]</th>
+                <td>데이터 종류가 적고 같은 데이터가 많이 존재할 때 사용</td>
+            </tr>
+            <tr>
+                <th>DROP INDEX</th>
+                <td>인덱스 제거, ex) DROP INDEX 인덱스이름</td>
+            </tr>
+        </table>
+    </div>
+    <!-- 뷰 -->
+    <div id="sqlview">
+        <h3>뷰</h3>
+        <table class="table border">
+            <thead class="table-dark">
+            <tr>
+                <th>종류</th>
+                <th>설명</th>
+            </tr>
+            </thead>
+            <tr>
+                <th>
+                    CREATE VIEW
+                </th>
+
+                <td>
+                    <details>
+                        <summary>
+                            뷰 생성
+                        </summary>
+                        <span>
+                            CREATE VIEW [OR REPLACE] [FORCE||NOFORCE] VIEW <span class="attribute">뷰이름</span> (<span class="attribute">열이름1, 열이름2, ...</span>) <br>
+                        AS (SELECT ... )<br>
+                        [WITH CHECK OPTION [CONSTRAINT <span class="attribute">제약조건</span>]]<br>
+                        [WITH READ ONLY[CONSTRAINT <span class="attribute">제약조건</span>]];<br><br>
+                        </span>
+
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>[OR REPLACE]</th>
+                <td>뷰가 이미 존재할 겨우 새로운 것으로 대체</td>
+            </tr>
+            <tr>
+                <th>[FORCE]</th>
+                <td>뷰가 저장할 SELECT 문 기반의 테이블이 존재하지 않아도 강제로 생성</td>
+            </tr>
+            <tr>
+                <th>[NOFORCE]</th>
+                <td>기본값, 뷰가 저장할 SELECT 문 기반의 테이블이 존재할 경우에만 생성</td>
+            </tr>
+            <tr>
+                <th>[WITH CHECK OPTION]</th>
+                <td>지정한 제약 조건을 만족하는 데이터에 한해 DML작업이 가능하도록 뷰 생성</td>
+            </tr>
+            <tr>
+                <th>[WITH READ ONLY]</th>
+                <td>뷰의 열람, 즉 SELECT 문에서만 가능하도록 뷰 생성</td>
+            </tr>
+            <tr>
+                <th>TOP-N 추출
+                </th>
+                <td>
+                    <details>
+                        <summary>
+                            인라인 뷰를 이용한 TOP-N 추출
+                        </summary>
+                        <span>
+                            WITH E AS (SELECT * FROM EMP ORDER BY SAL DESC) <br>
+                        SELECT ROWNUM, E.*<br>
+                        FROM E;<br>
+                        WHERE ROWNUM <= 3;<br>
+                        </span>
+
+                    </details>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <!-- 시퀀스 -->
+    <div id="sqlseq">
+        <h3>시퀀스</h3>
+        <table class="table border">
+            <thead class="table-dark">
+            <tr>
+                <th class="w-25">종류</th>
+                <th>설명</th>
+            </tr>
+            </thead>
+            <tr>
+                <th>CREATE SEQUENCE <span class="attribute">시퀀스이름</span>
+                </th>
+                <td>
+                    <details>
+                        <summary>
+                            시퀀스 생성
+                        </summary>
+                        <span>
+                            CREATE SEQUENCE SEQ_DEPT_SEQUENCE<br>
+                            INCREMENT BY 10<br>
+                            START WITH 10<br>
+                            MAXVALUE 90<br>
+                            MINVALUE 0<br>
+                            NOCYCLE<br>
+                            CACHE 2;
+                        </span>
+
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>[INCREMENT BY n]</th>
+                <td>시퀀스에서 생성할 번호의 증가 값, 기본값 1</td>
+            </tr>
+            <tr>
+                <th>[START WITH n]</th>
+                <td>시퀀스에서 생성할 번호의 시작값, 기본값 1</td>
+            </tr>
+            <tr>
+                <th>[MAXVALUE n | NOMAXVALUE]</th>
+                <td>시퀀스에서 생성할 번호의 최대값, NOMAXVALUE일 때 -1부터 10^27 까지</td>
+            </tr>
+            <tr>
+                <th>[MINVALUE n | NOMINVALUE]</th>
+                <td>시퀀스에서 생성할 번호의 최소값, NOMINVALUE일 때 -10^26부터 1 까지</td>
+            </tr>
+            <tr>
+                <th>[CYCLE | NOCYCLE]</th>
+                <td>시퀀스에서 생성한 번호가 경계값에 도달했을 경우 CYCLE 이면 시작 값에서 다시 시작, NOCYCLE이면 다음 번호 생성중단, 추가 생성 요청시 오류 발생</td>
+            </tr>
+            <tr>
+                <th>[CACHE n | NOCACHE]</th>
+                <td>시퀀스가 생성할 번호를 메모리에 미리 할당해 놓은 수 지정, NOCACHE는 미리 생성해놓지 않음, 기본값 20</td>
+            </tr>
+
+            <tr>
+                <th><span class="attribute">시퀀스이름</span>.NEXTVAL
+                </th>
+                <td>
+                    <details>
+                        <summary>
+                            행 삽입시 다음 시퀀스번호 추가
+                        </summary>
+                        <span>
+                            INSERT INTO DEPT_SEQUENCE (<span class="attribute">DEPTNO</span>, DNAME, LOC)<br>
+                            VALUES (<span class="attribute">SEQ_DEPT_SEQUENCE.NEXTVAL</span>, 'DATABASE', 'SEOUL');<br>
+                        </span>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>ALTER SEQUENCE 시퀀스이름
+                </th>
+                <td>
+                    <details>
+                        <summary>
+                            시퀀스 수정
+                        </summary>
+                        <span>
+                            ALTER SEQUENCE 시퀀스 이름<br>
+                            [INCREMENT BY n]<br>
+                            [MAXVALUE n | NOMAXVALUE]<br>
+                            [MINVALUE n | NOMINVALUE]<br>
+                            [CYCLE | NOCYCLE]<br>
+                            [CACHE n | NOCACHE]<br><br>
+                            수정 후 시퀀스는 시작값이 아닌 현재 시퀀스값부터 시작함
+                        </span>
+                    </details>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <!-- 동의어 -->
+    <div id="sqlsynonym">
+        <h3>동의어</h3>
+        <table class="table border">
+            <thead class="table-dark">
+            <tr>
+                <th class="w-25">종류</th>
+                <th>설명</th>
+            </tr>
+            </thead>
+            <tr>
+                <th>CREATE SYNONYM <span class="attribute">동의어이름</span> <br> FOR <span class="attribute">객체이름</span>
+                </th>
+                <td>
+                    <details>
+                        <summary>
+                            객체의 동의어 생성
+                        </summary>
+                        <span>
+                            GRANT CREATE SYNONYM [제작자]<br><br>
+                            CREATE [PUBLIC] SYNONYM [동의어이름] <br>
+                            FOR [사용자.][객체 이름];<br><br>
+
+                            CREATE SYNONYM E FOR EMP;
+                        </span>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>[PUBLIC]</th>
+                <td>데이터베이스 내의 사용 권한이 있는 모든 사용자가 동의어를 사용할 수 있도록 설정, 생략할 경우 제작자만 사용 가능</td>
+            </tr>
+
+        </table>
+    </div>
+
 </main>
 </body>
 </html>
