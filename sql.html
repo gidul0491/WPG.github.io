@@ -1056,7 +1056,7 @@
         <table class="table border">
             <thead class="table-dark">
             <tr>
-                <th>종류</th>
+                <th class="w-25">종류</th>
                 <th>설명</th>
             </tr>
             </thead>
@@ -1110,7 +1110,7 @@
                 <th>DELETE (FROM)
                 </th>
                 <td>
-                    행 제거, <span>DELETE (FROM, 생략가능) <span
+                    행 제거, <span>DELETE [FROM] <span
                         class="attribute">테이블 이름</span> WHERE ...(생략시 데이터 모두 삭제)</span>
                 </td>
             </tr>
@@ -1136,7 +1136,7 @@
         <table class="table border">
             <thead class="table-dark">
             <tr>
-                <th>종류</th>
+                <th class="w-25">종류</th>
                 <th>설명</th>
             </tr>
             </thead>
@@ -1152,8 +1152,19 @@
                             CREATE TABLE <span class="attribute">[소유계정.]테이블 이름</span> (<br>
                             <span class="attribute">열1이름 열1자료형,<br>
                             열2이름 열2자료형,<br>...<br></span>
-
                             );<br> <br>
+                            CREATE TABLE EMP_HW (<br>
+                            EMPNO NUMBER(4),<br>
+                            ENAME VARCHAR(10),<br>
+                            JOB VARCHAR(9),<br>
+                            MGR NUMBER(4),<br>
+                            HIREDATE DATE,<br>
+                            SAL NUMBER(7,2),<br>
+                            COMM NUMBER(7,2),<br>
+                            DEPTNO NUMBER(2)<br>
+                            );<br><br>
+
+
                             CREATE TABLE <span class="attribute">[소유계정.]테이블 이름</span><br>
                             AS SELECT * FROM <span class="attribute">불러올테이블이름</span>;<br>
                             (WHERE ...)
@@ -1177,8 +1188,10 @@
                             테이블 수정
                         </summary>
                         <span>
-                            ADD : ALTER TABLE <span class="attribute">테이블이름</span> ADD <span class="attribute">열 자료형(크기)</span><br>
-                            RENAME TO : ALTER TABLE <span class="attribute">테이블이름</span> RENAME COLUMN <span class="attribute">열이름</span> TO <span class="attribute">새로운이름</span> <br>
+                            ADD : ALTER TABLE <span class="attribute">테이블이름</span> ADD <span
+                                class="attribute">열 자료형(크기)</span><br>
+                            RENAME TO : ALTER TABLE <span class="attribute">테이블이름</span> RENAME COLUMN <span
+                                class="attribute">열이름</span> TO <span class="attribute">새로운이름</span> <br>
                             MODIFY : ,,, MODIFY <span class="attribute">열이름 새로운자료형(크기)</span> <br>
                             DROP : ,,, DROP <span class="attribute">삭제할열이름</span>
                         </span>
@@ -1189,7 +1202,8 @@
                 <th>RENAME TO
                 </th>
                 <td>
-                    테이블 이름 변경, <span>RENAME <span class="attribute">변경할테이블이름</span> TO <span class="attribute">변경후이름</span></span>
+                    테이블 이름 변경, <span>RENAME <span class="attribute">변경할테이블이름</span> TO <span
+                        class="attribute">변경후이름</span></span>
                 </td>
             </tr>
             <tr>
@@ -1293,7 +1307,7 @@
         <table class="table border">
             <thead class="table-dark">
             <tr>
-                <th>종류</th>
+                <th class="w-25">종류</th>
                 <th>설명</th>
             </tr>
             </thead>
@@ -1308,7 +1322,8 @@
                             뷰 생성
                         </summary>
                         <span>
-                            CREATE VIEW [OR REPLACE] [FORCE||NOFORCE] VIEW <span class="attribute">뷰이름</span> (<span class="attribute">열이름1, 열이름2, ...</span>) <br>
+                            CREATE VIEW [OR REPLACE] [FORCE||NOFORCE] VIEW <span class="attribute">뷰이름</span> (<span
+                                class="attribute">열이름1, 열이름2, ...</span>) <br>
                         AS (SELECT ... )<br>
                         [WITH CHECK OPTION [CONSTRAINT <span class="attribute">제약조건</span>]]<br>
                         [WITH READ ONLY[CONSTRAINT <span class="attribute">제약조건</span>]];<br><br>
