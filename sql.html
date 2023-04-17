@@ -115,6 +115,9 @@
                 <li>
                     <a href="#sqluser">사용자 관리</a>
                 </li>
+                <li>
+                    <a href="#sqlpl">PL/SQL</a>
+                </li>
             </ul>
         </div>
     </div>
@@ -1593,7 +1596,8 @@
 
                             CREATE TABLE<span class="attribute"> TABLE_CHECK</span>( <br>
                             ...<br>
-                            <span class="attribute">LOGIN_PWD</span> CONSTRAINT <span class="attribute">TBLCK_LOGINPW_CK</span> CHECK(<span class="attribute">(LENGTH(LOGIN_PWD) > 3)</span>) <br>
+                            <span class="attribute">LOGIN_PWD</span> CONSTRAINT <span
+                                class="attribute">TBLCK_LOGINPW_CK</span> CHECK(<span class="attribute">(LENGTH(LOGIN_PWD) > 3)</span>) <br>
                             );
                         </span>
                     </details>
@@ -1623,7 +1627,8 @@
                             IDENTIFIED BY <span class="attribute">패스워드</span><br>
                             [DEFAULT TABLESPACE <span class="attribute">테이블 스페이스 이름</span>]<br>
                             [TEMPORARY TABLESPACE <span class="attribute">테이블 스페이스(그룹) </span>]<br>
-                            [QUOTA <span class="attribute">테이블 스페이스 크기</span> ON <span class="attribute">테이블 스페이스 이름</span>]<br>
+                            [QUOTA <span class="attribute">테이블 스페이스 크기</span> ON <span
+                                class="attribute">테이블 스페이스 이름</span>]<br>
                             [PROFILE <span class="attribute">프로파일 이름</span>]<br>
                             [PASSWORD EXPIRE]<br>
                             [ACCOUNT [LOCK/UNLOCK]]<br>
@@ -1683,14 +1688,287 @@
             </tr>
             <tr>
                 <th>CONNECT</th>
-                <td>사용자가 데이터베이스에 접속하는 데 필요한 권한, 10g 버전부터는 CREATE SESSION 권한만 있음, 그 이전 버전은 ALTER SESSION, CREATE CLUSTER, CREATE DATABASE LINK, CREATE SEQUENCE, CREATE SESSION, CREATE SYNONYM, CREATE TABLE, CREATE VIEW 포함</td>
+                <td>사용자가 데이터베이스에 접속하는 데 필요한 권한, 10g 버전부터는 CREATE SESSION 권한만 있음, 그 이전 버전은 ALTER SESSION, CREATE CLUSTER,
+                    CREATE DATABASE LINK, CREATE SEQUENCE, CREATE SESSION, CREATE SYNONYM, CREATE TABLE, CREATE VIEW 포함
+                </td>
             </tr>
             <tr>
                 <th>RESOURCE</th>
-                <td>기본 시스템 권한 묶음, CREATE TRIGGER, CREATE SEQUENCE, CREATE TYPE, CREATE PROCEDURE, CREATE CLUSTER, CREATE OPERATOR, CREATE INDEXTYPE, CREATE TABLE</td>
+                <td>기본 시스템 권한 묶음, CREATE TRIGGER, CREATE SEQUENCE, CREATE TYPE, CREATE PROCEDURE, CREATE CLUSTER, CREATE
+                    OPERATOR, CREATE INDEXTYPE, CREATE TABLE
+                </td>
             </tr>
         </table>
     </div>
+    <!-- PL/SQL-->
+    <div id="sqlpl">
+        <h3>PL/SQL</h3>
+        <table class="table border">
+            <thead class="table-dark">
+            <tr>
+                <th class="w-25">종류</th>
+                <th>설명</th>
+            </tr>
+            </thead>
+            <tr>
+                <th>DECLARE/BEGIN/EXCEPTION</th>
+                <td>
+                    <details>
+                        <summary>
+                            명령어를 모아둔 PL/SQL 의 기본단위인 블럭
+                        </summary>
+                        <span>
+                            --선언부: 변수, 상수, 커서 등을 선언 <br>
+                            DECLARE<br>
+                            V_EMPNO NUMBER(4) := 7788;<br>
+                            V_ENAME VARCHAR2(10);<br>
+                            --실행부 : 조건분, 반복문, SELECT, DML, 함수 등을 정의<br>
+                            BEGIN<br>
+                            V_ENAME := 'SCOTT';<br>
+                            DBMS_OUTPUT.PUT_LINE('V_EMPNO : ' || V_EMPNO);<br>
+                            DBMS_OUTPUT.PUT_LINE('V_ENAME : ' || V_ENAME);<br>
+                            --EXCEPTION : 예외 처리부 : 오류, 예외상황을 해결하는 문장 기술<br>
+                            EXCEPTION<br>
+                            ..<br>
+                            --블럭의 종료<br>
+                            END;<br>
+                            /
+                        </span>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    DECLARE
+                </th>
+                <td>
+                    <details>
+                        <summary>
+                            변수와 상수 선언
+                        </summary>
+                        <span>
+                            <span class="attribute">변수이름</span> [CONSTATNT] <span class="attribute">자료형</span> [NOT NULL] DEFAULT || := <span
+                                class="attribute"></span> <span class="attribute">값 또는 표현식</span>; --변수 또는 상수를 선언하고 기본값을 지정하거나 초기화<br>
+                        </span>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>NUMBER</th>
+                <td>최대 38자리 숫자 데이터</td>
+            </tr>
+            <tr>
+                <th>CHAR</th>
+                <td>최대 32,767바이트 고정 길이 문자열 데이터</td>
+            </tr>
+            <tr>
+                <th>VARCHAR2</th>
+                <td>최대 32,767바이트 가변 길이 문자열 데이터</td>
+            </tr>
+            <tr>
+                <th>DATE</th>
+                <td>기원전 4712년 1월 1일 부터 서기 9999년 12월 31일까지의 날짜 데이터</td>
+            </tr>
+            <tr>
+                <th>BOOLEAN</th>
+                <td>PL/SQL에서만 사용가능한 논리 자료형으로, true, flase, NULL을 포함</td>
+            </tr>
+            <tr>
+                <th>%TYPE</th>
+                <td>
+                    <details>
+                        <summary>
+                            특정 테이블의 열을 참조하는 자료형, 지정한 테이블의 열과 같은 자료형이 됨
+                        </summary>
+                        <span>
+                            <span class="attribute">변수이름</span> <span class="attribute">테이블이름</span>.<span
+                                class="attribute">열이름</span>%TYPE <br><br> <br>
+                            DELCARE<br>
+                            V_DEPTNO DEPT.DEPTNO%TYPE := 50;<br>
+                            BEGIN<br>
+                            DBMS_OUTPUT.PUT_LINE('V_DEPTNO : ' || V_DEPTNO);<br>
+                            END;<br>
+                            /
+                        </span>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>%ROWTYPE</th>
+                <td>
+                    <details>
+                        <summary>
+                            특정 테이블의 행을 참조하는 자료형, 변수이름.열이름1, 변수이름.열이름2 와 같이 테이블의 열에 해당하는 값을 가짐
+                        </summary>
+                        <span>
+                            <span class="attribute">변수이름</span> <span
+                                class="attribute">테이블이름</span>%ROWTYPE <br><br> <br>
+                            DELCARE<br>
+                            V_DEPT_ROW DEPT%ROWTYPE;<br>
+                            BEGIN<br>
+                            SELECT DEPTNO, DNAME, LOC INTO V_DEPT_ROW;<br>
+                            FROM DEPT<br>
+                            WHERE DEPTNO = 40;<br>
+                            DBMS_OUTPUT.PUT_LINE('DEPTNO : ' || V_DEPT_ROW.DEPTNO);<br>
+                            DBMS_OUTPUT.PUT_LINE('DNAME : ' || V_DEPT_ROW.DNAME);<br>
+                            DBMS_OUTPUT.PUT_LINE('LOC : ' || V_DEPT_ROW.LOC);<br>
+                            END;<br>
+                            /<br><br>
+                            DEPTNO = 40인 행의 DEPTNO, DNAME, LOC 값을 반환
+                        </span>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    IF-THEN [-ELSIF-THEN] [-ELSE]
+                </th>
+                <td>
+                    <details>
+                        <summary>
+                            특정 상황일 때 명령어 수행
+                        </summary>
+                        <span>
+                            IF <span class="attribute">조건식</span> THEN
+                            <span class="attribute">수행할명령어</span>
+                            END IF;<br><br><br>
+                            DECLARE <br>
+                            V_NUMBER NUMBER := 13;<br>
+                            BEGIN<br>
+                            IF MOD(V_NUMBER, 2) = 1 THEN<br>
+                            DBMS_OUTPUT.PUT_LINE('V_NUMBER는 홀수');<br>
+                            <br>
+                            ELSIF MOD(V_NUMBER, 2) = 0 THEN
+                            DBMS_OUTPUT.PUT_LINE('V_NUMBER는 짝수');<br>
+                            <br>
+                            ELSE<br>
+                            DBMS_OUTPUT.PUT_LINE('V_NUMBER는 유리수');
+                            <br>
+                            END IF;<br>
+                            END;<br>
+                            /
+                        </span>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>CASE</th>
+                <td>
+                    <details>
+                        <summary>
+                            특정 비교기준이 특정 값을 가질 때 명령어를 실행
+                        </summary>
+                        <span>
+                            CASE <span class="attribute">비교기준</span> <br>
+                            WHEN <span class="attribute">값1</span> THEN <span class="attribute">명령어</span>; <br>
+                            WHEN <span class="attribute">값2</span> THEN <span class="attribute">명령어</span>; <br>
+                            ... <br>
+                            ELSE <br>
+                            <span class="attribute">명령어</span>; <br>
+                            END CASE;<br><br><br>
+                            DECLARE<br>
+                            V_SCORE NUMBER := 89;<br>
+                            BEGIN<br>
+                            <br>
+                            CASE TRUNC(V_SCORE/10)<br>
+                            WHEN 10 THEN DBMS_OUTPUT.PUT_LINE('A학점');<br>
+                            WHEN 9 THEN DBMS_OUTPUT.PUT_LINE('A학점');<br>
+                            WHEN 8 THEN DBMS_OUTPUT.PUT_LINE('B학점');<br>
+                            WHEN 7 THEN DBMS_OUTPUT.PUT_LINE('C학점');<br>
+                            WHEN 6 THEN DBMS_OUTPUT.PUT_LINE('D학점');<br>
+                            ELSE DBMS_OUTPUT.PUT_LINE('F학점');<br>
+                            END CASE;<br>
+                            <br>
+                            END;<br>
+                            /
+                        </span>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>LOOP</th>
+                <td>
+                    <details>
+                        <summary>
+                            반복수행작업
+                        </summary>
+                        <span>
+                            LOOP<br>
+                            <span class="attribute">반복수행작업</span>;<br>
+                            END LOOP;<br><br><br>
+                            DECLARE<br>
+                            V_NUM NUMBER := 0;<br>
+                            BEGIN<br>
+                            <br>
+                            LOOP<br>
+                            DBMS_OUTPUT.PUT_LINE('현재 V_NUM : '|| V_NUM);<br>
+                            V_NUM := V_NUM + 1;<br>
+                            EXIT WHEN V_NUM > 4;<br>
+                            END LOOP;<br>
+                            <br>
+                            END;<br>
+                            /
+                        </span>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>WHILE LOOP</th>
+                <td>
+                    <details>
+                        <summary>
+                            조건식을 만족할 때 반복수행작업
+                        </summary>
+                        <span>
+                            WHILE <span class="attribute">조건식</span> LOOP<br>
+                            <span class="attribute">반복수행작업</span>;<br>
+                            END LOOP;<br><br><br>
+                            DECLARE<br>
+                            V_NUM NUMBER := 0;<br>
+                            BEGIN<br>
+                            <br>
+                            WHILE V_NUM < 4 LOOP<br>
+                            DBMS_OUTPUT.PUT_LINE('현재 V_NUM : '|| V_NUM);<br>
+                            V_NUM := V_NUM + 1;<br>
+                            END LOOP;<br>
+                            <br>
+                            END;<br>
+                            /
+                        </span>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>FOR LOOP</th>
+                <td>
+                    <details>
+                        <summary>
+                            i 가 특정 범위 내일때 반복수행작업
+                        </summary>
+                        <span>
+                            FOR i IN [REVERSE(역순)]<span class="attribute">i의시작값</span> .. <span class="attribute">i의종료값</span> LOOP<br>
+                            <span class="attribute">반복수행작업</span>;<br>
+                            END LOOP;<br><br><br>
+                            BEGIN<br>
+                            <br>
+                            FOR i IN [REVERSE] 0..4 LOOP<br>
+                            DBMS_OUTPUT.PUT_LINE('현재 i : '|| i);<br>
+                            <br>
+                            [IF <span class="attribute">MOD(i,2)=1</span> THEN CONTINUE;]<br>
+                            [IF <span class="attribute">MOD(i,2)=1</span> THEN EXIT;]<br>
+                            [CONTINUE WHEN<span class="attribute">MOD(i,2)=1</span>;]<br>
+                            [EXIT WHEN<span class="attribute">MOD(i,2)=1</span>;]<br>
+                            END LOOP;<br>
+                            <br>
+                            END;<br>
+                            /
+                        </span>
+                    </details>
+                </td>
+            </tr>
+        </table>
+    </div>
+
 
 </main>
 </body>
