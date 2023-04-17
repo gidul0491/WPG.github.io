@@ -47,6 +47,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="./sql.html">SQL</a>
                 </li>
+
             </ul>
         </div>
     </div>
@@ -107,6 +108,12 @@
                 </li>
                 <li>
                     <a href="#sqlsynonym">동의어</a>
+                </li>
+                <li>
+                    <a href="#sqlconstraint">제약 조건</a>
+                </li>
+                <li>
+                    <a href="#sqluser">사용자 관리</a>
                 </li>
             </ul>
         </div>
@@ -1193,7 +1200,7 @@
                             RENAME TO : ALTER TABLE <span class="attribute">테이블이름</span> RENAME COLUMN <span
                                 class="attribute">열이름</span> TO <span class="attribute">새로운이름</span> <br>
                             MODIFY : ,,, MODIFY <span class="attribute">열이름 새로운자료형(크기)</span> <br>
-                            DROP : ,,, DROP <span class="attribute">삭제할열이름</span>
+                            DROP : ,,, DROP COLUMN<span class="attribute">삭제할열이름</span>
                         </span>
                     </details>
                 </td>
@@ -1498,6 +1505,190 @@
                 <td>데이터베이스 내의 사용 권한이 있는 모든 사용자가 동의어를 사용할 수 있도록 설정, 생략할 경우 제작자만 사용 가능</td>
             </tr>
 
+        </table>
+    </div>
+    <!-- 제약 조건-->
+    <div id="sqlconstraint">
+        <h3>제약 조건</h3>
+        <table class="table border">
+            <thead class="table-dark">
+            <tr>
+                <th class="w-25">종류</th>
+                <th>설명</th>
+            </tr>
+            </thead>
+            <tr>
+                <th>[CONSTRAINT]</th>
+                <td>
+                    <details>
+                        <summary>
+                            제약조건 이름 설정
+                        </summary>
+                        <span>
+                            CREATE TABLE<span class="attribute"> 테이블 이름</span>( <br>
+                            <span class="attribute">열1이름 열1자료형</span> [CONSTRAINT <span class="attribute">제약조건이름</span>] NOT NULL<br>
+                            );
+                        </span>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>NOT NULL
+                </th>
+                <td>
+                    <details>
+                        <summary>
+                            지정한 열에 NULL을 허용하지 않음
+                        </summary>
+                        <span>
+                            CREATE TABLE<span class="attribute"> 테이블 이름</span>( <br>
+                            <span class="attribute">열1이름 열1자료형</span> NOT NULL<br>
+                            );
+                        </span>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>UNIQUE</th>
+                <td>
+                    <details>
+                        <summary>
+                            지정한 열이 유일한 값을 가지도록 설정
+                        </summary>
+                        <span>
+                            CREATE TABLE<span class="attribute"> 테이블 이름</span>( <br>
+                            <span class="attribute">열1이름 열1자료형</span> NOT NULL<br>
+                            ...<br>
+                            );
+                            <br><br><br>
+                            CREATE TABLE<span class="attribute"> 테이블 이름</span>( <br>
+                            <span class="attribute">열1이름 열1자료형</span><br>
+                            ...<br>
+                            UNIQUE(<span class="attribute">열1이름</span>)<br>
+                            );
+                        </span>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>PRIMARY KEY</th>
+                <td>지정한 열이 유일한 값을 가지면서 NULL을 허용하지 않음, 테이블당 하나만 지정 가능</td>
+            </tr>
+            <tr>
+                <th>FOREIGN KEY</th>
+                <td>다른 테이블의 열을 참조하여 존재하는 값만 입력 가능</td>
+            </tr>
+
+            <tr>
+                <th>CHECK</th>
+                <td>
+                    <details>
+                        <summary>
+                            설정한 조건식을 만족하는 데이터만 입력 가능
+                        </summary>
+                        <span>
+                            CREATE TABLE<span class="attribute"> 테이블 이름</span>( <br>
+                            <span class="attribute">열1이름 열1자료형</span> CHECK(<span class="attribute">제약조건</span>) <br>
+                            );<br><br><br>
+
+                            CREATE TABLE<span class="attribute"> TABLE_CHECK</span>( <br>
+                            ...<br>
+                            <span class="attribute">LOGIN_PWD</span> CONSTRAINT <span class="attribute">TBLCK_LOGINPW_CK</span> CHECK(<span class="attribute">(LENGTH(LOGIN_PWD) > 3)</span>) <br>
+                            );
+                        </span>
+                    </details>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <!-- 사용자 관리-->
+    <div id="sqluser">
+        <h3>사용자 관리</h3>
+        <table class="table border">
+            <thead class="table-dark">
+            <tr>
+                <th class="w-25">종류</th>
+                <th>설명</th>
+            </tr>
+            </thead>
+            <tr>
+                <th>CREATE USER</th>
+                <td>
+                    <details>
+                        <summary>
+                            사용자 생성
+                        </summary>
+                        <span>
+                            CREATE USER<span class="attribute"> 사용자이름</span><br>
+                            IDENTIFIED BY <span class="attribute">패스워드</span><br>
+                            [DEFAULT TABLESPACE <span class="attribute">테이블 스페이스 이름</span>]<br>
+                            [TEMPORARY TABLESPACE <span class="attribute">테이블 스페이스(그룹) </span>]<br>
+                            [QUOTA <span class="attribute">테이블 스페이스 크기</span> ON <span class="attribute">테이블 스페이스 이름</span>]<br>
+                            [PROFILE <span class="attribute">프로파일 이름</span>]<br>
+                            [PASSWORD EXPIRE]<br>
+                            [ACCOUNT [LOCK/UNLOCK]]<br>
+                        </span>
+                    </details>
+                </td>
+            </tr>
+
+            <tr>
+                <th>ALTER USER <span class="attribute">사용자</span></th>
+                <td>
+                    <details>
+                        <summary>
+                            사용자의 계정 정보 변경
+                        </summary>
+                        <span>
+                            ALTER USER <span class="attribute">ORCLSTUDY</span><br>
+                            IDENTIFIED BY ORCL;<br>
+                            ORCLSTUDY의 비밀번호를 ORCL로 변경
+                        </span>
+                    </details>
+                </td>
+            <tr>
+                <th>DROP USER [CASCADE]<span class="attribute">사용자</span></th>
+                <td>
+                    사용자 삭제[사용자와 스키마의 객체 모두 삭제]
+                </td>
+            </tr>
+            <tr>
+                <th>GRANT <span class="attribute">명령어</span> TO <span class="attribute">사용자</span></th>
+                <td>
+                    <details>
+                        <summary>
+                            사용자에게 명령어를 사용할 수 있는 권한 부여
+                        </summary>
+                        <span>
+                            GRANT<span class="attribute"> CREATE SESSION </span>TO ORCLSTUDY;<br>
+                            ORCLSTUDY 에게 데이터베이스에 접속할 수 있는 권한 부여
+                        </span>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>CREATE ROLE <span class="attribute">롤이름</span></th>
+                <td>
+                    <details>
+                        <summary>
+                            권한을 부여할 때 쓰이는 명령어 모음 생성
+                        </summary>
+                        <span>
+                            CREATE ROLE<span class="attribute"> ROLESTUDY </span><br>
+                            GRANT CONNECT, RESOURCE, CREATE VIEW, CREATE SYNONYM, ... TO <span class="attribute">ROLESTUDY</span>;<br>
+                            GRANT <span class="attribute">ROLESTUDY</span> TO <span class="attribute">ORCLSTUDY;</span>
+                        </span>
+                    </details>
+                </td>
+            </tr>
+            <tr>
+                <th>CONNECT</th>
+                <td>사용자가 데이터베이스에 접속하는 데 필요한 권한, 10g 버전부터는 CREATE SESSION 권한만 있음, 그 이전 버전은 ALTER SESSION, CREATE CLUSTER, CREATE DATABASE LINK, CREATE SEQUENCE, CREATE SESSION, CREATE SYNONYM, CREATE TABLE, CREATE VIEW 포함</td>
+            </tr>
+            <tr>
+                <th>RESOURCE</th>
+                <td>기본 시스템 권한 묶음, CREATE TRIGGER, CREATE SEQUENCE, CREATE TYPE, CREATE PROCEDURE, CREATE CLUSTER, CREATE OPERATOR, CREATE INDEXTYPE, CREATE TABLE</td>
+            </tr>
         </table>
     </div>
 
